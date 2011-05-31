@@ -1,0 +1,6 @@
+Options +ExecCGI
+AddHandler cgi-script pl
+DirectoryIndex awstats.pl 
+
+RewriteCond %{HTTP_HOST} ^www.hundertwasser.co.il/awstats$ [NC]
+RewriteRule ^(.*)$ http://hundertwasser.co.il/awstats/$1 [R=301,L]

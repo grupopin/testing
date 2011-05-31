@@ -1,0 +1,209 @@
+@charset "utf-8";
+/* CSS Document */
+#imgDiv {
+	position:absolute;
+	left:14px;
+	top:281px;
+	width:188px;
+	height:539px;
+	z-index:11;
+}
+#title0Div {
+	position:absolute;
+	left:248px;
+	top:679px;
+	width:421px;
+	z-index:512;
+	height: 39px;
+}
+
+#title1Div {
+	position:absolute;
+	left:338px;
+	top:728px;
+	width:367px;
+	z-index:512;
+	height: 42px;
+}
+#title2Div {
+	position:absolute;
+	left:292px;
+	top:779px;
+	width:367px;
+	z-index:512;
+	height: 43px;
+}
+
+#jump {
+	position:absolute;
+	left:20px;
+	top:907px;
+	width:46px;
+	height:41px;
+	z-index:12;
+}
+
+.ausstellungCoverImg
+{
+	overflow: hidden;
+	clip: rect(20,auto,auto,20);
+}
+#apDiv1 {
+	position:absolute;
+	left:198px;
+	top:352px;
+	width:113px;
+	height:102px;
+	z-index:501;
+}
+
+#apDiv2 {
+	position:absolute;
+	left:311px;
+	top:340px;
+	width:113px;
+	height:102px;
+	z-index:501;
+}
+
+#apDiv3 {
+	position:absolute;
+	left:418px;
+	top:350px;
+	width:113px;
+	height:102px;
+	z-index:501;
+}
+
+#apDiv4 {
+	position:absolute;
+	left:527px;
+	top:349px;
+	width:113px;
+	height:102px;
+	z-index:501;
+}
+
+#apDiv5 {
+	position:absolute;
+	left:631px;
+	top:355px;
+	width:113px;
+	height:102px;
+	z-index:501;
+}
+
+
+#apDiv11 {
+	position:absolute;
+	left:200px;
+	top:525px;
+	width:113px;
+	height:102px;
+	z-index:501;
+}
+
+#apDiv12 {
+	position:absolute;
+	left:301px;
+	top:525px;
+	width:113px;
+	height:102px;
+	z-index:501;
+}
+
+#apDiv13 {
+	position:absolute;
+	left:400px;
+	top:518px;
+	width:123px;
+	height:122px;
+	z-index:501;
+}
+
+#apDiv14 {
+	position:absolute;
+	left:494px;
+	top:492px;
+	width:143px;
+	height:142px;
+	z-index:501;
+}
+
+#apDiv15 {
+	position:absolute;
+	left:618px;
+	top:529px;
+	width:113px;
+	height:102px;
+	z-index:501;
+}
+
+
+#apDiv21 {
+	position:absolute;
+	left:205px;
+	top:700px;
+	width:113px;
+	height:102px;
+	z-index:501;
+}
+
+#apDiv22 {
+	position:absolute;
+	left:300px;
+	top:709px;
+	width:113px;
+	height:102px;
+	z-index:501;
+}
+
+#apDiv23 {
+	position:absolute;
+	left:394px;
+	top:695px;
+	width:123px;
+	height:122px;
+	z-index:501;
+}
+
+#apDiv24 {
+	position:absolute;
+	left:500px;
+	top:685px;
+	width:143px;
+	height:142px;
+	z-index:501;
+}
+
+#apDiv25 {
+	position:absolute;
+	left:607px;
+	top:715px;
+	width:113px;
+	height:102px;
+	z-index:501;
+}
+
+
+#maskDiv {
+	position:absolute;
+	left:193px;
+	top:281px;
+	width:559px;
+	height:554px;
+	z-index:502;
+	visibility: visible;
+}
+
+a.exhibitionLink { /* Ausstellungen lila */
+	color: #A33BAE;
+	font-size: 20px;
+	background: transparent;
+	line-height:28px;
+}
+
+a.exhibitionLink:hover
+{
+	text-decoration:underline;	
+}

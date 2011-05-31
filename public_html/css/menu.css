@@ -1,0 +1,396 @@
+/* http://meyerweb.com/eric/tools/css/reset/ */
+/* v1.0 | 20080212 */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+
+h1#siteTitle a { /* h1-Titel ersetzen */
+	
+	background: transparent url(/interface/nav_logo_hw3.png) 0 0 no-repeat;
+	text-indent: -999em;
+
+	width: 92px;
+	height: 138px;
+	position: absolute;
+	top: 10px;
+	left: 15px;
+	z-index: 5000;
+	margin: 5px;
+}
+
+
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+img {border: none;}
+
+strong, b {
+	font-weight: bold;
+}
+
+em, i {
+	font-style: italic;
+}
+
+/* puzzles */
+
+
+/*
+#topRight_0, #topRight_1, #topRight_2, #topRight_3 {
+	background: transparent url(/interface/khw_square/top_right.png) 0 0 no-repeat;	
+	position: absolute;
+	left: 790px;
+	top: 0px;
+	width: 275px;
+	height: 239px;
+	clear: both;
+}
+*/
+
+
+#nav_ballDiv {
+	position: absolute;
+	left: 765px;
+	top: 165px;
+	width: 43px; 
+	height: 43px;
+}
+
+#nav_titDiv {
+	position: absolute;
+	left: 500px;
+	top: 190px;
+	width: 245px; 
+	height: 37px;	
+}
+
+#nav_IconDiv {
+	position: absolute;
+	left: 855px;
+	top: 20px;
+	width: 110px; 
+	height: 128px;
+}
+
+html body.black #nav_ballDiv {
+	left: 795px;
+	top: 160px;
+}
+
+html body.black #nav_titDiv {
+	left: 540px;
+	top: 190px;
+}
+
+html body.black #nav_IconDiv {
+	left: 865px;
+	top: 20px;
+}
+
+/* positions */ 
+#menuDiv {
+	position:absolute;
+	left:115px;
+	top:69px;
+	z-index: 5000;
+}
+#menuDiv img {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+#menuDiv table,#menuDiv tr,#menuDiv td {
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+  border: 0px solid white;
+}
+
+/* Aufklappbare farbige Submenues */
+
+#subMenu0 { /* Hundertwasser */
+	position:absolute;
+	left: 121px;
+	top: 110px;
+	width: 178px;
+	z-index: 2061;
+	visibility:hidden;
+}
+
+#subMenu1 { /* Werk */
+	position:absolute;
+	left: 299px;
+	top: 106px;
+	width: 178px;
+	z-index: 2061;
+	visibility:hidden;
+}
+
+#subMenu2 { /* Texte */
+	position:absolute;
+	left: 425px;
+	top: 106px;
+	width: 178px;
+	z-index: 2061;
+	visibility:hidden;
+}
+
+#subMenu3 { /* Ausstellungen */
+	position:absolute;
+	left: 556px;
+	top: 106px;
+	width: 178px;
+	z-index: 2061;
+	visibility:hidden;
+}
+
+
+/* Menue 1.Hierarchie */
+
+div.menu_no, div.menu_act {
+	font-size: 18px;
+	font-weight: normal;
+	padding: 5px 5px;
+	line-height: 130%;
+}
+div.menu_no img, div.menu_act img{
+	padding-right: 10px;
+}
+.menu_no a, .menu_no a:visited  {
+	color: #999999;
+	
+	display:block;
+}
+.menu_act a, .menu_act a:hover, .menu_no a:hover, .menu_act a:visited {
+	color: #00CC00;
+	/* margin-left: 10px; */
+	display:block;
+}
+
+/* Menue 2.Hierarchie */
+
+div.menu2_no, div.menu2_act {
+	font-size: 16px;
+	font-weight: bold;
+	padding: 4px 5px 4px 15px;
+	line-height: 130%;
+}
+
+div.menu2_no img, div.menu2_act img{
+	padding-right: 10px;
+}
+
+.menu2_no a, .menu2_no a:visited  {
+	color: #999999;	
+	display:block;
+}
+
+.menu2_act a, .menu2_act a:hover, .menu2_no a:hover, .menu2_act a:visited {
+	color: #00CC00;
+	display:block;
+}
+
+/* Menue 3.Hierarchie */
+
+div.menu3_no, div.menu3_act {
+	font-size: 16px;
+	font-weight: bold;
+	padding: 0px 5px 3px 28px;
+	line-height: 130%;
+}
+
+div.menu3_no img, div.menu3_act img{
+	padding-right: 10px;
+}
+
+.menu3_no a, .menu3_no a:visited  {
+	color: #999999;
+	display:block;
+}
+
+.menu3_act a, .menu3_act a:hover, .menu3_no a:hover, .menu3_act a:visited {
+	color: #00CC00;
+	display:block;
+}
+
+/* Menue 4.Hierarchie */
+
+div.menu4_no, div.menu4_act {
+	font-size: 16px;
+	font-weight: bold;
+	padding: 4px 5px 4px 15px;
+	line-height: 130%;
+}
+
+div.menu4_no img, div.menu4_act img{
+	padding-right: 10px;
+}
+
+.menu4_no a, .menu4_no a:visited  {
+	color: #999999;
+	display:block;
+}
+
+.menu4_act a, .menu4_act a:hover, .menu4_no a:hover, .menu4_act a:visited {
+	color: #FFBE02;
+	
+	display:block;
+}
+
+/* Menue 5.Hierarchie */
+div.menu5_no, div.menu5_act {
+	font-size: 18px;
+	font-weight: normal;
+	padding: 5px 5px;
+	line-height: 130%;
+}
+div.menu5_no img, div.menu5_act img{
+	padding-right: 10px;
+}
+.menu5_no a, .menu5_no a:visited  {
+	color: #999999;
+	
+	display:block;
+}
+.menu5_act a, .menu5_act a:hover, .menu5_no a:hover, .menu5_act a:visited {
+	color: #FFBE02;
+	
+	/* margin-left: 10px; */
+	display:block;
+}
+
+/* submenu */
+
+.subMenuTD {
+
+	padding: 5px 3px;
+}
+
+.subMenuTD a {
+	display: block;
+	padding: 5px 3px;
+	margin: 0 2px;
+}
+
+.subMenuTDMO {
+	background: #666;
+	padding: 5px 3px;
+}
+
+.subMenuTDMO a {
+	display: block;
+	padding: 5px 3px;
+	margin: 0 2px;
+}
+
+a.subMenuLink:link, a.subMenuLink:visited {
+	font-weight: bold;
+	color: #ccc;
+}
+
+a.subMenuLinkTop {
+	margin-top: 20px;
+}
+
+/* colors are colors are colors */
+
+#subMenu0 td.subMenuTD { /* Hunderwasser dunkelgelb */
+	background: #827129;
+}
+
+#subMenu0 table .subMenuTDMO {
+	background: #685A20;
+	color: inherit;
+}
+
+#subMenu1 td.subMenuTD { /* Werk gruen */
+	background: #33612f;
+}
+
+#subMenu1 table .subMenuTDMO {
+	background: #234321;
+	color: inherit;
+}
+
+#subMenu2 td.subMenuTD { /* Texte blau */
+	background: #203e6f;
+}
+
+#subMenu2 table .subMenuTDMO { 
+	background: #142748;
+	color: inherit;
+}
+
+#subMenu3 td.subMenuTD { /* Ausstellungen lila */
+	background: #6e2872;
+}
+
+#subMenu3 table .subMenuTDMO {
+	background: #511D54;
+	color: inherit;
+}
+
+/* Kontakt und Impressum */
+
+#sub_kontakt {
+	position: absolute;
+	left: 680px;
+	top: 125px;
+}
+
+#sub_kontakt ul {
+	list-style: none outside;
+}
+
+#sub_kontakt ul li {
+	display: inline;
+}

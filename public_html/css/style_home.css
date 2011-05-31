@@ -1,0 +1,101 @@
+* {padding:0;margin:0}
+body,html{height:100%;font-family:Arial, Helvetica, sans-serif;color:#acc798;background:#000000;line-height:22px;}
+table{border-collapse:collapse;}
+td{vertical-align:top;margin:0;}
+img{border:0px;}
+a{color:#df1c1f;}
+a:hover{color:#7cc433;text-decoration:none;}
+a:visited{color:#adaead;text-decoration:underline;}
+h1{font-size:15px;font-weight:bold;color:#7cc433;}
+h2{font-size:15px;font-weight:bold;color:#7cc433;}
+
+/*----------------LINKS-----------------*/
+.l1,.l2:hover,.l3:hover{text-decoration:underline;}
+.l1:hover,.l2,.l3{text-decoration:none;}
+.l1{color:#7cc433;}
+.l1:hover,.l2:hover{color:#b2387b;}
+.l2{color:#979797;}
+.l3{color:#eeeeee;}
+.l3:hover{color:#d8da83;}
+
+/*----------------POSITION-----------------*/
+#mainf{margin:0;background:url(../images/bg_hp_0.jpg) bottom left no-repeat;}
+.tab1{width:100%;height:100%;}
+.tab1TD1{height:530px;}
+.tab1TD2{width:100%;/*background:url(../images/bg_hp_1.jpg) top left no-repeat;*/padding-left:190px;font-size:14px;line-height:20px;}
+.tab1TD2{width:100%;background:url(../images/bg_hp_1.jpg) top left no-repeat;padding-left:190px;font-size:14px;line-height:20px;}
+
+.footer{height:30px;font-size:11px;}
+	.footer div{float:left;}
+	.f1{margin-left:18px;}
+	.f2{color:#979797;margin-left:75px;}
+	.f3{margin-left:30px;color:#d8da83;}
+
+.hpT1,.hpT2,.hpT3{float:left;}
+.hpT1{width:236px;}
+.hpT2{width:296px;margin-left:15px;}
+.hpT3{width:200px;color:#cdcf8e;font-family:"Times New Roman", Times, serif;font-size:15px;line-height:17px;padding-top:10px;}
+
+#top1{position:absolute;top:0px;left:0;}
+#top1_1{margin-left:505px;margin-top:16px;}
+	#top1_1 img{float:left;margin-right:7px;}
+	#top1_1 div{margin-top:-5px;}
+#top1_2{width:330px;margin-left:495px;margin-top:5px;clear:both;}
+	.top1_2a{height:36px;width:212px;background:url(../images/bg_input1.gif) left top no-repeat;padding-left:15px;float:left;}
+	.top1_2b{float:left;margin-top:8px;margin-left:5px;cursor:pointer;}
+#top1_3,#top1_4,#top1_5,#top1_6,#top1_7,#top1_8{position:absolute;}
+#top1_3{top:85px;left:490px;}
+#top1_3[title]{top:100px;}
+#top1_4{top:182px;left:710px;}
+#top1_5{top:332px;left:510px;}
+#top1_6{top:382px;left:445px;}
+#top1_7{top:409px;left:415px;}
+#top1_8{top:182px;left:520px;}
+#top1_4[title],#top1_8[title]{top:197px;}
+
+/*----------------CLASSES-----------------*/
+.text{font-family:Arial, Helvetica, sans-serif;color:#acc798;line-height:21px;}
+.b{font-weight:bold;}
+.green{color:#d45232;}
+.orange{color:#83b238;}
+
+/*----------------INPUTS-----------------*/
+.input1{width:173px;color:#fff;background:none !important;margin-top:10px;overflow:hidden;border:0;}
+
+.viz{border:1px #FF0000 solid;}
+
+
+/*NEW 12 2 2010-------------------------------------*/
+
+body,html{font-family:"Times New Roman", Times, serif;font-size:18px !important;}
+.hpT1,.hpT2,.hpT3{font-size:16px;padding-top:20px;}
+.hpT1{width:220px;}
+.hpT2{width:226px;}
+.hpT2{color:#d45232;}
+.tab1TD2{background:url();}
+#mainf{background:url()}
+#top1_5b{position:absolute;}
+#top1_8{left:530px;}
+#top1_4{left:670px;}
+#top1_5b{top:285px;left:610px;}
+.l12,.l12:visited{color:#b2387b !important;text-decoration:underline !important;}
+.l12:hover{color:#7cc433 !important;}
+.hpT3{padding-top:37px;padding-left:55px;margin-left:25px;background:url(../images/newbg1.gif) left 30px no-repeat;line-height:19px;width:250px;}
+#agreement{width:100%;height:130%;background:#000;position:absolute;top:0;left:0;opacity:0.8;filter:alpha(opacity=80);padding-top:200px;}
+#agbg{background:url(../images/arbg.png) left top no-repeat;width:990px;height:451px;position:absolute;top:230px;left:140px;}
+#agtext{width:750px;margin-top:60px;color:#000;text-align:center;margin-left:90px;}
+#agtext u,#agtext span{font-size:15px;font-weight:bold;}
+#agtext img{position:relative;top:4px;}
+#agtext form{display:inline;}
+
+/*
+border:1px white solid;
+
+
+*/
+
+#landing1{width:811px;margin-left:auto;margin-right:auto;background:url(../images/landing-1.jpg) left top no-repeat;height:1000px;color:#acc798;text-align:center;padding-top:300px;font-size:15px;line-height:22px;}
+#landing1 h3{padding-bottom:8px;}
+#landing1 a{color:#30ff00;padding-top:18px;display:block;font-weight:bold;text-decoration:none;font-size:17px;}
+#landing1 a:hover{color:#d45232;text-decoration:underline;}
+#landing2{color:#98c7b9;margin-top:20px;}

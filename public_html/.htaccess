@@ -1,0 +1,13 @@
+php_value memory_limit 512M
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ /index.php
+
+#AuthGroupFile /dev/null
+#AuthName "Hw-archive"
+#AuthType Basic
+#AuthUserFile /home/hwarch/domains/hw-archive.com/.htpasswd/public_html/.htpasswd
+#require valid-user
+#Allow from 62.90.141.5
+#Satisfy Any

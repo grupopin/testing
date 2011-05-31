@@ -1,0 +1,1085 @@
+/*
+CSS file for KunstHausWien.com website
+Creator: Krzysztof Jeziorny, Sedlacek Michael www.krautzer-lynn.com
+Last edited: 02.07.2009
+*/
+/*
+html {
+	font: normal 87% Georgia, Times, "Bitstream Vera Serif", "Times New Roman", serif;
+	line-height: 140%;
+	background: #FFF url(interface/content_bg8.png) -2px -180px repeat-y;
+	height: 100%;
+	width: 100%;
+}
+*/
+
+body {
+	font: normal 87% Georgia, Times, "Bitstream Vera Serif", "Times New Roman", serif;
+	line-height: 140%;
+	background: #FFF url(interface/content_bg8.png) -2px -180px repeat-y;
+	height: 100%;
+	width: 100%;
+}
+
+/* Default Text Layer */
+
+#wrapper {
+	margin: 0;
+	padding: 0;
+	width: 801px;
+	width: 100%;
+}
+
+#skip {display: none;} /* Menue uberspringen (in Textmode), accesskey s */
+
+/*
+#top {
+	display: none; 
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	width: 0px; 
+	height: 0px;
+}
+*/
+
+#navigation {
+	font: bold 1em "Helvetica Neue", Helvetica, Arial, "Bitstream Vera Sans", sans-serif;
+	height: 214px;
+	width: 100% !important;
+	top: 0;
+	left: 0;
+	position: absolute;
+	clear: both;
+	background: #FFF url(interface/header_clean8.png) 0 0 no-repeat;
+	z-index: 200;
+}
+
+#contentwrapper {
+	float: left;
+	clear: both;
+	width: 801px;
+	margin: 214px 0 0 0;
+	padding: 0;
+	color: #999;
+	background: transparent;
+	/* background: transparent url(interface/content_bg.png) 0 0 repeat-y; */
+}
+
+#content {
+	padding: 0; 
+	margin: 40px 5px 30px 40px;
+	width: 700px;
+	min-height: 450px;
+
+}
+
+table {font: normal 87% Georgia, Times, "Bitstream Vera Serif", "Times New Roman", serif;
+	line-height: 140%;}
+	
+
+	
+/* Bereiche */
+
+.hw { /* Hundertwasser yellow */
+	color: #E3B702;
+	background: transparent;
+}
+
+.werk { /* Werk gruen */
+	color: #21c021;
+	background: transparent;
+}
+
+.txt { /* Texte blau */
+	color: #315fab;
+	background: transparent;
+}
+
+.exhib { /* Ausstellungen lila */
+	color: #A33BAE;
+	background: transparent;
+}
+
+/* Default ShopInfo Layer */
+/*
+div#shopInfo {
+	position: relative; 
+	width: 200px;
+	margin-top: 50px;
+	z-index: 3;
+}
+*/
+
+a {
+	color: #999;
+	background: transparent;
+	text-decoration: none;
+}
+
+.inlineimg { /* Bild float left */
+	float: left;
+	margin: 0 1em 0.4em 0;
+}
+
+.inlineimg-alt { /* Bild float rechts */
+	float: right;
+	margin: 0 0 0.4em 1em;
+}
+
+div.newsItem { /* Einzelner Block mit Inhalt */
+	width: 600px;
+	height: auto;
+	margin: 10px 0 10px 0;
+	float: left;
+	clear: both;
+}
+
+div.newsBox { /* Einzelner Block mit Inhalt */
+	width: 600px;
+	height: auto;
+	margin: 10px 0 10px 0;
+}
+
+.newsItem p {
+	clear: right;
+}
+.newsBox p {
+	clear: right;
+}
+
+.newsItem img {
+	float: left; 
+	margin: 0 15px 8px 0;
+	padding: 0.2em; 
+}
+
+.newsBox img {
+	margin: 0 15px 8px 0;
+	padding: 0.2em;
+}
+
+.textItem {
+	width: 600px;
+	height: auto;
+	margin: 10px 0 10px 0;
+	float: left;
+	text-align: left;
+}
+
+
+.textItem h1 {
+  color: #315fab;
+  font-size: 16px;
+  font-weight: bold;
+	text-align: left;
+}
+
+
+.textItem p {
+	text-align: left;
+}
+
+.textItem img {
+	float: left;
+	margin: 0 15px 8px 0;
+	padding: 0.2em;
+}
+
+sup {
+	vertical-align: super;
+}
+
+sub {
+	vertical-align: sub;
+}
+
+span.copyright {
+	width: 170px;
+}
+
+ol {
+	list-style: decimal inside;
+}
+
+#checksize {
+	background-color: #999;
+}
+
+#checksize td {
+	background-color: #000;
+	font-size: 14px;
+}
+
+#seperator {
+	height: 55px;
+	width: 700px;
+	clear: both;
+}
+
+#seperatorthin {
+	height: 25px;
+	width: 700px;
+	clear: both;
+}
+
+.alternative h3.revert { text-align: left; }
+
+.alternative img, .alternative p img+span.reference {
+	float: right; /* alternativ, nach rechts */ 
+	clear: left; 
+	margin: 0 0 10px 15px;
+}
+
+.alternative p { clear: left; }
+
+#contentwrapper h2, h2 {
+	font-size: 1.6em;
+	font-weight: normal;
+	line-height: 140%;
+	letter-spacing: 1px;
+	/* text-shadow: 1px 1px 1px #111; */
+	color: #999;
+	background: transparent;
+	margin: 1em 0;
+}
+
+#contentwrapper h2 a { 
+	font-size: inherit;
+	letter-spacing: inherit;
+	margin-bottom: 1.6em;
+	line-height: 150%;
+	color: #999 !important;
+	background: transparent; 
+	padding-bottom: 0.2em;
+}
+
+#contentwrapper h3 {
+	font-size: 1.3em;
+	line-height: 130%;
+	font-weight: normal;
+	margin: 0.5em 0;
+	background: transparent;
+}
+
+#contentwrapper h4 { font-size: 1.15em;
+	line-height: 1.4em;
+}
+
+#contentwrapper h5 { font-size: 1.0em; 
+	line-height: 1.3em;
+}
+
+p, #contentwrapper table, address, #contentwrapper dl, #contentwrapper ul, #contentwrapper ol {
+	font-size: 1.15em;
+	font-style: normal;
+	line-height: 130%;
+	margin-bottom: 0.5em;
+	color: #999;
+	background: transparent;
+}
+
+#contentwrapper ul, #contentwrapper ol {
+	margin: 0.5em 2%;
+}
+
+#contentwrapper ul li, #contentwrapper ol li { 
+	line-height: 1.7em;
+	margin-left: 1%;
+}
+
+.alternative dl h3 { text-align: left; }
+dt.point1 {margin-left: 2em;}
+dt.point2 {margin-left: 4em;}
+dt.point3 {margin-left: 6em;}
+
+table.fauxcenter {
+	margin-left: 140px;
+}
+
+#jump {
+	float: left;
+	clear: both;
+	padding: 20px 40px;
+}
+
+/* Hundertwasser Ausstellung */
+
+/* modalbox fuer den Rundgang */
+
+body.modalbox {
+	background-color: #333 !important;
+	color: inherit;
+}
+
+body.modalbox #wrapper
+body.modalbox #contentwrapper,
+body.modalbox #content,
+body.modalbox .newsItem,
+body.modalbox .newsItem .alternative {
+	width: 750px;
+}
+
+body.modalbox #contentwrapper {
+	margin-top: 20px;
+}
+
+#content.hundertwasser-ausstellung {
+	background: #000 url(interface/plan/grundriss.png) 40px 100px no-repeat;
+	height: 600px;
+}
+
+#content.hundertwasser-ausstellung #rund1 a {
+	position:absolute;
+	left:500px;
+	top:515px;
+	width:68px;
+	height:104px;
+	z-index:99;
+	background: transparent url(interface/spirale/tapisserien.png) 0 0 no-repeat;
+}
+
+#content.hundertwasser-ausstellung #rund2 a {
+	position:absolute;
+	left:380px;
+	top:345px;
+	width:87px;
+	height:107px;
+	z-index: 99;
+	background: transparent url(interface/spirale/jugendwerk.png) 0 0 no-repeat;
+}
+
+#content.hundertwasser-ausstellung #rund3 a {
+	position:absolute;
+	left:650px;
+	top:620px;
+	width:63px;
+	height:89px;
+	z-index: 99;
+	background: transparent url(interface/spirale/graphik.png) 0 0 no-repeat;
+}
+
+#content.hundertwasser-ausstellung #rund4 a {
+	position:absolute;
+	left:200px;
+	top:650px;
+	width:77px;
+	height:100px;
+	z-index: 99;
+	background: transparent url(interface/spirale/briefmarken.png) 0 0 no-repeat;
+}
+
+#content.hundertwasser-ausstellung #rund5 a {
+	position:absolute;
+	left:300px;
+	top:500px;
+	width:113px;
+	height:58px;
+	z-index: 99;
+	background: transparent url(interface/spirale/melerei.png) 0 0 no-repeat;
+}
+
+#content.hundertwasser-ausstellung #rund6 a {
+	position:absolute;
+	left:120px;
+	top:470px;
+	width:75px;
+	height:108px;
+	z-index: 99;
+	background: transparent url(interface/spirale/architektur.png) 0 0 no-repeat;
+}
+
+/* Hundertwasser cover */
+
+#content.spirale a {
+	text-decoration: none;
+	font: bold 1.2em Georgia, Times, "Bitstream Vera Serif", "Times New Roman", serif;
+	vertical-align: middle;
+	text-align: center;
+}
+
+
+/* body IDs und entsprechende Farben */
+
+/*
+body#information h2, body#information h3 { color: #E3B702;}
+body#information h3 a { color: #FC0;
+}
+*/
+
+body#ausstellungen h2, body#exhibitions h2, 
+body#ausstellungen h3, body#exhibitions h3  { color: #a33bae; }
+body#ausstellungen h3 a, body#exhibitions h3 a { color: #A33BAE; 
+	border-bottom-color: #A33BAE;
+}
+
+/*
+body#khw h2, body#khw h3 { color: #39F;}
+body#khw h3 a { color: #39F;
+	border-bottom-color: #39F; 
+}
+*/
+/*
+hundertwasse is acutally the area called work or the oeuvre
+*/
+body#hundertwasser h2, body#hundertwasser h3 { color: #21c021;}
+body#hundertwasser h3 a { color: #21c021;
+	border-bottom-color: #21c021;
+}
+
+body#hwuhw h2, body#hwuhw h3 { color: #E3B702;}
+body#hwuhw h3 a { color: #E3B702;
+	border-bottom-color: #E3B702;
+}
+
+body#hwnews h2, body#hwnews h3 { color: #CC6600;}
+body#hwnews h3 a { color: #CC6600;
+	border-bottom-color: #CC6600;
+}
+
+body#hwtexte h2, body#hwtexte h3 { color: #315fab;}
+body#hwtexte h3 a { color: #315fab;
+	border-bottom-color: #315fab;
+}
+
+
+body#contact h2, body#contact h3 { color: #ff0000;}
+body#contact h3 a { color: #ff0000;
+	border-bottom-color: #ff0000;
+}
+
+body#impressum h2, body#impressum h3 { color: #66FFCC;}
+body#impressum h3 a { color: #66FFCC;
+	border-bottom-color: #66FFCC;
+}
+/*
+body#shop h3 { color: #F60; }
+body#shop h3 a { color: #F60; 
+	border-bottom-color: #F60;
+}
+*/
+
+/* definition lists */
+
+#content dl.points a { 
+	font-family: Georgia, Times, "Bitstream Vera Serif", "Times New Roman", serif;
+	text-decoration: none; 
+}
+
+#content dl.points img {
+	vertical-align: middle;
+}
+
+#content dl.points dt.point1 a { color: #999; }
+#content dl.points dt.point2 a { color: #999; border-bottom-color: #999; }
+#content dl.points dt.point3 a { color: #666; border-bottom-color: #666; }
+
+#content dl.points { 
+	margin-top: 50px;
+	margin-bottom: 40px; 
+}
+
+#content dl.points dt { margin-bottom: 1em; }
+
+#content dl.points a { font: bold 1.3em serif; 
+	line-height: 1.3em;
+}
+
+table.middleman {
+	background: transparent url(interface/black/sprirale.png) 0 0 no-repeat;
+}
+
+.middleman td {
+	vertical-align: middle;
+	text-align: center;
+	font: bold italic 90% Georgia, Times, "Bitstream Vera Serif", "Times New Roman", serif; 
+}
+
+.middleman td a {
+	text-decoration: none !important;
+}
+
+table#preise {
+	margin: 20px 10px;
+	font-size: 95%;
+}
+
+table#preise td {
+	padding-bottom: 5px;
+	vertical-align: bottom;
+}
+
+body.arch_projekte #containerRight {
+	position: absolute;
+}
+
+body.arch_projekte #containerRight ul ul li a,
+body.arch_projekte #containerRight ul ul li.active a {
+	font-size: 80%;
+	line-height: 100%;
+}
+
+/* helpers */
+
+caption {
+	display: none;
+}
+
+#year_archive select, #year_archive input {
+	background: #222;
+	color: #999;
+	font-size: 0.9em;
+}
+
+/*
+#jumptop { 
+	float: left;
+	margin: 10px 5px 20px 580px;
+}
+
+#jumptop a {
+	border-bottom: none;
+}
+*/
+
+td.year { padding-right: 10px; }
+
+.reference { 
+	margin: 0.5em 0;
+	font-size: 0.9em;
+	font-style: italic;
+}
+
+.mediaplayer {
+	margin: 2em 40px;
+}
+
+.inlineLabels label {
+	text-align: right;
+}
+
+#tooltip {
+	position: absolute;
+	z-index: 3000;
+	border: 1px solid #111;
+	color: #000;
+	background-color: #999;
+	padding: 5px;
+	opacity: 0.85;
+	font-size: 1.3em;
+}
+
+#sponsors {
+	font-size: 0.9em;
+	text-transform: uppercase;
+	line-height: 150%;
+}
+
+#sponsors img {
+	border: 1px solid #999;
+	padding: 2px;
+	background: #999;	
+}
+
+#map {
+	color: #333;
+}
+
+/* right menu */
+
+#containerRight {
+	position: absolute;
+	top: 205px;
+	left: 790px;
+	width: 273px;
+	margin: auto;
+}
+
+#containerRight p { 
+	color: #333;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 20px 0 20px 20px;
+	padding: 50px 15px 0 15px;
+	line-height: 130%;
+}
+/*
+#containerRight ul p {
+	font: italic 1em serif;
+	background-image: none;
+	margin: 0.8em 0 0 1em;
+	padding: 0;
+}
+*/
+#containerRight p.alt { font-size: 1em; 
+	margin-left: 30px;
+}
+
+#containerRight ul {
+	font-size: 1.1em;
+	margin: 0 0 20px 20px;
+	padding: 0 0 20px 20px;
+	background: transparent url(interface/rightbar_bottom.png) left bottom no-repeat;
+	width: 225px;
+}
+
+#containerRight ul li {
+	list-style: none outside; 
+	margin: 0.5em 0 0.5em 1em;
+	font-weight: bold;
+	line-height: 140%;
+}
+
+#containerRight ul li a { color: #222; 
+	background: transparent; 
+	width: 90%;
+	display: block;
+}
+
+#containerRight ul ul {
+	font-size: 0.9em;
+	background-image: none;
+	padding: 0;
+	margin-bottom: 0;
+}
+
+/* IDs und Farben, diesmal fuer containerRight */
+
+body#information #containerRight {
+	background: transparent url(interface/rightbar_top_yellow.png) 20px 0 no-repeat;
+}
+
+body#information #containerRight p a { 
+	color: #FC0 !important; 
+	background: transparent;
+}
+
+body#information #containerRight ul li a:hover { 
+	color: #FC0 !important;
+	background: transparent;
+}
+
+body#ausstellungen #containerRight,
+body#exhibitions #containerRight {
+	background: transparent url(interface/rightbar_top_violet.png) 20px 0 no-repeat;
+}
+
+body#ausstellungen #containerRight p a, 
+body#exhibitions #containerRight p a { color: #A33BAE !important; 
+	background: transparent;
+}
+
+body#ausstellungen #containerRight ul li a:hover,
+body#exhibitions #containerRight ul li a:hover { color: #A33BAE !important;
+	background: transparent;
+}
+
+body#khw #containerRight {
+	background: transparent url(interface/rightbar_top_blue.png) 20px 0 no-repeat;
+}
+
+body#khw #containerRight p a { color: #39F !important; 
+	background: transparent;
+}
+
+body#khw #containerRight ul li a:hover { color: #39F !important;
+	background: transparent;
+}
+
+body#hundertwasser #containerRight {
+	background: transparent url(interface/rightbar_top_green.png) 20px 0 no-repeat;
+}
+
+body#hwuhw #containerRight {
+	background: transparent url(interface/rightbar_top_yellow.png) 20px 0 no-repeat;
+}
+
+body#hwnews #containerRight {
+	background: transparent url(interface/rightbar_top_orange24.png) 20px 0 no-repeat;
+}
+
+body#hwtexte #containerRight {
+	background: transparent url(interface/rightbar_top_blue.png) 20px 0 no-repeat;
+}
+
+body#hundertwasser.ausstellung #containerRight {
+	position: absolute;
+}
+
+body#hundertwasser #containerRight p a {
+	color: #21c021 !important; 
+	background: transparent;
+}
+
+body#hwuhw #containerRight p a {
+	color: #e3b702 !important;
+	background: transparent;
+}
+
+body#hwnews #containerRight p a {
+	color: #CC6600 !important;
+	background: transparent;
+}
+
+body#hwtexte #containerRight p a {
+	color: #315fab !important;
+	background: transparent;
+}
+
+body#hundertwasser #containerRight ul li a:hover {
+	color: #21c021 !important;
+	background: transparent;
+}
+
+body#hwuhw #containerRight ul li a:hover {
+	color: #E3B702 !important;
+	background: transparent;
+}
+
+body#hwnews #containerRight ul li a:hover {
+	color: #CC6600 !important;
+	background: transparent;
+}
+
+body#hwtexte #containerRight ul li a:hover {
+	color: #315fab !important;
+	background: transparent;
+}
+
+/* active dot */
+
+body#information #containerRight ul li.active a, body#information #containerRight ul li.active a:hover { 
+	color: #333; 
+	background: transparent url(interface/ball_0_small.png) left center no-repeat;
+	margin-left: -30px;
+	padding-left: 30px;
+}
+
+body#ausstellungen #containerRight ul li.active a, body#ausstellungen #containerRight ul li.active a:hover,
+body#exhibitions #containerRight ul li.active a, body#exhibitions #containerRight ul li.active a:hover { 
+	color: #333; 
+	background: transparent url(interface/ball_3_small.png) left center no-repeat;
+	margin-left: -30px;
+	padding-left: 30px;
+}
+
+body#khw #containerRight ul li.active a, body#khw #containerRight ul li.active a:hover { 
+	color: #333; 
+	background: transparent url(interface/ball_2_small.png) left center no-repeat;
+	margin-left: -30px;
+	padding-left: 30px;
+}
+
+body#hundertwasser #containerRight ul li.active a, body#hundertwasser #containerRight ul li.active a:hover {
+	color: #666666; 
+	background: transparent url(interface/ball_1_small.png) left center no-repeat;
+	margin-left: -30px;
+	padding-left: 30px;
+}
+
+body#hwuhw #containerRight ul li.active a, body#hwuhw #containerRight ul li.active a:hover {
+	color: #333;
+	background: transparent url(interface/ball_0_small.png) left center no-repeat;
+	margin-left: -30px;
+	padding-left: 30px;
+}
+
+body#hwnews #containerRight ul li.active a, body#hwnews #containerRight ul li.active a:hover {
+	color: #333;
+	background: transparent url(interface/ball_4_small.png) left center no-repeat;
+	margin-left: -30px;
+	padding-left: 30px;
+}
+
+body#hwtexte #containerRight ul li.active a, body#hwtexte #containerRight ul li.active a:hover {
+	color: #333;
+	background: transparent url(interface/ball_2_small.png) left center no-repeat;
+	margin-left: -30px;
+	padding-left: 30px;
+}
+
+
+
+/* KHW black */
+
+html body.black {
+	background-color: #000;
+	background-image: none;
+	color: #CCC;
+}
+.archMenuLink {
+	font-size: 15px;
+	line-height: 20px;
+	color: #E9E9E9;
+	text-decoration: none;
+	text-align: center;
+}
+
+a.archMenuLink:hover {
+	color: #0F0;	
+}
+
+
+html body.black div#navigation {
+	height: 217px !important;
+	background: #000 url(interface/black/header.png) 0 0 no-repeat;
+}
+
+html body.black #wrapper {
+	background-image: none;
+	background-color: #000;
+}
+
+
+html body.black #contentwrapper {
+	background-image: none;
+	background-color: #000;
+}
+
+html body.black body#information #containerRight {
+	background: transparent url(interface/rightbar_top_yellow.png) 20px 0 no-repeat;
+}
+
+html body#ausstellungen.black #containerRight,
+html body#exhibitions.black #containerRight {
+	background: transparent url(interface/rightbar_top_violet.png) 20px 0 no-repeat;
+}
+
+html body#khw.black #containerRight {
+	background: transparent url(interface/rightbar_top_blue.png) 20px 0 no-repeat;
+}
+
+html body#hundertwasser.black #containerRight {
+	background: transparent url(interface/rightbar_top_green.png) 20px 0 no-repeat;
+}
+
+html body#hwuhw.black #containerRight {
+	background: transparent url(interface/rightbar_top_yellow.png) 20px 0 no-repeat;
+}
+
+html body#hwnews.black #containerRight {
+	background: transparent url(interface/black/rightbar_top_orange_black24.png) 20px 0 no-repeat;
+}
+
+html body#hwtexte.black #containerRight {
+	background: transparent url(interface/rightbar_top_blue.png) 20px 0 no-repeat;
+}
+
+html body.black #containerRight ul {
+	background: transparent url(interface/rightbar_bottom.png) left bottom no-repeat;
+}
+
+html body.black #containerRight ul ul {
+	background-image: none;
+}
+
+html body.black #containerRight ul li a,
+html body.black #containerRight ul li a:hover {
+	color: #999;
+}
+
+html body.black #containerRight ul li.active a,
+html body.black #containerRight ul li.active a:hover {
+	color: #999;
+}
+
+/* Ausstellungen */
+
+table.ausstelungsItemTable img {
+	margin: 0px 0px;
+	border: 0;
+}
+
+table.ausstelungsItemTable td
+{
+	padding: 0px 10px 10px 10px;
+	vertical-align:top;
+}
+
+table.ausstelungsItemTable h4 a p {
+	font-size: 17px;
+	color: #A33BAE;
+	text-decoration: none;
+}
+
+table.ausstelungsItemTable h4 a:hover p {
+	font-size: 17px;
+	color: #A33BAE;
+	text-decoration: underline;
+}
+
+table.ausstelungsItemTable a {
+	font-size: 15px;
+	color: #A33BAE;
+}
+
+table.ausstelungsItemTable a:hover {
+	text-decoration: underline;
+}
+
+table.ausstelungsItemTable p {
+	font-size: 15px;
+}
+
+span.copyright {
+	width: 170px;
+}
+
+#ausstellungPhotos div p {
+	font-size:12px;
+	font-style: italic;
+	padding: 5px 0px 0px 0px;
+}
+
+#ausstellungPhotos img
+{	
+	margin: 0px 0px;	
+}
+
+#ausstellungContent
+{
+	font-size: 14px;
+	padding: 0px 0px 0px 30px;
+	vertical-align:top;
+}
+
+div.ausstellungsTitel p{
+	font-size: 18px;
+	color: #A33BAE;
+}
+
+div.ausstellungsDatum p{
+	font-size: 14px;
+	font-weight:bold;
+}
+
+div.ausstellungsLocation p
+{ 
+	font-size:16px;
+	font-style: italic;
+	line-height:110%;
+	text-align:right;
+	padding-bottom: 30px;
+}
+
+div.ausstellungsLocation p a
+{ 
+	color: #A33BAE;
+}
+
+div.ausstellungsLocation p a:hover {
+	text-decoration: underline;
+}
+
+/* literatur */
+
+
+table.literaturItemTable td
+{
+	padding: 10px 10px 20px 10px;
+	vertical-align:top;
+}
+
+div.lit_autor
+{
+	font-size:17px;
+	font-weight:bold;
+}
+
+div.lit_titel p
+{
+	font-size:17px;
+	font-weight:bold;
+	font-style:italic;
+}
+
+div.lit_beschreibung p
+{
+	font-size:15px;
+	font-weight:normal;
+	font-style:normal;
+}
+
+div.lit_verlag
+{
+	font-size:15px;
+	font-weight:normal;
+	font-style:normal;
+}
+
+div.lit_kommentar p
+{
+	font-size:14px;
+	font-weight:normal;
+	font-style:normal;
+}
+
+
+/* news */
+
+#newsPhotos
+{
+	
+	margin:0px;
+	padding: 0px 0px 0px 30px;
+	vertical-align:top;
+}
+
+#newsPhotos div p
+{
+	font-size:12px;
+	font-style:italic;
+	padding: 5px 0px 0px 0px;
+}
+
+#newsContent
+{
+	font-size: 14px;
+	padding: 0px 0px 0px 30px;
+	vertical-align:top;
+}
+
+div.newsTitle a {
+	margin-top: 20px;
+	font-size: 20px;
+	color: #CC6600;
+}
+
+div.newsTitle {
+	margin-top: 20px;
+	font-size: 20px;
+	color: #CC6600;
+}
+
+div.newsTitle a:hover {
+	text-decoration:underline
+}
+
+div.newsSubTitle {
+	font-size: 16px;
+	color: #CC6600;
+}
+
+div.newsDatum {
+	font-size: 14px;
+	font-weight:bold;
+	font-style:italic;
+}
+
+#newsContent
+{
+	
+	margin:0px;
+	padding: 0px 0px 0px 30px;
+	vertical-align:top;
+}
+
+#newsContent a
+{
+	color: #CC6600;
+}
+
+#newsContent a:hover
+{
+	text-decoration:underline
+}

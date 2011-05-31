@@ -1,0 +1,39 @@
+body {
+	margin:0 auto;
+	background-color: #000;
+	font-family: Georgia, Times, "Bitstream Vera Serif", "Times New Roman", serif;
+	font-size: 14px;
+	color: #999999;
+	line-height: 140%;
+}
+
+/* -------------------------- TAGs  ------------------------------*/
+h1 {
+	font-size: 18px;
+	font-weight: normal;
+	color: #999999;
+	padding: 0;
+	line-height: 125%;
+}
+
+h2 {
+	font-size: 16px;
+}
+a {
+	font-size: 12px;
+	color: #C0F;
+	text-decoration: none;
+}
+a:hover {
+	font-size: 12px;
+	color: #C0F;
+	text-decoration: underline;
+}
+
+/* -------------------------- CLASSes  ------------------------------*/
+TD.posterdesc {
+	font-family: Georgia, Times, "Bitstream Vera Serif", "Times New Roman", serif;
+	font-size: 14px;
+	line-height: 140%;
+	color: #999999;
+}

@@ -1,0 +1,36 @@
+/*
+CSS print file for KunstHausWien.com website
+Creator: Krzysztof Jeziorny, www.krautzer-lynn.com
+Last edited: 04.09.2007
+*/
+
+#navDiv, #menuDiv, #subMenu0, #subMenu1, #subMenu2, #subMenu3, #subMenu4, #subMenu5, #titDiv, #ballDiv, #navIconDiv, #jumptop, #year, #containerRight { display: none !important;}
+
+body { font-family: Helvetica, Arial, "Bitstream Vera Sans", sans-serif;
+	font-size: 12pt;
+}
+
+h1#siteTitle { font: bold 14pt Helvetica, Arial, sans-serif; }
+
+h2 {font-size: 12pt; }
+
+h3 { font-size: 11pt; }
+
+a { color: #333; 
+	background: transparent; 
+	text-decoration: none;
+}
+
+.newsItem {page-break-inside: avoid;}
+
+.newsItem img { float: left; 
+	margin: 0 0.5cm 0.5cm 0;
+	display: block;
+	page-break-inside: avoid;
+}
+
+.alternative img { float: right; 
+	margin: 0 0 0.5cm 0.5cm;
+	display: block;
+	page-break-inside: avoid;
+}
