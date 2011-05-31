@@ -1,0 +1,40 @@
+<?php if ($this->pageCount):
+$paramsArr['type']=$this->type;
+$paramsArr['object_type']=$this->object_type;
+$paramsArr['work_number']=$this->work_number;
+$paramsArr['key_word']=$this->key_word;
+$paramsArr['cat_id']=$this->cat_id;
+$paramsArr['free_text']=$this->free_text;
+$paramsArr['year_from']=$this->year_from;
+$paramsArr['year_to']=$this->year_to;
+$paramsArr['year']=$this->year;
+?>
+<div id="catPaging">
+<?php if (isset($this->previous)):
+$params=array_merge(array('page' => $this->previous),$paramsArr);
+?>
+<a class="l9" href="<?php echo $this->url($params); ?>">Previous</a>
+<?php else: ?>
+<span class="19">Previous</span>
+<?php endif; ?>
+&lt;
+<?php foreach ($this->pagesInRange as $page): ?>
+<?php if ($page != $this->current):
+$params=array_merge(array('page' => $page),$paramsArr);
+?>
+<a class="l9" href="<?php echo $this->url($params); ?>"><?php echo $page;?></a>
+<?php else: ?>
+<span><?php echo $page;?></span>
+<?php endif; ?>
+<?php if ($page!=$this->lastPageInRange) {echo ",";} ?>
+<?php endforeach; ?>
+&gt;
+<?php if (isset($this->next)):
+$params=array_merge(array('page' => $this->next),$paramsArr);
+?>
+<a class="l9" href="<?php echo $this->url($params); ?>">Next</a>
+<?php else: ?>
+<span class="19">Next</span>
+<?php endif; ?>
+</div>
+<?php endif; ?>

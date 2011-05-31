@@ -1,0 +1,15 @@
+<?php
+if ($this->message){
+	echo $this->message;
+	echo "<a href='/objeto/edit?type={$this->type}&id={$this->id}'>Aceptar</a>";
+}
+else{
+	$this->form->setAction($this->url());
+	echo $this->form;
+	echo "<a href='/objeto/edit?type={$this->type}&id={$this->id}'>Cancel</a>";
+		
+}
+?>
+<br/>
+<br/>
+<br/>

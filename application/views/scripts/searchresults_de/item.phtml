@@ -1,0 +1,18 @@
+<?php
+if ($this->title){
+print "title:".$this->title."<br>";
+}
+$sz1=sizeof($this->wkArr);
+$this->placeholder('work_id')->set($this->work.'_id');
+$this->placeholder('work')->set($this->work);
+if (in_array($this->work,array('audio','video','text'))){
+  $this->placeholder('title_fld')->set($this->titleArr[$this->work]);
+}else{
+  $this->placeholder('title_fld')->set($this->titleArr[$this->work].'_'.$this->lang);
+}
+if($sz1){
+  print $this->partialLoop('skin/_workRow.phtml',$this->wkArr); 
+}
+
+
+?>

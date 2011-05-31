@@ -1,0 +1,28 @@
+<?
+//print $this->view->work;
+
+$work_id=$this->placeholder('work_id');
+$title_fld=$this->placeholder('title_fld');
+$date_fld=$this->placeholder('date_fld');
+//print "date_fld:".$date_fld;
+//print $work_id."-".$title_fld."<br>";
+?>
+<div style="height:95px;overflow:none;">
+<table cellpadding=0 cellspacing=0 width="595" border=0><tr>
+<td width=7></td>
+<td class=welcome valign=top style="padding-left:6px; padding-top:6px; background-image:url(/images/skins_title_bg.jpg); background-repeat: no-repeat;">
+<div style="width:165px; height:70px; overflow:hidden;">
+<img src="<?=$this->img?>">
+</div>
+</td>
+<td valign=top class=welcome width="398" style="padding-left:6px; padding-top:6px; background-image:url(/images/skins_text_bg.jpg); background-repeat: no-repeat;">
+<div style="width:390px; height:70px; overflow:hidden;">
+<font size="2"><?=$this->escape($this->$title_fld)?></font>
+<b>
+<u><a href="/<?=$this->placeholder('work')?>/item/id/<?=$this->escape($this->$work_id)?>">Full&nbsp;details</a></u></b></font></div></td></tr>
+</table>
+<img src=/images/sep.jpg>
+</div>
+
+
+

@@ -1,0 +1,262 @@
+<table align=left cellpadding=0 cellspacing=0>
+<tr>
+  <td align=left height=95 valign=bottom style="padding-left:35px;">
+  <a href="/"><font color="#878d8a"><b><u>Home</u></b></font></a> 
+  <font color="#d45232"> <font size="1" face=verdana>&gt;</font>
+  <font face="Verdana" size="2">Advanced Search</font></font></td>
+  </tr>
+  <tr>
+  <td><form action=/search method=post name=searchForm>
+    <table width="807" align=left cellpadding=0 cellspacing=0 border=0>
+    <tr>
+    <td width=30 height=55 align=left>
+    </td>
+    <td valign=bottom width=140 align=left>
+    <img src=http://www.hw-archive.com/images/by_work.jpg>
+    </td>
+    <td width=140></td>
+    <td width=140 valign=bottom align=left>
+    <img src=http://www.hw-archive.com/images/by_skin.jpg>
+    </td>
+    <td width=140 valign=bottom align=left>
+      <img src=http://www.hw-archive.com/images/by_work_type.jpg>
+    </td>
+    <td width=191 valign=bottom align=left>
+    </td>
+    </tr>
+    <tr>
+    <td></td>
+    <td colspan=2 align=left>
+    <b>
+    <font color="#65A31B" face="Verdana" size="2">Key Word:</font></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class=input_a name=work[keyword] value='<?=$this->data['work']['keyword']?>' id=work_keyword type=text>
+     <br><br><br>
+    <b>
+    <font color="#65A31B" face="Verdana" size="2">Work Number:</font></b>
+    &nbsp;<input name=work[num] value='<?=$this->data['work']['num']?>' id=work_num type=text class=input_a >
+    <br><br><br>
+
+    <b>
+    <font color="#65A31B">By Period:</font></b>
+<br><br><font face="Verdana" size="2"><b>
+    <font color="#65A31B">
+From Year&nbsp;&nbsp;&nbsp; To Year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Specific Year</font></b>
+    </font>
+    <br>
+    &nbsp;<input name=period[fromyear] id=period_fromyear type=text class=input_b maxlength=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    <input name=period[toyear] id=period_toyear type=text class=input_b maxlength=4>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 
+    <input name=period[spyear] id=period_spyear type=text class=input_b maxlength=4>
+    <br><br>
+    </td>
+    <td style=padding-left:5px; valign=top align=left>
+    <input type=checkbox name="skin[all]" <?=($this->data['skin']['all'])?'checked':''; ?>  style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>All</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name="skin[epidermis]" <?=($this->data['skin']['epidermis'])?('checked'):'';?> value="1" style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Epidermis</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name="skin[clothes]" <?=($this->data['skin']['clothes'])?('checked'):'';?> value="2" style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Clothes</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name="skin[house]" <?=($this->data['skin']['house'])?('checked'):'';?> value='3' style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>House</font>
+
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name="skin[identity]" <?=($this->data['skin']['identity'])?('checked'):'';?> value='4' style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Identity</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name="skin[earth]" <?=($this->data['skin']['earth'])?('checked'):'';?> value='5' style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Earth</font>
+    </font></b>
+
+    
+    </td>
+    <td style=padding-left:5px; valign=top  align=left>
+    <input type=checkbox name=paint[all] <?=($this->data['paint']['all'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>All</font>
+    </font></b>
+
+    <br><br style="line-height:10px;">
+      <input type=checkbox name=paint[water_color] <?=($this->data['paint']['water_color'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Water Color</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name=paint[oil] <?=($this->data['paint']['oil'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Oil</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name=paint[silk] <?=($this->data['paint']['silk'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Silk</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name=paint[wood_cut] <?=($this->data['paint']['wood_cut'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Wood Cut</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name=paint[pva] <?=($this->data['paint']['pva'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>PVA</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox  name=paint[egg_tempera] <?=($this->data['paint']['egg_tempera'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Egg Tempera</font>
+    </font></b>
+    </td>
+
+    <td style=padding-left:5px; valign=top  align=left>
+
+    <input type=checkbox name=paint[oil_on_canvas_strips] <?=($this->data['paint']['oil_on_canvas_strips'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Oil on canvas strips</font>
+    </font></b>
+    
+    
+    
+    </td>
+
+    </tr>
+    <tr>
+    <td width=30 height=55  align=left>
+    </td>
+    <td valign=bottom width=140  align=left>
+    <img src=http://www.hw-archive.com/images/by_archi.jpg>
+
+    </td>
+    <td width=140 valign=bottom  align=left><img src=http://www.hw-archive.com/images/by_text.jpg>
+    </td>
+    <td width=140 valign=bottom  align=left>
+    <img src=http://www.hw-archive.com/images/by_graphic.jpg>
+    </td>
+    <td width=140 valign=bottom>
+      
+    </td>
+    <td width=191 valign=bottom  align=left>
+
+    <img src=http://www.hw-archive.com/images/by_tapestry.jpg >
+    </td>
+
+    </tr>
+    <tr>
+    <td></td>
+    <td style=padding-left:5px; valign=top  align=left>
+    <input type=checkbox name="arch[all]" <?=($this->data['arch']['all'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>All</font>
+    </font></b>
+
+    <br><br style="line-height:10px;">
+      <input type=checkbox name="arch[building]" <?=($this->data['arch']['building'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Building</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name="arch[model]" <?=($this->data['arch']['model'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Model</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name="arch[sketch]" <?=($this->data['arch']['sketch'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Sketch</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name="arch[scripts]" <?=($this->data['arch']['scripts'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Scripts</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+
+    </td>
+
+    <td style=padding-left:5px; valign=top  align=left>
+
+    <input type=checkbox name=text[all] <?=($this->data['text']['all'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>All</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+      <input type=checkbox name='text[manifest]' <?=($this->data['text']['manifest'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Manifests</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name='text[saying]' <?=($this->data['text']['saying'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Sayings</font>
+
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name='text[article]' <?=($this->data['text']['article'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Articles</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name='text[interview]' <?=($this->data['text']['interview'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Interviews</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name='text[poem]' <?=($this->data['text']['poem'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Poems</font>
+    </font></b>
+
+    </td>
+
+    <td style=padding-left:5px; valign=top align=left>
+    <input type=checkbox name='graph[all]' <?=($this->data['graph']['all'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>All</font>
+    </font></b>
+
+    <br><br style="line-height:10px;">
+      <input type=checkbox name='graph[linocut]' <?=($this->data['graph']['linocut'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Linocut</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name='graph[sketch]' <?=($this->data['graph']['sketch'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Sketch</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name='graph[wood_cut]' <?=($this->data['graph']['wood_cut'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Woodcut</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name='graph[etching]' <?=($this->data['graph']['etching'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Etching</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name='graph[lithograph]' <?=($this->data['graph']['lithograph'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Lithograph</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name='graph[silk_screen]' <?=($this->data['graph']['silk_screen'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Silk Screen</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name='graph[mixed_media]' <?=($this->data['graph']['mixed_media'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Mixed Media</font>
+
+    </font></b>
+
+    </td>
+
+    <td style=padding-left:5px; valign=top align=left>
+    <input type=checkbox name='graph[rotaprint]' <?=($this->data['graph']['rotaprint'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Rotaprint</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+      <input type=checkbox name='graph[aquatint]' <?=($this->data['graph']['aquatint'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Aquatint</font>
+
+    </font></b>
+    
+    </td>
+    <td style=padding-left:5px; valign=top align=left>
+    <input type=checkbox name='tap[all]' <?=($this->data['tap']['all'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>All</font>
+    </font></b>
+    <br><br style="line-height:10px;">
+      <input type=checkbox name='tap[wool]' <?=($this->data['tap']['wool'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Wool</font>
+    </font></b>
+
+    <br><br style="line-height:10px;">
+
+      <input type=checkbox name='tap[linen]' <?=($this->data['tap']['linen'])?('checked'):'';?> style="width:11px; height:11px;">&nbsp;&nbsp;&nbsp;<b><font face="Verdana" size="2"><font color=#65A31B>Linen</font>
+    </font></b>
+    
+    </td>
+
+    </tr>
+    <tr>
+<td></td>   <td colspan=5 align=left><br><br>
+        <input type="submit" value="&nbsp;" name="submit"
+        
+        onmouseout="this.style.backgroundImage='url(/images/btn_search_ge.gif)'" 
+        onmouseover="this.style.backgroundImage='url(/images/btn_search_over_ge.gif)'" 
+        style="cursor:pointer;background-image:url(/images/btn_search_ge.gif);height:37px;width:153px;border:0;">
+</td>
+    </tr>
+    </table></form>
+  </td>
+  </tr>
+</table>
+

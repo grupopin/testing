@@ -1,0 +1,8 @@
+<h1><?php echo $this->escape($this->title);?></h1>
+<?php if(count($this->news)) : ?>
+<table>
+
+<?php echo $this->partialLoop('news/_placeRow.phtml', $this->news) ?>
+
+</table>
+<?php endif; ?>

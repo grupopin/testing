@@ -1,0 +1,21 @@
+<?php echo $this->doctype('XHTML1_STRICT'); ?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <?php echo $this->HeadMeta(); ?>
+    <?php echo $this->headTitle(); ?>
+    <?php echo $this->headLink(); ?>
+</head>
+<body>
+    <?php echo $this->partial("_header.phtml"); ?>
+    <?php echo $this->layout()->menu; ?>
+    <div id="container" >
+        <div id="content" class="column"><div id="pad">
+            <?php echo $this->layout()->content; ?>
+        </div></div>
+        <div id="right" class="column">
+            <?php echo $this->layout()->advert; ?>
+        </div>
+    </div>
+    <?php echo $this->partial("_footer.phtml"); ?>
+</body>
+</html>

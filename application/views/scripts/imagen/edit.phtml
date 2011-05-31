@@ -1,0 +1,42 @@
+
+<h4>Image Info</h4> <br/>
+
+<table border=1  >
+<tr><td width="100">ID</td><td> <?php echo $this->imagen_id; ?></td></tr>
+<tr><td>Name</td><td> <?php echo $this->imagen['name']; ?></td></tr>
+<tr><td>Picture</td><td><?php echo "<img  src='". $this->path . $this->imagen['name'] . "'>" ?></td></tr>
+
+</table>
+<br/>
+
+
+<form >
+<input type="hidden" name="id" value="<?php echo $this->id?>">
+<input type="hidden" name="imagen_id" value="<?php echo $this->imagen_id?>">
+<input type="hidden" name="objeto_id"  value="<?php echo $this->objeto_id?>">
+<input type="hidden" name="type" value="<?php echo $this->type?>">
+
+<table border=1  >
+<tr><td width="100">Order</td><td><input type="text" name="orden" size="2" maxlength="2" value="<?php echo $this->imagen['orden'];?>"></td></tr>
+<tr><td>Photographer</td><td> 
+<select name="photographer" >
+<option value="0"></option>
+<?php foreach ($this->photographers as $photographer) {
+  if ($photographer['id']==$this->imagen['photographer_id']) {?>
+  	<option value="<?php echo $photographer['id']?>" selected="selected"><?php echo $photographer['name']?></option>
+ <?php } else {?>
+	<option value="<?php echo $photographer['id']?>"><?php echo $photographer['name']?></option>
+<?php } } ?> 
+</select> </td></tr>
+<tr><td>Copyright</td><td><input type="text" name="copyright" size="50" maxlength="100" value="<?php echo $this->imagen['copyright'];?>"></td></tr>
+<tr><td>Description - English</td><td><textarea name="description_en" rows="2" cols="50"><?php echo $this->imagen['description_en'];?></textarea></td></tr>
+<tr><td>Description - German</td><td><textarea name="description_ge" rows="2" cols="50"><?php echo $this->imagen['description_ge'];?></textarea></td></tr>
+</table>
+<br><br>
+<input type="submit" name="accion" value="Save">
+ 	&nbsp; 	&nbsp;
+<input type="submit" name="accion" value="Cancel">
+
+</form>
+
+<br/><br/><br/><br/>

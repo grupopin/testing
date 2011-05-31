@@ -1,0 +1,56 @@
+<h1><a href='/backend'>Backend</a> &gt; Search Work</h1>
+<br/>
+<br/>
+<form action="/objeto/search/" method="get" name="AdvancedSearchForm" id="AdvancedSearchForm">
+	<table class="tab2" >
+		<tr>	 
+            <td>
+				<span style="font-weight: bold">Type:</span>  
+			    <select name="type[]">
+                <option value="jw" <?php if($this->type=='jw') echo "selected='selected'";?> >Early Work</option>
+                <option value="paint" <?php if($this->type=='paint') echo "selected='selected'";?> >Paintings</option>
+                <option value="hwg" <?php if($this->type=='hwg') echo "selected='selected'";?>>Original Graphic</option>
+                <option value="tap" <?php if($this->type=='tap') echo "selected='selected'";?>>Tapestry</option>
+                <option value="apa" <?php if($this->type=='apa') echo "selected='selected'";?>>Applied Art</option>
+                <option value="arch" <?php if($this->type=='arch') echo "selected='selected'";?>>Architecture</option>
+                </select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span style="font-weight: bold">Number:</span>
+				<input name="work_number"  type="text" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="submit" value="Search" name='submit' id="submit" >
+				
+			</td>
+		</tr>
+	</table>
+</form>
+	
+
+<?php  if ($this->items) {?>
+
+<h1>Results</h1><br/>
+<table border=1 width="400">
+    <?php foreach ($this->items as $item): ?>
+    <tr>
+      <td> <?php echo $this->escape($item['term_arg1'])."-".$this->escape($item['term_arg2']) ?></td>
+      <td> <?php  echo "<a href='/item/view?type={$item['term_arg1']}&id={$item['term_arg2']}' target='_blank'>View Work</a>";?></td>
+      <td> <?php  echo "<a href='/objeto/edit?type={$item['term_arg1']}&id={$item['term_arg2']}' target='_blank'>Edit Image List</a>";?></td>
+    </tr>
+    <?php endforeach ?>
+</table>
+<?php } ?>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>

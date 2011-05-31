@@ -1,0 +1,153 @@
+<?php
+$title=$this->item['title'.$this->langArr['lang_word']];
+if (!$title){
+  $title=$this->item['title'];
+}
+if($workNumStr=$this->item['workNumber']){
+  $workNumStr.="&nbsp;&nbsp;&nbsp;";
+}
+?>
+<!--<table>
+<tr style='font-weight:bold;'>
+<td>APA</td>
+<td><?=$this->item['apa']?></td>
+</tr>
+<tr>
+<td><h2><?=$workNumStr?></h2></td>
+<td><h2><?=$title?></h2></td>
+</tr>
+<?php
+print showTitle($this->item['titleEnglish'],$title);
+print showTitle($this->item['titleGerman'],$title);
+print showTitle($this->item['titleFrench'],$title);
+print showTitle($this->item['titleItalian'],$title);
+print showTitle($this->item['titleSpanish'],$title);
+print showTitle($this->item['titleJapanese'],$title);
+?>
+</table><br/>
+-->
+APA <?=$this->item['apa']?>
+<br/>Work No. <?=$workNumStr?>
+<br/><h2><?=$title?></h2>
+
+<div class="itemView2">
+<?=showProp($this->item['descriptionCategoryKeyword'])?>
+
+<?=showProp($this->item['year'])?>
+<?=showProp($this->item['derivation'])?>
+<?=showProp($this->item['description'])?>
+
+<?php if ($this->item['heightMm']){?>
+<?=$this->item['heightMm']?> mm  / <?=$this->item['widthMm']?> mm <br/>
+<?php }?>
+
+<?php if ($this->item['imageHeightMm']){?>
+<?=$this->l('Image').': '.$this->item['imageHeightMm']?> mm  / <?=$this->item['imageHeightMm']?> mm <br/>
+<?php }?>
+<?=showProp($this->item['technique'])?>
+<?=showProp($this->item['edition'])?>
+<?=showProp($this->item['executedBy'],$this->l('Executed by'))?>
+<?=showProp($this->item['printedBy'],$this->l('Printed by'))?>
+<?=showProp($this->item['publishedBy'],$this->l('Published by'))?>
+<?=showProp($this->item['producedBy'],$this->l('Produced by'))?>
+<?=showProp($this->item['coordinator'],$this->l('Coordinator'))?>
+</div>
+
+
+<div class="text1">
+	<?php
+	showText($this->item['hundertwasser_comment_'.$this->langArr['lang_alt_short']],
+          	$this->item['hundertwasser_comment_ge'],
+          	$this->langArr['lang_alt_short'],
+          	          'ge',
+          	$this->l('Hundertwasser comment about the work'), 'font-size:16px;');
+
+	showText($this->item['information_'.$this->langArr['lang_alt_short']],
+        	$this->item['information_ge'],
+        	$this->langArr['lang_alt_short'],
+        	          'ge',
+        	$this->l(''), 'font-size:16px;');
+
+?>
+
+  <?php $this->showList($this->item['oneManExhibitions'],$this->l('One-man exhibitions'))?>
+
+	<?php $this->showList($this->item['groupExhibitions'],$this->l('Group exhibitions'))?>
+
+	<?php $this->showList($this->item['literatureMonographs'],$this->l('Literature'),$this->l('Monographs'))?>
+
+	<?php $this->showList($this->item['literatureExhibitionCatalogues'],$this->l('Literature'),$this->l('Exhibition catalogues'))?>
+
+	<?php $this->showList($this->item['literatureVarious'],$this->l('Literature'),$this->l('Various'))?>
+
+  <?php $this->showList($this->item['literatureMagazinesPeriodicals'],$this->l('Literature'),$this->l('Magazines/periodicals'))?>
+
+  <?php $this->showList($this->item['reproductionsArtPrints'],$this->l('Reproductions art prints'))?>
+
+
+
+
+</div>
+
+<?php
+
+function showProp($val,$lab=''){
+  if ($val){
+    if ($lab){
+      $lab1=$lab.': ';
+    }
+    //return $lab1.$val.'<br>'; //Modificado por GC
+    return $lab1.html_entity_decode($val, ENT_QUOTES, "utf-8").'<br>';
+  }
+}
+
+	function showTitle($titleLang,$title){
+	  if ($titleLang && $titleLang!=$title){
+	   ?>
+	   <tr>
+         <td></td>
+         <td><h2><?=$titleLang?></h2></td>
+       </tr>
+	   <?php
+	  }
+	}
+
+function showText($textLang, $textDef, $curLang, $defLanguage,$header){
+  $res=$textLang;
+	if (!$res && $curLang!=$defLanguage){
+	  $res=$textDef;
+	}
+	if ($res){
+	?>
+	<?php if ($header) {?><br><span class="t1"><?=$header?></span>:<?php }?>
+<!--	<br><?=$res?><br/>  Modificado por GC-->
+    <br><?php echo html_entity_decode($res, ENT_QUOTES, "utf-8") ; ?><br/>
+    <?php
+	 }
+
+}
+
+
+
+function showList($val,$header1,$header2=''){
+  static $listId=0;
+  $listId++;
+  if (isset($val)){
+    ?>
+<br>
+<span class="t1 list-header-<?=$listId?>"><?=$header1?></span>:<? if ($header2) print $header2;?>
+<ul class="ul1" style="height:45px;overflow:auto;">
+<?php
+$arr=explode("<br>",$val);
+foreach($arr as $rn=>$row){
+  ?>
+	<li><?=$row?></li>
+	<?php
+}
+?>
+</ul>
+<?php
+  }
+}
+
+?>

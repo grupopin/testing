@@ -1,0 +1,9 @@
+<?php 
+if ($this->message){
+	echo $this->message;
+}
+else{
+	$this->form->setAction($this->url());
+	echo $this->form;	
+}
+

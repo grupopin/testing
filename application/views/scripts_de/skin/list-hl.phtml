@@ -1,0 +1,95 @@
+<td colspan="2"><!--RELATED ITEMS DISPLAY-->
+<div style="float: right;">
+<div class="" id="rightBlock">
+<div id="RB1"><img alt="Related Items"
+	src="/images/items/tit_rel_eng.gif" /></div>
+<div id="RB1Cat">
+<div id="RB2"><?php
+$langArr=$this->sess('langArr');
+//print_r($langArr);
+if ($this->relLink){
+foreach($this->relLink as $id=>$link){
+  ?>
+<div
+	onmouseover="MM_swapImage('ImageRB<?=$id?>','','/images/icons/tit_<?=$link['name']?>_on_<?=$langArr['lang_alt']?>.gif',1)"
+	onmouseout="MM_swapImgRestore()"><a href="#"> <img
+	alt="<?=$link['title']?>" src="/images/icons/<?=$link['name']?>.gif" />
+<img id="ImageRB<?=$id?>" name="ImageRB<?=$id?>"
+	alt="<?=$link['title']?>"
+	src="/images/icons/tit_<?=$link['name']?>_<?=$langArr['lang_alt']?>.gif" />
+</a> (<?=$link['cnt']?>)</div>
+  <?php
+}
+}
+
+?> <br />
+<br />
+ </div>
+<div title="" id="RB1Cat2"> </div>
+</div>
+<div class="" id="RB1Cat3">
+<div id="RB3"><!--<img src="/images/items/buy_eng.gif" alt="Related Shop Products" />-->
+<div class="newCrazy1">Buy Me!   </div>
+<span class="newCrazy2">Related Shop Products    </span>
+<div id="RB4">
+<div class="ThumbRow">
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Somewhat Long
+Product Title </span></a></div>
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Short Title</span></a></div>
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Another Product
+Title</span></a></div>
+</div>
+<div class="ThumbRow clearRow">
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Somewhat Long
+Product Title </span></a></div>
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Short Title</span></a></div>
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Another Product
+Title</span></a></div>
+</div>
+</div>
+<a id="shopLink" class="l10" href="#">Visit Online Shop</a>
+<div id="RB1Cat4"> </div>
+</div>
+</div>
+</div>
+</div>
+<!--MAIN ITEM DISPLAY-->
+<div>
+<div id="inCatItems"><?php if ($this->count){?> <img
+	style="position: relative; top: -6px; left: 15px;" alt="Earth"
+	src="/images/skins/tit_earth_eng.gif" />
+<div id="inCI1c"><?=$this->l('Main Title')?> <br />
+<?=$this->l('Highlights')?> (<?=$this->from+1?> - <?=$this->from+$this->items->getCurrentItemCount()?>
+of <?=$this->count?>)</div>
+<?php foreach($this->txtArr as $txtId=>$hlArr){
+  //$txtIdStr=str_replace(".","_",$txtId);
+  $title=str_replace("\r\n","<br>",$this->texts[$txtId]['text_title_en']);
+  ?>
+<div class="CatItem1">
+<div class="CatItem2"></div>
+<div title="" class="CatItem3 CI3noPad CatItem3b">
+<div><a class="l12" href="/text/<?=$txtId?>"><span><?=$title?></span></a>
+  <?php foreach($hlArr as $i=>$hlData){?> <br />
+<br />
+<a class="l12b" href="/text/<?=$txtId?>/hl/<?=$hlData['id']?>"><?=$hlData['text']?></a>
+<a class="l6b" href="/text/<?=$txtId?>/hl/<?=$hlData['id']?>">more Info</a>
+  <?php }?></div>
+</div>
+<div class="CatItem4"></div>
+</div>
+  <?php }?>
+
+<div id="catPaging"><!--ITEM PAGING--> <?php
+echo $this->paginationControl($this->items,'Sliding', 'skin/pages.phtml');
+?></div>
+<?php }else{
+  print $this->l('No highlights defined for this maintitle');
+}?></div>
+</div>
+</td>

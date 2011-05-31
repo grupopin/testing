@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="eng">
+<head>
+<!-- Israeli Web Development -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title dir="rtl">Hundertwasser</title>
+<meta http-equiv="content-language" content="en" />
+<meta name="author" content="Hundertwasser" />
+<link rel="shortcut icon" href="images/favicon.ico" />
+
+</head>
+<body class="InBody" id="top">
+<style>
+body,html 
+{
+	padding:0;
+	margin:0;
+}
+a 
+{
+text-decoration: none;
+}
+
+a:hover
+{
+text-decoration: underline;
+}
+.welcome
+{
+font-family: Verdana,Arial,Helvetica,sans-serif;
+font-size:12px;
+color: #ACC790;
+
+}
+.bottom_links
+{
+color: #74C828;
+text-decoration: none;
+}
+.bottom_links: hover
+{
+color: #74C828;
+text-decoration: underline;
+}
+
+.sitemap_links
+{
+color: #959595;
+text-decoration: none;
+
+}
+.sitemap_links : hover
+{
+color: #959595;
+text-decoration: underline;
+
+}
+
+.bottom_click
+{
+font-family: Verdana,Arial,Helvetica,sans-serif;
+font-size:13px;
+}
+
+.bottom
+{
+font-family: Verdana,Arial,Helvetica,sans-serif;
+font-size:10px;
+}
+
+.bg
+{
+background-image: url(http://www.hw-archive.com/images/item_normal_bg.jpg);
+background-repeat: no-repeat;
+width: 1008px;
+height: 980px;
+}
+
+
+.scroll_text
+{
+font-family: Verdana,Arial,Helvetica,sans-serif;
+font-size: 13px;
+color: #9EB198;
+}
+
+.cur_page_link_class{
+ color:#D07B27; 
+}
+.page_link_class{
+ color: #B43B78;
+}
+
+
+
+</style>
+</head>
+<body >
+<table bgcolor=#000000 cellpadding=0 cellspacing=0 align=center width=1008 height=868>
+<tr>
+<td align=center class=bg valign=top>
+	<table cellpadding=0 cellspacing=0 align=left><tr><td>
+	
+
+	<!-- Start Top Menu -->
+	<table cellpadding=0 cellspacing=0   align=left>
+	<tr>
+	<td colspan=2 height=87></td>
+	</tr>
+	<tr>
+	<td style="width:218px;">
+	</td>
+	<td>
+	<table width=450><tr><td valign=top width="45"><br style="line-height:7px;">
+					<a href="/" onmouseover="document.home.src='http://www.hw-archive.com/images/btn_home_over.jpg'" onmouseout="document.home.src='http://www.hw-archive.com/images/btn_home.jpg'">
+				<IMG SRC="http://www.hw-archive.com/images/btn_home.jpg" NAME="home" BORDER="0" ALT="Home"></a>
+				</td>
+				<td valign=top width="74"><a href="/skin"><img src="http://www.hw-archive.com/images/btn_skins2_ge.gif" border=0></img></a></td>
+				<td width="84">
+					<a href="/shop/home.php" onmouseover="document.shop.src='http://www.hw-archive.com/images/btn_shop_over.jpg'" onmouseout="document.shop.src='http://www.hw-archive.com/images/btn_shop.jpg'">
+				<IMG SRC="http://www.hw-archive.com/images/btn_shop.jpg" NAME="shop" BORDER="0" ALT="Shop"></a>
+				</td>
+				<td valign=top width="85"><br style="line-height:6px;">
+					<a href="/contact_ge" onmouseover="document.contact.src='http://www.hw-archive.com/images/btn_contact_over_ge.gif'" onmouseout="document.contact.src='http://www.hw-archive.com/images/btn_contact_ge.gif'">
+				<IMG SRC="http://www.hw-archive.com/images/btn_contact_ge.gif" NAME="contact" BORDER="0" ALT="Kontakt"></a>
+				</td>
+				<td valign=top>
+					<a href="/search_ge" onmouseover="document.adsearch.src='http://www.hw-archive.com/images/btn_ad_search_over_ge.gif'" onmouseout="document.adsearch.src='http://www.hw-archive.com/images/btn_ad_search_ge.gif'">
+				<IMG SRC="http://www.hw-archive.com/images/btn_ad_search_ge.gif" NAME="adsearch" BORDER="0" ALT="Spezial recherche"></a>
+				</td>
+				</tr></table>
+				<!-- End Top Menu -->
+	</td></tr>
+	</table>
+	
+</td></tr>
+<tr>
+<td valign=top width=1008>
+<table width="1006" border=0>
+<tr><td width=35></td>
+<td width=100% valign=top class=welcome align=left>
+<br style="line-height:75px;">
+
+<br>
+<?
+switch($this->referrer){
+	case 'SkinController':
+		?>
+
+<a href=/><font color=878D8A><b><u>Home</u></b></font></a> 
+<font size="1">&gt;</font> <a href=/skin_ge><font color=878D8A><b><u>Haute</u></b></font></a><font size="1">&gt;</font><font color=878D8A><font color="D45232">
+<a href="<?=$this->refUri?>"><font face="Verdana" size="2">Skin item results</font></a>
+		<?
+		break;
+	case 'SearchresultsController':
+		?>
+		 <a href="/">
+  <font color="#878d8a" face="Verdana" size="2"><b><u>
+  Home</u></b></font></a> 
+  <font color="#d45232"> <font size="1" face=verdana>&gt;</font>
+  <a href="/search_ge"><font color="#878d8a" face="Verdana" size="2"><b><u>Spezial recherche</u></b></font></a><font size="1" face=verdana> &gt;</font>
+  <a href="<?=$this->refUri?>"><font face="Verdana" size="2">Search item results</font></a></font>
+		<?
+		break;
+}
+?>
+<br clear=all><br clear=all>
+<?
+switch($this->work){
+  
+  case 'apa':
+    $titleImg="btn_more_apa_ge.gif";
+    break;
+  case 'arch':  
+    $titleImg="btn_more_archi_ge.gif";
+    break;
+  case 'graph':
+    $titleImg="btn_more_orig_ge.gif";
+    break;
+  case 'paint':
+    $titleImg="btn_more_painting_ge.gif";
+    break;
+    
+  case 'tap':
+    $titleImg="btn_more_tapestry_ge.gif";
+    break;
+    
+  case 'audio':
+    $titleImg="btn_more_audio.jpg";
+    break;
+    
+  case 'video':
+    $titleImg="btn_more_video.jpg";
+    break;
+    
+  case 'text':
+    $titleImg="btn_more_text_ge.gif";
+    break;
+  default:
+  
+}
+
+?>
+  <img src='http://www.hw-archive.com/images/<?=$titleImg?>'>
+
+<br>
+<br>
+<?php echo $this->layout()->content; ?>
+<?=$this->links?>
+
+<br><br>
+</td>
+
+<td valign=top align=left>
+<br>
+<br style="line-height:55px;">
+ <?=$this->hlpOtherWorks($this->id, $this->work,$this->otherWorks,$this->lang, $this->titleArr)?>
+</td>
+</tr>
+</table>
+<br>
+
+<table cellpadding=0 cellspacing=0 align=left>
+<tr>
+<td colspan=6 style="padding-left:10px;">
+
+<p align=left>
+<b><font face="Verdana" color="#7AC633">
+Related items:</font>
+</p><br><br>
+</td></tr>
+<tr>
+<td style="padding-left:10px;" valign=bottom align=left>
+  <a href="/searchresults_ge/index/type/paint<?=($this->skinCnt['paint'])?('/item_'.$this->work.'/'.$this->id):('')?>" onmouseover="document.painting.src='http://www.hw-archive.com/images/btn_more_painting_over_ge.gif'" onmouseout="document.painting.src='http://www.hw-archive.com/images/btn_more_painting_ge.gif'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_painting_ge.gif" NAME="painting" BORDER="0" ALT="Gemalde"></a>
+
+</td><td align=left valign=top><br style="line-height:10px;"><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['paint']?>)</font></b></td>
+<td width=40 align=left></td><td valign=bottom align=left>
+  <a href="/searchresults_ge/index/type/apa<?=($this->skinCnt['apa'])?('/item_'.$this->work.'/'.$this->id):('')?>" onmouseover="document.apa.src='http://www.hw-archive.com/images/btn_more_apa_over_ge.gif'" onmouseout="document.apa.src='http://www.hw-archive.com/images/btn_more_apa_ge.gif'">
+
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_apa_ge.gif" NAME="apa" BORDER="0" ALT="Angewandte Kunst"></a>
+
+</td><td align=left style="padding-left:5px;" valign=top><br style="line-height:10px;"><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['apa']?>)</font></b></td>
+<td width=40></td>
+<td align=left valign=bottom>
+  <a href="/searchresults_ge/index/type/video<?=($this->skinCnt['video'])?('/item_'.$this->work.'/'.$this->id):('')?>" onmouseover="document.video.src='http://www.hw-archive.com/images/btn_more_video_over.jpg'" onmouseout="document.video.src='http://www.hw-archive.com/images/btn_more_video.jpg'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_video.jpg" NAME="video" BORDER="0" ALT="Video"></a>
+
+</td><td align=left style="padding-left:5px;" valign=top><br style="line-height:10px;"><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['video']?>)</font></b></td>
+
+</tr>
+<tr>
+
+<td style="padding-left:10px;" align=left valign=bottom>
+  <a href="/searchresults_ge/index/type/tap<?=($this->skinCnt['tap'])?('/item_'.$this->work.'/'.$this->id):('')?>" onmouseover="document.tapestry.src='http://www.hw-archive.com/images/btn_more_tapestry_over.jpg'" onmouseout="document.tapestry.src='http://www.hw-archive.com/images/btn_more_tapestry_ge.gif'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_tapestry_ge.gif" NAME="tapestry" BORDER="0" ALT="Tapisserie"></a>
+
+</td><td align=left valign=middle><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['tap']?>)</font></b></td>
+<td width=40></td><td valign=bottom>
+  <a href="/searchresults_ge/index/type/arch<?=($this->skinCnt['arch'])?('/item_'.$this->work.'/'.$this->id):('')?>" onmouseover="document.archi.src='http://www.hw-archive.com/images/btn_more_archi_over_ge.gif'" onmouseout="document.archi.src='http://www.hw-archive.com/images/btn_more_archi_ge.gif'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_archi_ge.gif" NAME="archi" BORDER="0" ALT="Architektur"></a>
+
+</td><td align=left style="padding-left:5px;" valign=middle><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['arch']?>)</font></b></td>
+<td width=40></td>
+
+<td valign=bottom align=left>
+  <a href="/searchresults_ge/index/type/audio<?=($this->skinCnt['audio'])?('/item_'.$this->work.'/'.$this->id):('')?>" onmouseover="document.audio.src='http://www.hw-archive.com/images/btn_more_audio_over.jpg'" onmouseout="document.audio.src='http://www.hw-archive.com/images/btn_more_audio.jpg'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_audio.jpg" NAME="audio" BORDER="0" ALT="Audio"></a>
+
+</td><td align=left style="padding-left:5px;" valign=middle><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['audio']?>)</font></b></td>
+
+</tr>
+<tr>
+<td style="padding-left:10px;" valign=bottom align=left>
+  <a href="/searchresults_ge/index/type/graph<?=($this->skinCnt['graph'])?('/item_'.$this->work.'/'.$this->id):('')?>" onmouseover="document.orig.src='http://www.hw-archive.com/images/btn_more_orig_over_ge.gif'" onmouseout="document.orig.src='http://www.hw-archive.com/images/btn_more_orig_ge.gif'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_orig_ge.gif" NAME="orig" BORDER="0" ALT="Original Graphik"></a>
+
+</td><td align=left style="padding-left:5px;" valign=middle><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['graph']?>)</font></b></td>
+<td width=40></td><td valign=bottom align=left>
+  <a href="/searchresults_ge/index/type/text<?=($this->skinCnt['text'])?('/item_'.$this->work.'/'.$this->id):('')?>" onmouseover="document.text.src='http://www.hw-archive.com/images/btn_more_text_over_ge.gif'" onmouseout="document.text.src='http://www.hw-archive.com/images/btn_more_text_ge.gif'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_text_ge.gif" NAME="text" BORDER="0" ALT="Texte"></a>
+
+</td><td align=left style="padding-left:5px;" valign=top><br style="line-height:10px;"><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['text']?>)</font></b></td>
+<td width=40></td>
+<td valign=bottom align=left>
+</td><td align=left style="padding-left:5px;" valign=top></td>
+
+</tr>
+
+</table>
+
+
+</td>
+</tr>
+
+<tr>
+<td align=left >
+<br>
+<br>
+<table >
+<tr >
+<td width=25 ></td>
+<td class=bottom >
+<font color=577A34>All contents &copy 2007</font>
+</td>
+<td width=50 ></td>
+<td class=bottom><font color=908F8F>
+Design: <a target=_blank class=sitemap_links href="http://www.galordesign.com">
+galordesign</a> || Powered By : 
+<a target=_blank class=sitemap_links href="http://www.mad-logic.com">MadLogic</a></font>
+</td>
+<td width=50></td>
+<td class=bottom ><font color=908F8F>
+<a class=sitemap_links href="/sitemap.html">Site Map</a>  </font><font color=#D8DA83>
+||</font><font color=908F8F>
+<a  class=sitemap_links href="/terms.html">Terms Of Use</a>  </font><font color=#D8DA83>
+||</font><font color=908F8F>
+<a class=sitemap_links href="/support.html">Support</a></font>  <font color=#D8DA83>
+||</font><font color=908F8F>
+<a class=sitemap_links href="/links.html">Links</a></font>  <font color=#D8DA83>
+||</font><font color=908F8F>
+<a class=sitemap_links href="/contact">Contact Us</a>  </font></td>
+</tr>
+</table>
+</td>
+</tr>
+
+</table>
+
+
+
+
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+	
+		

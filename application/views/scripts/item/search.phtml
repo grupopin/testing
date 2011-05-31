@@ -1,0 +1,287 @@
+<?php
+     $this->jQuery()->setLocalPath("/js/jquery/jquery-1.3.2.min.js");
+    $this->jQuery()->addJavascriptFile("/js/jquery1.7/js/jquery-ui-1.7.2.custom.light.min.js");
+    //$this->jQuery()->addJavascriptFile("/js/jquery1.7/ui/ui.autocomplete.js");
+    //$this->jQuery()->addStylesheet("/css/jquery/autocomplete.css");
+
+    //autocomplete version 1.1Pre
+    //$this->jQuery()->addJavascriptFile("/js/jquery1.7/ui/jquery.autocomplete.js");
+    //$this->jQuery()->addStylesheet("/css/jquery/jquery.autocomplete.css");
+
+    //autocomplete version 1.1 http://bassistance.de/jquery-plugins/jquery-plugin-autocomplete/
+    $this->jQuery()->addJavascriptFile("/js/jquery.plugins/jquery-autocomplete/jquery.autocomplete.js");
+    $this->jQuery()->addStylesheet("/js/jquery.plugins/jquery-autocomplete/jquery.autocomplete.css");
+    //$this->jQuery()->addJavascriptFile("/js/jquery.plugins/jquery.tools.min.js");
+    $this->jQuery()->addJavascriptFile("/js/jquery.plugins/dimensions_1.2/jquery.dimensions.pack.js");
+    $this->jQuery()->addJavascriptFile("/js/jquery.plugins/jquery-tooltip/jquery.tooltip.pack.js");
+    //$this->jQuery()->addJavascriptFile("/js/jquery.plugins/jquery-autocomplete/demo/localdata.js");
+
+
+?>
+<style>
+<?
+$this->headStyle()->captureStart();
+?>
+.label-checkbox{
+ cursor:pointer;
+}
+#tooltip {
+	position: absolute;
+	z-index: 3000;
+	border: 1px solid #111;
+	background-color: #eee;
+	padding: 5px;
+	opacity: 0.85;
+}
+#tooltip h3, #tooltip div { margin: 0; }
+
+/*
+.tooltip{
+ display:none; 
+ background-color: #c0c0c0;'
+ width: 200px;
+ height:200px;
+}
+
+.label{
+ cursor:pointer; color:#D45232; font-size:14px;font-weight:bold;
+ }
+ */
+<?
+$this->headStyle()->captureEnd();
+?>
+</style>
+<script>
+<?php
+$this->jQuery()->onLoadCaptureStart();
+?>
+
+
+$(".type-checkbox").click(function(){
+	//alert($("#type").val());
+	$("#key_word").flushCache();
+});
+
+$(".label-checkbox").click(function(){
+	var idArr=$(this).attr("id").split('-');
+	var id=idArr[1];
+	if (id){
+	 $("#type-"+id).trigger('click');
+	}
+});
+
+var newType=function(){
+	var str='',typeVal;
+	for(var i=1;i<=6;i++){
+
+		typeVal=$("#type-"+i).val();
+		if ($("#type-"+i).attr('checked')){
+     str+=','+typeVal;
+		}
+	}
+
+  //alert(str);
+  return str;
+}
+
+
+
+	//alert('1');
+$(".label").tooltip();
+
+
+$("#work_number").click(function(){
+  $("#label-work-id").css("color","#C0C0C0");
+  $("#work_id").val("");
+  $("#label-work-number").css("color","#D45232");
+});
+
+$("#work_id").click(function(){
+	$("#work_number").val("");
+	$("#label-work-id").css("color","#D45232");
+	$("#label-work-number").css("color","#C0C0C0");
+});
+
+$("#key_word_field").autocomplete("/item/auto",{
+	minChars: 0,
+	width: 310,
+	matchContains: "word",
+	scrollHeight:300,
+	max: 200,
+	autoFill: false,
+	extraParams:{'type':newType}
+
+}).result(function(event, data, formatted) {
+$("#key_word").val( !data ? "<?=$this->l('Not found')?>" : data[1]);
+});
+
+/*
+ * version for 1.7 autocomplete
+ */
+//
+//$("#key_word").autocomplete(
+//      {
+//    	  "resultsClass":"ac_results",
+//	      "inputClass":"ac_input",
+//	      "loadingClass":"ac_loading",
+//    	  "minChars":1,
+//        "url":"/item/auto",
+//        'extraParams':{'type[]':newType},
+//
+//    });
+//
+//$('#key_word').autocomplete("result",function(event, data, formatted) {
+//    $("#cat_id").val( !data ? "<?=$this->l('Not found')?>" : data[1]);
+// });
+
+$("#work_number").autocomplete("/item/auto-work-number",
+	      {
+          autoFill:false,
+	        matchContains:"word",
+	        minChars:1,
+	        scrollHeight:300,
+	        max: 200,
+	        cacheLength:1,
+	        extraParams:{'type':newType}
+	    }).result(function(event, data, formatted) {
+	    $("#id-work-number").val( !data ? "<?=$this->l('Not found')?>" : data[1]);
+	 });
+
+$("#work_id").autocomplete("/item/auto-work-id",
+	      {
+        autoFill:false,
+	        matchContains:"word",
+	        minChars:1,
+	        scrollHeight:300,
+	        max: 200,
+	        cacheLength:1,
+	        extraParams:{'type':newType}
+	    }).result(function(event, data, formatted) {
+	    $("#id-work-id").val( !data ? "<?=$this->l('Not found')?>" : data[1]);
+	 });
+
+	$("#year_from").autocomplete("/item/auto-year",
+		    {
+	      autoFill:false,
+        matchContains:"word",
+        minChars:0,
+        max: 200,
+        cacheLength:1,
+        extraParams:{'type':newType}
+		    });
+
+	$("#year_to").autocomplete("/item/auto-year",
+		      {
+	      autoFill:false,
+      matchContains:"word",
+      minChars:0,
+      max: 200,
+      cacheLength:1,
+      extraParams:{'type':newType}
+		    });
+
+
+	$("#year").autocomplete("/item/auto-year",
+     {
+	  autoFill:false,
+      matchContains:"word",
+      minChars:0,
+      max: 200,
+      cacheLength:1,
+      extraParams:{'type':newType}
+     });
+
+   $("input#submit").mouseover(function(){
+    $(this).css('background-image','url(/images/advanced_search/btn_search_over.gif)');
+   });
+
+   $("input#submit").mouseout(function(){
+	    $(this).css('background-image','url(/images/advanced_search/btn_search.gif)');
+   });
+
+   
+//   $("#submit").click(function(){
+//     $("form#AdvancedSearchForm").submit();
+//	 });
+<?php
+$this->jQuery()->onLoadCaptureEnd();
+?>
+</script>
+<tr><!--BREADCRUMB PATH-->
+	<td class="" style="height: 136px; background: url(&quot;/images/advanced_search/top_4.jpg&quot;) no-repeat scroll left top transparent;">
+		<div id="bcPath">
+			<a href="/" class="l4 b">Home Page</a> &gt;
+			<span class="l4on">Advanced Search</span>
+		</div>
+	</td>
+	<td>
+
+		<div class="bcPath3" title="" style="background: url(&quot;/images/advanced_search/top_5.jpg&quot;) no-repeat scroll left top transparent;">&nbsp;</div>
+	</td>
+</tr>
+<tr>
+<td class="" colspan="2"><!--ADVANCED SEARCH FORM-->
+			<div id="inAdSe" style="background:url(/images/advanced_search/top_6.jpg) left top no-repeat;">
+				<form action="/item/object-list/" method="get" name="AdvancedSearchForm" id="AdvancedSearchForm">
+					<table class="tab2">
+						<tr>
+							<td colspan="2" id="inAdSe1">
+							
+							<span id='typelabel-4' class='label-checkbox'><?=$this->l ( 'Early Work' )?></span>: 
+							<input class='type-checkbox' name='type[]' id='type-4' value='jw' type="checkbox" />
+							<span id='typelabel-5' class='label-checkbox'><?=$this->l ( 'Paintings' )?></span>: 
+							<input class='type-checkbox' name='type[]' id='type-5' value='paint' type="checkbox" />
+							<span id='typelabel-3' class='label-checkbox'><?=$this->l ( 'Original Graphic' )?></span>: 
+							<input class='type-checkbox' name='type[]' id='type-3' value='hwg' type="checkbox" />
+							<span id='typelabel-6' class='label-checkbox'><?=$this->l ( 'Tapestry' )?></span>: 
+							<input class='type-checkbox' name='type[]' id='type-6' value='tap' type="checkbox" />
+							<span id='typelabel-1' class='label-checkbox'><?=$this->l ( 'Applied Art' )?></span>: 
+							<input class='type-checkbox' name='type[]' id='type-1' value='apa' type="checkbox" />
+							<span id='typelabel-2' class='label-checkbox'><?=$this->l ( 'Architecture' )?></span>: 
+							<input class='type-checkbox' name='type[]' id='type-2' value='arch' type="checkbox" />
+                            <br/>
+
+							<span title="Search by Hundertwasser Work Numbers<br>(Search by Work Id will be disabled)" id="label-work-number" class="label" ><?=$this->l('Work Number')?>:
+							<input name="work_number" id="work_number" type="text" class="input4"/></span>
+							<input id='id-work-number' type='hidden'/>
+								
+							<span title="Search for JW, HWG, TAP, APA or ARCH number.<br>(Search by Work Number will be disabled)" id="label-work-id" class="label" ><?=$this->l('Work Id')?>:
+							<input name="work_id" id="work_id" type="text" class="input4"/></span>
+							<input id='id-work-id' type='hidden'/>	
+ 
+   							<div id="dec-keyword">
+			                  <?=$this->l('Key Word')?>:
+							  <input name="key_word_field" id='key_word_field' type="text" class="input4" value="<?=$this->l('Start Typing')?>"
+								title="<?=$this->l('Click on empty input field start typing to see available keywords')?>"
+          						onclick="if (this.value=='<?=$this->l('Start Typing')?>'){this.value=''}"/>
+          					  <input type='hidden' value='' id='key_word' name='key_word'/>
+						    </div>
+								 
+						   <div id="dec-free">
+			                    	<?=$this->l('Free text')?>:
+            		        		<input name="free_text" type="text" class="input4"/>
+                			</div>
+       						<div id="dec-fromyear"> From Year<br/>
+                      			<input name="year_from" id='year_from' type="text" class="input5" style='width:70px;'/>
+		                    </div>
+		                    <div id="dec-toyear"> To Year<br/>
+			                      <input name="year_to" id='year_to' type="text" class="input5" style='width:70px;'/>
+		                    </div>
+		                    <div id="dec-specyear"> Specific Year<br/>
+			                      <input name="year" id='year' type="text" class="input5"  style='width:70px;'/>
+		                    </div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<div id="asBtn" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('submit','','/images/advanced_search/btn_search_over.gif',1)">
+								<!--<a href="javascript:document.AdvancedSearchForm.submit();">-->
+								<input type="submit" value="&nbsp;" name='submit' id="submit" style='background-image:url(/images/advanced_search/btn_search.gif);border:0px;padding:0px;background-color:transparent;height:37px;width:153px;'>
+								 </div>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</td>
+</tr>

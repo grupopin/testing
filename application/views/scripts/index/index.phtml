@@ -1,0 +1,8 @@
+<h1><?php echo $this->escape($this->title);?></h1>
+<p>Welcome to <em>Hundertwaaser site</em>! </p>
+<h2>Recent reviews</h2>
+<?php if(count($this->apas)) : ?>
+<table>
+<?php echo $this->partialLoop('index/_placeRow.phtml', $this->apas) ?>
+</table>
+<?php endif; ?>

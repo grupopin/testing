@@ -1,0 +1,342 @@
+<script type="text/javascript"><!--
+<?php
+$this->JQuery()->addJavascriptFile("/js/jquery/ui/development-bundle/external/cookie/jquery.cookie.min.js");
+//$this->JQuery()->addStylesheet("/js/dynatree/src/skin/ui.dynatree.css");
+$this->JQuery()->addJavascriptFile("/js/dynatree/src/jquery.dynatree.min.js");
+
+$this->JQuery()->addStylesheet("/js/dynatree/doc/skin-vista/ui.dynatree.css");
+
+//$this->jQuery()->addJavascriptFile("/js/jquery.contextMenu/jquery.contextMenu.js");
+//$this->jQuery()->addStylesheet("/js/jquery.contextMenu/jquery.contextMenu.css");
+
+//$this->jQuery()->addJavascriptFile("/js/mbMenu.min.js");
+
+$this->jQuery()->addStylesheet("/js/jquerycssmenu/jquerycssmenu.css");
+$this->jQuery()->addJavascriptFile("/js/jquerycssmenu/jquerycssmenu.js");
+
+$this->headStyle()->captureStart();
+?>
+<!--[if lte IE 7]>
+<style type="text/css">
+html .jquerycssmenu{height: 1%;} /*Holly Hack for IE7 and below*/
+</style>
+<![endif]-->
+<?
+$this->headStyle()->captureEnd();
+?>
+<style type="text/css">
+<?
+$this->headStyle()->captureStart();
+?>
+
+span.docs a
+{
+    background-color: maroon;
+    color: yellow;
+}
+span.docs span.ui-dynatree-icon
+{
+    background-color: #c0c0c0;
+}
+
+span.skin a
+{
+    background-color: #ffffff;
+    color: navy;
+}
+span.skin span.ui-dynatree-icon
+{
+    background-color: red;
+}
+<?php $this->headStyle()->captureEnd();
+?>
+</style>
+<?
+$this->jQuery()->onLoadCaptureStart();
+?>
+
+    $("#tree").dynatree({
+      title: "HW Knowledgebase hierarchy",
+      rootVisible: true,
+      icon: 'home_48.png',
+      persist: true,
+      imagePath: "/images/icons_big/", // Image folder used for data.icon attribute.
+      fx: { height: "toggle", duration: 200 },
+      // initAjax is hard to fake, so we pass the children as objecz array:
+//      initAjax: { .. },
+      children: [
+        <?
+        $num=sizeof($this->skinArr);
+        foreach($this->skinArr as $i=>$skinRow){
+          if ($i<$num-1){
+           $end=',';
+          }else{
+            $end='';
+          }
+         print "{title: '{$skinRow['title']}', tooltip:'Skin name', icon: 'circle_orange.png', isFolder:true, isLazy:true,  key: '{$skinRow['n']}', id:{$skinRow['n']},  type:'skin', addClass: 'skin'}".$end;
+        }
+        ?>
+        ],
+
+      onActivate: function(dtnode) {
+        $("#echoActive").text(dtnode.data.type+'->'+dtnode.data.id+':'+dtnode.data.title);
+      },
+      onLazyRead: function(dtnode){
+        // typically we would call something like this:
+        dtnode.appendAjax(
+               {url: "/link/jq-list-items/",
+                data: {item_id: dtnode.data.id,
+                       type: dtnode.data.type
+                       },
+                cache: false
+                }
+        );
+      }
+
+    });
+
+
+$("#from_item").autocomplete("/link/jq-item-auto/item/"+$("#type_of_item").val()+"/",
+  {
+	 resultsClass:"ac_results",
+   inputClass:"ac_input",
+   loadingClass:"ac_loading",
+   multiple:false,
+   matchSubset:true,
+   autoFill:true,
+   matchContains:true,
+   delay:100,
+   minChars:0,
+   cacheLength:10,
+   scrollHeight:200
+  });
+
+$('#from_item').result(function(event, data, formatted) {
+    	   $("#from_item_id").val( !data ? "No match!" : data[1]);
+});
+
+$("#to_item").autocomplete("/link/jq-item-auto/item/"+$("#type_of_item2").val()+"/",
+		  {
+		   resultsClass:"ac_results",
+		   inputClass:"ac_input",
+		   loadingClass:"ac_loading",
+		   multiple:false,
+		   matchSubset:true,
+		   autoFill:true,
+		   matchContains:true,
+		   delay:100,
+		   minChars:0,
+		   cacheLength:10,
+		   scrollHeight:200
+		  });
+
+$('#to_item').result(function(event, data, formatted) {
+         $("#to_item_id").val( !data ? "No match!" : data[1]);
+});
+
+$("#type_of_item2").change(
+				 function(){
+				  $('#to_item').setOptions({url:"/link/jq-item-auto/item/"+$("#type_of_item2").val()+"/"})
+				  $("#to_item").flushCache();
+				 }
+				);
+
+$("#type_of_item").change(
+ function(){
+	$('#from_item').setOptions({url:"/link/jq-item-auto/item/"+$("#type_of_item").val()+"/"});
+	$('#from_item').flushCache();
+ }
+);
+
+$("#create_link").click(function(){
+	//check if link already exist
+	var
+	 url='',url2='',
+	 type_of_item,
+	 from_item_id,
+	 type_of_link,
+	 type_of_item2,
+	 to_item_id;
+
+	type_of_item=$("#type_of_item").val();
+	from_item_id=$("#from_item_id").val();
+	type_of_link=$("#type_of_link").val();
+	type_of_item2=$("#type_of_item2").val();
+	to_item_id=$("#to_item_id").val();
+  pathCheck="/link/jq-check-link/";
+  pathAssert="/link/jq-assert-link/";
+	switch(type_of_link){
+	 case 'parent_of':
+		 term=type_of_item2+'_to_'+type_of_item;
+		 url="?child="+type_of_item2+"&child_id="+to_item_id+"&parent="+type_of_item+"&parent_id="+from_item_id;
+
+		break;
+	 case 'child_of':
+		 term=type_of_item+'_to_'+type_of_item2;
+		 url="?parent="+type_of_item2+"&parent_id="+to_item_id+"&child="+type_of_item+"&child_id="+from_item_id;
+		break;
+	 case 'both_directions':
+		 term=type_of_item2+'_to_'+type_of_item;
+		 url="?child="+type_of_item2+"&child_id="+to_item_id+"&parent="+type_of_item+"&parent_id="+from_item_id;
+
+		 term2=type_of_item+'_to_'+type_of_item2;
+		 url2="?parent="+type_of_item2+"&parent_id="+to_item_id+"&child="+type_of_item+"&child_id="+from_item_id;
+
+		break;
+
+
+	}
+ alert(pathCheck+url+'\n-'+pathCheck+url2);
+	//$assertStr="{$link_item}_to_{$type}($id,$link_item_id)";
+  //url="/link/jq-assert?id="+rowid+"&type="+linkItem1+"&link_item="+typeValue1+"&link_item_id="+curSelectedItem;
+ $.ajax({
+	  url: pathCheck+url,
+	  cache: false,
+	  success: function(html){
+	    if (html=='true') {
+		    alert("<?=$this->l('Link already exists')?>"+'->'+term)
+		  }else{
+	    $.ajax({
+		    url:pathAssert+url,
+		    cache: false,
+		    success: function(txt){
+		     alert('Asserted '+term);
+	      }
+	    });
+	    }
+
+	  }
+	}
+	);
+
+	if (url2){
+		 $.ajax({
+			    url: pathCheck+url2,
+			    cache: false,
+			    success: function(html){
+			      if (html=='true') {
+				      alert("<?=$this->l('2nd Link already exists')?>"+'->'+term2);
+			      }else{
+				      $.ajax({
+				    	  url: pathAssert+url2,
+				    	  cache: false,
+				    	  success: function(txt){
+				    	   alert('Asserted '+term2);
+					      }
+
+				      });
+
+				    }
+			    }
+		 });
+
+	}
+
+});
+
+$("#other-acts").click(
+function(){
+	alert('To be implemented later on');
+}
+);
+<?
+$this->JQuery()->onLoadCaptureEnd();
+?>
+--></script>
+
+<div id="myjquerymenu" class="jquerycssmenu">
+<ul>
+	<li><a href="/link/tree">KB Tree</a></li>
+	<li><a href="/link/index">KB Grids</a></li>
+	<li><a id="other-acts" href="#">Other actions</a>
+	<ul>
+		<li><a href="#">Sub Item 1.1</a></li>
+		<li><a href="#">Sub Item 1.2</a></li>
+		<li><a href="#">Sub Item 1.3</a></li>
+		<li><a href="#">Sub Item 1.4</a></li>
+	</ul>
+	</li>
+	<li><a href="#">Menu Item 3</a></li>
+</ul>
+<br style="clear: left" />
+</div>
+<div style="height:10px;"></div>
+
+<?php
+$items=array(
+  'skin'=>$this->l('Skin'),
+  'maintitle'=>$this->l('Maintitle'),
+  'highlight'=>$this->l('Highlight'),
+  'Works'=>
+array(
+    'graph'=>$this->l('Graphics'),
+    'apa'=>$this->l('Apa'),
+    'tap'=>$this->l('Tapestry'),
+    'paint'=>$this->l('Paintings'),
+    'arch'=>$this->l('Architecture')
+),
+  'Documents'=>
+array(
+    'text'=>$this->l('Text'),
+    'audio'=>$this->l('Audio'),
+    'video'=>$this->l('Video'),
+    'gallery'=>$this->l('Gallery')
+)
+);
+
+
+?>
+
+<div id="new-link">
+<?=$this->l('Create a link')?>
+<select name='type_of_item' id='type_of_item'>
+<?php
+foreach($items as $itemType =>$itemName){
+  if (is_array($itemName)){
+    print "<optgroup label='{$this->l($itemType)}'>".$this->l($itemType);
+
+    foreach($itemName as $subitemType =>$subitemLabel){
+      print "<option value='{$subitemType}'>{$this->l($subitemLabel)}</option>";
+    }
+    print "</optgroup>";
+  }else{
+    print "<option value='$itemType'>{$this->l($itemName)}</option>";
+  }
+ }
+ ?>
+</select>
+<input type="text" value="" name="from_item" id="from_item"><input name="from_item_id" id="from_item_id" value="0" type="hidden">
+<select name='type_of_link' id='type_of_link'>
+<option value='parent_of'><?=$this->l('parent-of')?></option>
+<option value='child_of'><?=$this->l('child-of')?></option>
+<option value='both_directions'><?=$this->l('both-directions')?></option>
+</select>
+
+<select name='type_of_item2' id='type_of_item2'>
+<?php
+foreach($items as $itemType =>$itemName){
+  if (is_array($itemName)){
+    print "<optgroup label='{$this->l($itemType)}'>".$this->l($itemType);
+
+    foreach($itemName as $subitemType =>$subitemLabel){
+      print "<option value='{$subitemType}'>{$this->l($subitemLabel)}</option>";
+    }
+    print "</optgroup>";
+  }else{
+    print "<option value='$itemType'>{$this->l($itemName)}</option>";
+  }
+ }
+ ?>
+</select>
+<input type="text" value="" name="to_item" id="to_item"><input type="hidden" name="to_item_id" id="to_item_id" value='0'>
+<button id="create_link">Create</button>
+</div>
+
+<div
+	id="tree"><!-- When using initAjax, it may be nice to put a throbber here, that spins until the initial content is loaded: -->
+</div>
+
+<div>Active node: <span id="echoActive">-</span></div>
+
+
+

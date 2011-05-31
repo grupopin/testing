@@ -1,0 +1,145 @@
+<tr><!--BREADCRUMB PATH-->
+	<td class="" style="height: 136px; background: url(&quot;/images/advanced_search/top_4.jpg&quot;) no-repeat scroll left top transparent;">
+		<div id="bcPath">
+			<a href="/" class="l4 b">Home Page</a> &gt;
+			<a href="/skin" class="l4">The 5 Skins</a> &gt;
+			<a href="<?=$this->pathArr[2][1]?>" class="l4"><?=$this->pathArr[2][0]?></a> &gt;
+			<span class="l4on"><?=$this->pathArr[3][0]?></span>
+		</div>
+	</td>
+	<td>
+		<div class="bcPath3" title="" style="background: url(&quot;/images/advanced_search/top_5.jpg&quot;) no-repeat scroll left top transparent;">&nbsp;</div>
+	</td>
+</tr>
+<tr>
+<td colspan="2"><!--RELATED ITEMS DISPLAY-->
+<div style="float: right;">
+<div class="" id="rightBlock">
+<div id="RB1"><img alt="Related Items"
+	src="/images/items/tit_rel_eng.gif" /></div>
+<div id="RB1Cat">
+<div id="RB2"><?php
+$langArr=$this->sess('langArr');
+//print_r($langArr);
+if ($this->relLink){
+foreach($this->relLink as $id=>$link){
+  ?>
+<div style='z-index:100000;'
+	onmouseover="MM_swapImage('ImageRB<?=$id?>','','/images/icons/tit_<?=$link['name']?>_on_<?=$langArr['lang_alt']?>.gif',1)"
+	onmouseout="MM_swapImgRestore()"><a href="/hl/<?=$this->idStr?>_related-<?=$link['type']?>"> <img
+	alt="<?=$link['title']?>" src="/images/icons/<?=$link['name']?>.gif" />
+<img id="ImageRB<?=$id?>" name="ImageRB<?=$id?>"
+	alt="<?=$link['title']?>"
+	src="/images/icons/tit_<?=$link['name']?>_<?=$langArr['lang_alt']?>.gif" />
+</a> (<?=$link['cnt']?>)</div>
+  <?php
+}
+}
+
+?> <br />
+<br />
+</div>
+<div title="" id="RB1Cat2"></div>
+</div>
+<div class="" id="RB1Cat3">
+<div id="RB3"><!--<img src="/images/items/buy_eng.gif" alt="Related Shop Products" />-->
+<div class="newCrazy1">Buy Me!</div>
+<span class="newCrazy2">Related Shop Products</span>
+<div id="RB4">
+<?php
+$cnt=sizeof($this->buyItems);
+
+for($i=0;$i<$cnt;$i++){
+
+  $srcEnc=urlencode($this->buyItems[$i]['image_path']);
+  if ($i % 3==0){
+    ?>
+<div class="ThumbRow clearRow"><?php
+  }
+  ?>
+<div>
+<!--<a class="l11" target='_blank'	href="http://hw-archive.com/shop/product.php?productid=<?=$this->buyItems[$i]['id']?>&cat=<?=$this->buyItems[$i]['categoryid']?>&page=1"><img	alt="<?=substr($this->buyItems[$i]['descr'],0,30)?>"
+	src="/image/thumb/?cat=apparel&from=shop&src=<?=$srcEnc?>"><span><?=substr($this->buyItems[$i]['descr'],0,30)?></span></a>
+	--></div>
+  <?php
+  if ($i % 3 ==2  OR $i==$num){
+    ?></div>
+    <?php
+  }
+  }
+  ?>
+</div>
+<a id="shopLink" class="l10" href="#">Visit Online Shop</a>
+<div id="RB1Cat4"></div>
+</div>
+</div>
+</div>
+</div>
+<!--MAIN ITEM DISPLAY-->
+<div>
+<div id="inCatItems">
+<div class='highlightT'>
+<span>Highlight excerpts from Hundertwasser&rsquo;s texts: </span><br>
+(Click to access the complete text)
+</div>
+
+<?php if ($this->count){?>
+<?php
+
+  $skin = $this->pathArr[2][1];
+  switch ($skin) {
+   case "/epidermis": 
+    $colour_index=1;
+   break;
+   case "/clothes":
+     $colour_index=2;
+   break;
+   case "/houses":
+     $colour_index=3;
+   break;   
+   case "/identity":
+     $colour_index=4;
+   break;  
+   case "/earth":
+     $colour_index=5;
+   break;     
+   default:
+     $colour_index=1 ;
+   break;
+ }
+
+?> 
+<?php foreach($this->txtArr as $txtId=>$hlArr){
+  //$txtIdStr=str_replace(".","_",$txtId);
+  $title=str_replace("\r\n","<br>",$this->texts[$txtId]['text_title_en']);
+  $year=substr($this->texts[$txtId]['text_date'],0,4);
+  
+?>
+
+<div class="highlights">
+<div class="highlightsTop h<?php echo $colour_index;?>_or_t"></div>
+<div class="highlightsMid h<?php echo $colour_index;?>_or_m">
+<div>
+  <?php foreach($hlArr as $i=>$hlData){?>
+<img src="/images/highlights/h<?php echo $colour_index;?>_bul.png" alt="" />&nbsp;
+<a class="l12b" href="/text/<?=$txtId?>/hl/<?=$hlData['id']?>"><?=$hlData['text']?></a>&nbsp;
+<img src="/images/highlights/h<?php echo $colour_index;?>_bul.png" alt="" />
+<br />
+<br />
+  <?php }?>
+<span style="font-size: small; color: white;"><?php echo "From: " . html_entity_decode($title, ENT_QUOTES, "utf-8").  ", $year" ; ?></span>
+</div>
+</div>
+<div class="highlightsBot h<?php echo $colour_index;?>_or_b"></div>
+</div>
+  <?php }?>
+
+<div id="catPaging" style='float:left;'><!--ITEM PAGING--> <?php
+echo $this->paginationControl($this->items,'Sliding', 'skin/pages.phtml');
+?></div>
+<?php }else{
+  print $this->l('No highlights defined for this maintitle');
+}?></div>
+</div>
+</td>
+</tr>

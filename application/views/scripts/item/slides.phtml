@@ -1,0 +1,180 @@
+<script>
+<?php
+$this->jQuery()->onLoadCaptureStart();
+?>
+var url="/item/get";
+var Type='<?=$this->type?>';
+var id=0;
+
+
+//preload next and prev images
+var preImages=new Array();
+
+var preloadImage=function(id){
+	if (id){
+  	if (!preImages[id]){
+  	jQuery.getJSON(
+  		      url,
+  		      { 'type' : Type,
+  		        'id'   : id,
+  		      },function(item){
+  		        //alert(item['imgPath']);
+  		      	$("#img-pre").attr("src", item['imgPath']);
+  		      }
+  			)
+  	}else{
+  		preImages[id]=true;
+  	}
+	}
+}
+
+prevId=jQuery("#prev-id").text();
+preloadImage(prevId);
+nextId=jQuery("#next-id").text();
+preloadImage(nextId);
+
+
+jQuery(".control").click(function(){
+	if ($(this).attr('id')=='fwd'){
+		id=jQuery("#next-id").text();
+	}else{
+		id=jQuery("#prev-id").text();
+	}
+
+	//alert(id);
+
+	if (id){
+
+	jQuery.getJSON(
+      url,
+      { 'type' : Type,
+        'id'   : id,
+      },function(item){
+        //alert(item['imgPath']);
+        $("#next-id").text(item['next']);
+        $("#prev-id").text(item['prev']);
+
+        preloadImage(jQuery("#prev-id").text());
+        preloadImage(jQuery("#next-id").text());
+
+        $("#cur").text(item['cur']);
+      	$("#img-pre").attr("src", item['imgPath']);
+        height=$("#img-pre").attr('height');
+        width=$("#img-pre").attr('width');
+
+
+
+      	$("#a-img").attr("src", item['imgPath']);
+      	$("#work-number").text(item['workNumber']);
+      	$("#title").text(item['titleStr']);
+      	$("#title").attr('title',item['title']);
+      	jQuery("#img").fadeOut('slow',function(){
+      		$("#img").attr("src", item['imgPath']);
+
+          if (height>width){
+              if (height>450){
+            	  jQuery("#img").attr('height',450);
+              }
+            }else{
+              if (width>450){
+            	  jQuery("#img").attr('width',450);
+              }
+          }
+      		jQuery("#img").fadeIn('slow');
+        });
+
+      }
+	)
+	}
+	return false;
+
+});
+
+
+<?php
+$this->jQuery()->onLoadCaptureEnd();
+?>
+</script>
+<td colspan="2" class=""><!--ADVANCED SEARCH FORM-->
+			<div style="background: transparent url(/images/items/top_6.jpg) no-repeat scroll left top; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous;" id="inSlideShow">
+				<div id="inSH1"><h1><?php print $this->path($this->pathData); ?> (<?=$this->count?>)</h1></div>
+				<?php
+        $idStr=$this->transId($this->id);
+				?>
+				<div id="viewChange"><a class="l4" href="/<?=$this->type?>/view-<?=$idStr?>">View Normal Mode <img alt="View Normal Mode" src="/images/items/hat.gif"/></a></div>
+				<div id="slideshowPic">
+				<?php
+				$pad=true;
+				if ($this->type=='gallery'){
+				  $pad=false;
+				  $imgPath=$this->item[$this->itemView['image_id']];
+				  $imgPath=str_replace('galery/','',$imgPath);
+				}else{
+				  //$imgPath=$this->item[$this->itemView['image_id']];
+				  $imgPath=$this->item[$this->itemView['id']];
+				}
+				$imgPath=$this->workImage($this->type,'original',$imgPath,'list',true,'asc',1,$pad);//medium is too small!!!
+				if (!$imgPath){
+				  //$imgPath="/images/items/someExamplePic.jpg";
+				  $imgPath="";
+				} else {
+    				$imgProps=getimagesize(DOCROOT.'/'.$imgPath);
+    				$imW=$imgProps[0];
+    				$imH=$imgProps[1];
+    				//print "$imW,$imH<br>";
+    				if ($imW>$imH){
+    				  if ($imW>450){
+    				    $imW=450;
+    				  }
+    				  $attr="width='$imW'";
+    				}else{
+    				  if ($imH>450){
+    				    $imH=450;
+    				  }
+    				  $attr="height='$imH'";
+    				}
+				}
+				?>
+				
+				<a id='a-img' href="<?=$imgPath?>" target="_blank"><img id='img' <?php print $attr;?>	src="<?=$imgPath?>"></a>
+				
+				<img id='img-pre' style='display:none'/>
+				</div>
+				<div id="inSH2">
+				<?php 
+				  if ($this->item[$this->itemView['title']]) { 
+				    $title=html_entity_decode($this->item[$this->itemView['title']],ENT_QUOTES,'UTF-8');
+				    //$titleStr=substr($title,0,62);
+				    $titleStr=$title;
+				  } else {
+				    $title=html_entity_decode($this->item[$this->itemView['title_default']],ENT_QUOTES,'UTF-8');
+				    //$titleStr=substr($title,0,62);
+				    $titleStr=$title;
+				  }
+				  if ($this->item[$this->itemView['work_number']]) { 
+				    $work_number = "Work N&deg;&nbsp;" . $this->item[$this->itemView['work_number']];
+				  } else {
+				    $work_number = "";
+				  }
+				  
+				?>
+					<span id='work-number'><?=$work_number?></span>&nbsp;<h2 id='title' title="<?=$title?>"><?=$titleStr?></h2>
+					<!--Work No.234-->
+					<div id="inSH3" title="">
+ <?php
+     $path=parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
+ ?>
+ <span id='bwd' class="l8 control" style='cursor:pointer'>&lt;&nbsp;<?=$this->l('Backward')?></span>
+ <div id='prev-id' style='display:none;'><?=$this->transId($this->prev)?></div>
+
+  <span class="l8" style='cursor:pointer'><?=$this->l('Stop')?></span>
+
+  <span id='fwd' class="l8 control" style='cursor:pointer'><?=$this->l('Forward')?>&nbsp;&gt;</span>
+ <div id='next-id' style='display:none;'><?=$this->transId($this->next)?></div>
+ <nobr><span id='cur'><?=$this->curNum+1?></span> of <span><?=$this->count?></span></nobr></div>
+				</div>
+
+			</div>
+			
+			
+		</td>

@@ -1,0 +1,77 @@
+<br>
+<h2><?php
+$title=$this->item['title_'.$this->langArr['lang']];
+if (!$title){
+  $title=$this->item['title'];
+}
+print $title;
+?></h2>
+<div class="itemView2">
+<?=showProp($this->item['subtitle_'.$this->langArr['lang']])?>
+<?=showProp($this->item['source_'.$this->langArr['lang']])?>
+<? if ($this->item['date_of_shot']) {
+  $date = new datetime($this->item['date_of_shot']);
+  $date = ", ". $date->format('F j, Y');
+   
+} else {
+  $date="";
+}
+?>
+<?=showProp($this->item['place_'.$this->langArr['lang']].$date)?>
+<?=showProp($this->item['duration'], $this->l('Duration'))?>
+<?=showProp($this->item['language'], $this->l('Language'))?>
+<?=showProp($this->item['content_'.$this->langArr['lang']])?>
+<?=showProp($this->item['note_occasion_'.$this->langArr['lang']])?>
+<?=showProp($this->item['broadcasting_title_'.$this->langArr['lang']], $this->l('Broadcasting Title'))?>
+<?=showProp($this->item['broadcasting_date'])?>
+<?=showProp($this->item['broadcasting_company_'.$this->langArr['lang']], $this->l('Company'))?>
+<?=showProp($this->item['broadcasting_place_'.$this->langArr['lang']], $this->l('Place'))?>
+</div>
+
+
+<?php
+function showProp($val,$lab=''){
+  if ($val){
+    if ($lab){
+      $lab1=$lab.': ';
+    }
+    return $lab1. html_entity_decode($val).'<br>';
+  }
+}
+
+function showText($textLang, $textDef, $curLang, $defLanguage,$header){
+  $res=$textLang;
+	if (!$res && $curLang!=$defLanguage){
+	  $res=$textDef;
+	}
+	if ($res){
+	?>
+	<br><span class="t1"><?=$header?></span>:
+	<br><?=$res?><br/>
+<?php
+	 }
+
+}
+
+
+
+function showList($val,$header1,$header2=''){
+  if (isset($val)){
+    ?>
+<br>
+<span class="t1"><?=$header1?></span>:<? if ($header2) print $header2;?>
+<ul class="ul1">
+<?php
+$arr=explode("<br>",$val);
+foreach($arr as $rn=>$row){
+  ?>
+	<li><?=$row?></li>
+	<?php
+}
+?>
+</ul>
+<?php
+  }
+}
+
+?>

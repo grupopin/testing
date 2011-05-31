@@ -1,0 +1,33 @@
+<h1><?php echo $this->escape($this->title);?></h1>
+
+<?php if(count($this->users)) : ?>
+<div style='float:right'>
+<table width=200 bgcolor=#000033>
+
+<?php echo $this->partialLoop('index/_placeRowUsers.phtml', $this->users) ?>
+
+</table>
+</div>
+<?php endif; ?>
+
+<?php if(count($this->news)) : ?>
+<div style='float:right'>
+<table width=300 bgcolor=#00cc33>
+
+<?php echo $this->partialLoop('index/_placeRowNews.phtml', $this->news) ?>
+
+</table>
+</div>
+<?php endif; ?>
+<?php if(count($this->apas)) : ?>
+<div style='float:left'>
+<table>
+
+<?php echo $this->partialLoop('index/_placeRow.phtml', $this->apas) ?>
+
+</table>
+</div>
+<?php endif; ?>
+<?
+print $this->form;
+?>

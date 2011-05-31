@@ -1,0 +1,15 @@
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/menu.css') ?>
+
+<div id="menu">
+    <ul id="main-menu">
+        <?php foreach($this->menu as $menu) : ?>
+        <li> 
+            <?php if($menu['url']): ?>
+                <a href="<?php echo $menu['url'] ?>"><?php echo $this->escape($menu['title']); ?></a>
+           <?php else: ?>
+                <h3><?php echo $this->escape($menu['title']); ?></h3>
+           <?php endif; ?>
+        </li>
+        <?php endforeach; ?>
+    </ul>
+</div>

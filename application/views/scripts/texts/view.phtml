@@ -1,0 +1,416 @@
+<?php
+$langArr=$this->sess('langArr');
+
+$this->JQuery()->addJavascriptFile("/js/jquery.plugins/jquery.scrollto/jquery.scrollTo-min.js");
+$this->JQuery()->addJavascriptFile("/js/jquery.plugins/jquery.siblings/jquery.siblings.js");
+?>
+
+<script type="text/javascript">
+<?php
+
+$this->jQuery()->onLoadCaptureStart();
+?>
+$.highlightFragment=function(hlId,activeId){
+ //var hlId=40;
+ //check if markers exist
+ var hlColor='#ACC798';
+ if (hlId==activeId){
+  hlColor='#D45232';
+ }
+ if ($("#hlS-"+hlId).count<=0){
+  alert('start marker '+hlId+' does not exist');
+ }
+ if ($("#hlE-"+hlId).count<=0){
+	  alert('end marker '+hlId+' does not exist');
+}
+//find common parent node
+ $("#hlS-"+hlId).parents().each(function(){
+			$(this).addClass('mark-parent-'+hlId);
+	 });
+ var found=false;
+ $("#hlE-"+hlId).parents().each(function(){
+   if (!found){
+	   if ($(this).hasClass('mark-parent-'+hlId)){
+	    $(this).addClass('common-parent-'+hlId);
+	    found=true;
+	   }else{
+      $(this).addClass('mark-parent-right'+hlId);
+	   }
+   }else{
+     $(this).removeClass('mark-parent-'+hlId);
+   }
+ });
+
+ //$('.mark-parent-'+hlId).css({'border':'solid thin green'});
+ var el=$("#hlS-"+hlId);
+ $(el).rightSiblings(el).each(function(){
+	 if ($(this).attr('id')=="hlE-"+hlId){
+			return false;
+	 }
+	 if (this.nodeType==3){
+  		 $(this).wrap("<span class='marked-kid"+hlId+"'></span>");
+  	 }else{
+  		 $(this).contents().andSelf().addClass('marked-kid'+hlId);
+  	 }
+	});
+
+	$('.mark-parent-'+hlId).each(function(index){
+		if (index>0){
+			$(this).rightSiblings(this).each(function(){
+				$(this).markNodes('marked-kid'+hlId);
+			});
+		}
+	});
+
+	var el2=$("#hlE-"+hlId);
+	var startPos=-1;
+  //find position of start marker, if exist
+  //alert($(el2).attr('id'));
+  $(el2).leftSiblings(el2).each(function(inx){
+	  //alert(this.nodeName+'/'+$(this).attr('id'));
+	  if ($(this).attr('id')=="hlS-"+hlId){
+      startPos=inx;
+      return false;
+	  }
+  });
+  //alert(startPos);
+	$(el2).leftSiblings(el2).each(function(inx){
+		if (startPos==-1 || inx>startPos){
+		if (this.nodeType==3){
+	  		 $(this).wrap("<span class='marked-kid"+hlId+"'></span>");
+	  	 }else{
+	  		 $(this).contents().andSelf().addClass('marked-kid'+hlId);
+	  	 }
+		}
+		});
+
+	$('.mark-parent-right'+hlId).each(function(index){
+		if (index>0){
+			$(this).leftSiblings(this).each(function(){
+				$(this).markNodes('marked-kid'+hlId);
+			});
+		}
+
+	});
+
+  $(".marked-kid"+hlId).css({color:hlColor,'font-weight':'bold'});
+}
+
+
+jQuery('span.hw-highlight').css({visibility:'hidden','font-size':'1px'});
+//find all fragment markers
+var ids=[];
+$('span.hw-highlight').each(function(){
+	var idArr=$(this).attr('id').split('-');
+	ids.push(idArr[1]);
+});
+//show them
+for(i in ids){
+$.highlightFragment(ids[i],<?=$this->hl_id?>);
+}
+
+
+
+var openLists=new Array();
+
+jQuery(".list-headers").click(function(){
+ var idArr=$(this).attr('id').split('-');
+ var id=idArr[idArr.length-1];
+// alert(id);
+
+if (openLists[id]){
+  //$("#list-body-"+id).animate({"height":"0px"}); //Comentado por GC
+  $("#list-body-"+id).attr("style","display: none;");
+  openLists[id]=false;
+  $("#list-sign-"+id).html('+');
+}else{
+	openLists[id]=true;
+	var height=$("#list-size-"+id).text()*30;
+	if (height>400){
+   		//height=400; Comentado por GC
+	}
+	//$("#list-body-"+id).animate({"height":height+"px"}); Comentado por GC
+	$("#list-body-"+id).attr("style","overflow: auto; width:600px; display:block");
+	$("#list-sign-"+id).html('-&nbsp');
+}
+
+
+});
+
+//$textBox=jQuery('div#text-box');
+//$textBox.scrollTo('#hlS-<?=$this->hl_id?>',800,{offset:-50});
+//$.scrollTo('#hlS-<?=$this->hl_id?>',800,{offset:-50}); //Comentado por GC
+
+
+<?php
+
+$this->jQuery()->onLoadCaptureEnd();
+?>
+</script>
+<?php
+//print "text_contents_{$langArr['lang_alt_short']}";
+$html= html_entity_decode($this->text["text_contents_{$langArr['lang_alt_short']}"],ENT_QUOTES,"utf-8");//html_entity_decode($cont,ENT_QUOTES, "utf-8");
+
+//$dom = new Zend_Dom_Query($html);
+//$text1=$dom->query("div");
+$divStr='<div style="overflow: auto; height: 170px; white-space: normal;">';
+$html2=preg_replace('@'.$divStr.'@','',$html,-1,$count);
+if ($count){
+for($i=1;$i<=$count;$i++){
+  $pos=mb_strripos($html2,"</div>");
+  $len=strlen("</div>");
+  $html2=substr_replace($html2,'',$pos,$len);
+}
+}else{
+  $html2=$html;
+}
+$html2=str_replace(array("\\n","\\r\\n"),"<br>",$html2);
+
+//$html2=Hw_Tidy::runTidy($html2); //Comentado por GC
+
+//print getcwd()."<br>";
+/*
+$fp= fopen("files/text-".$this->id.'.txt','w+');
+fwrite($fp,$html2);
+fclose($fp);
+
+$htmlClean=Hw_Tidy::runTidy($html2);
+$fp= fopen("files/text-clean-".$this->id.'.txt','w+');
+fwrite($fp,$htmlClean);
+fclose($fp);
+*/
+//replace highlight spans with bold tag and place anchor
+/*
+$span='<span id="hlS-8" class="hw-highlight" style="cursor: pointer; color: yellow; font-size: 10px; font-weight: bold;"> 8>>></span>';
+
+$dom=new Zend_Dom_Query($html2);
+$span=$dom->query("span.hw-highlight");
+print_r(count($span));
+foreach($span as $el){
+  print_r($el);
+
+}
+*/
+//print $html2;
+?>
+<div id="top"><a href="#" name="top"></a></div>
+
+<tr><!--BREADCRUMB PATH-->
+	<td class="" style="height: 136px; background: url(&quot;/images/advanced_search/top_4.jpg&quot;) no-repeat scroll left top transparent;">
+		<div id="bcPath">
+			<a href="/" class="l4 b">Home Page</a> &gt;
+			<a href="/skin" class="l4">The 5 Skins</a> &gt;
+			<a href="<?=$this->pathArr[2][1]?>" class="l4"><?=$this->pathArr[2][0]?></a> &gt;
+			<a href="<?=$this->pathArr[3][1]?>" class="l4"><?=$this->pathArr[3][0]?></a> &gt;
+			<span class="l4on">Related Text</span>
+		</div>
+	</td>
+	<td>
+		<div class="bcPath3" title="" style="background: url(&quot;/images/advanced_search/top_5.jpg&quot;) no-repeat scroll left top transparent;">&nbsp;</div>
+	</td>
+</tr>
+<tr>
+<td colspan="2"><!--RELATED ITEMS DISPLAY-->
+<div style="float: right;">
+<div class="" id="rightBlock">
+<div id="RB1"><img alt="Related Items"
+	src="/images/items/tit_rel_eng.gif" /></div>
+<div id="RB1Cat">
+<div id="RB2"><?php
+
+//print_r($langArr);
+if ($this->relLink){
+foreach($this->relLink as $id=>$link){
+  if ($link['cnt']>0){
+  ?>
+<div style='z-index:10000;'
+	onmouseover="MM_swapImage('ImageRB<?=$id?>','','/images/icons/tit_<?=$link['name']?>_on_<?=$langArr['lang_alt']?>.gif',1)"
+	onmouseout="MM_swapImgRestore()"><a href="/text/<?=$this->text['txt']?>_related-<?=$link['type']?>"> <img
+	alt="<?=$link['title']?>" src="/images/icons/<?=$link['name']?>.gif" />
+<img id="ImageRB<?=$id?>" name="ImageRB<?=$id?>"
+	alt="<?=$link['title']?>"
+	src="/images/icons/tit_<?=$link['name']?>_<?=$langArr['lang_alt']?>.gif" />
+</a> (<?=$link['cnt']?>)</div>
+  <?php
+  }
+}
+}
+?> <br />
+<br />
+</div>
+<div title="" id="RB1Cat2"></div>
+</div>
+<div class="" id="RB1Cat3">
+<div id="RB3"><!--<img src="/images/items/buy_eng.gif" alt="Related Shop Products" />-->
+<div class="newCrazy1">Buy Me!</div>
+<span class="newCrazy2">Related Shop Products</span>
+<div id="RB4">
+
+<?php
+$cnt=sizeof($this->buyItems);
+
+for($i=0;$i<$cnt;$i++){
+
+  $srcEnc=urlencode($this->buyItems[$i]['image_path']);
+  if ($i % 3==0){
+    ?>
+<div class="ThumbRow clearRow"><?php
+  }
+  ?>
+<div><!--<a class="l11" target='_blank'	href="http://hw-archive.com/shop/product.php?productid=<?=$this->buyItems[$i]['id']?>&cat=<?=$this->buyItems[$i]['categoryid']?>&page=1"><img	alt="<?=$this->buyItems[$i]['descr']?>"
+	src="/image/thumb/?cat=apparel&from=shop&src=<?=$srcEnc?>"><span><?=substr($this->buyItems[$i]['descr'],0,30)?></span></a>
+	--></div>
+  <?php
+  if ($i % 3 ==2  OR $i==$num){
+    ?></div>
+    <?php
+  }
+  }
+  ?>
+
+
+</div>
+<a id="shopLink" class="l10" href="http://hw-archive.com/shop">Visit Online Shop</a>
+<div id="RB1Cat4"></div>
+</div>
+</div>
+</div>
+</div>
+<!--MAIN ITEM DISPLAY-->
+<div>
+<div id="inCatItems"><?php if ($html){?>
+<br /><br />
+<div id="inCI1c"><?=html_entity_decode($this->text["text_title_{$langArr['lang_alt_short']}"],ENT_QUOTES,'UTF-8')?></div>
+<?php /*?>
+<div id="text-box" style="height:600px;width:800px;overflow:auto;">
+<?php */?>
+<div id="relatedText">
+<?php print $html2;?>
+</div>
+<?php }else{
+  print $this->l('No highlights defined for this maintitle');
+}?>
+<br/><br/>
+
+<div id="itemView">
+<div class="text1">
+<?php 
+
+if (strtolower($this->text['text_author'])!='hundertwasser'){
+  echo "<div id='relatedText'>";
+  print showProp($this->text['text_author']);
+  echo "</div>";
+}
+
+if ($this->text["text_occasion_{$langArr['lang_alt_short']}"]) { 
+  echo $this->l('Occasion:');
+  echo showHtml($this->text["text_occasion_{$langArr['lang_alt_short']}"],'','width:600px;overflow:auto;',true,false,$this->l('Click to open or close'));
+  //echo html_entity_decode($this->text["text_occasion_{$langArr['lang_alt_short']}"],ENT_QUOTES,'UTF-8');
+} ?>
+
+<?php if ($this->text["text_summary_{$langArr['lang_alt_short']}"]) { 
+ echo $this->l('Summary:');
+ echo showHtml($this->text["text_summary_{$langArr['lang_alt_short']}"],'','width:600px;overflow:auto;',true,false,$this->l('Click to open or close'));
+ //$this->showList(html_entity_decode($this->text["text_summary_{$langArr['lang_alt_short']}"],ENT_QUOTES,'UTF-8'),$this->l('Summary'),$this->l(''), '</p>')
+} ?>
+
+<?php //echo $this->l('Published:');?> 
+<?php //echo html_entity_decode($this->text["text_published_{$langArr['lang_alt_short']}"],ENT_QUOTES,'UTF-8')?>
+
+<?php if ($this->text["text_published_{$langArr['lang_alt_short']}"]) {
+  $dirty_text =  html_entity_decode($this->text["text_published_{$langArr['lang_alt_short']}"],ENT_QUOTES,'UTF-8');
+  $clean_text = strip_html_tags($dirty_text); 
+  $this->showList($clean_text,$this->l('Published'),$this->l(''), '</p>');
+}
+?>
+</div>
+</div>
+
+</div>
+</div>
+<br/><br/>
+<div id="jump"><a href="#top" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('toparrow','','/images/totop1_1.gif',1)"><img src="/images/totop0.gif" alt='Top page' title='Top page' name="toparrow" width="48" height="50" alt="" /></a></div>
+
+</td>
+</tr>
+<?php 
+/**
+ * Remove HTML tags, including invisible text such as style and
+ * script code, and embedded objects.  Add line breaks around
+ * block-level tags to prevent word joining after tag removal.
+ */
+
+function strip_html_tags( $text )
+{
+    $text = preg_replace(
+        array(
+          // Remove invisible content
+            '@<head[^>]*?>.*?</head>@siu',
+            '@<style[^>]*?>.*?</style>@siu',
+            '@<script[^>]*?.*?</script>@siu',
+            '@<object[^>]*?.*?</object>@siu',
+            '@<embed[^>]*?.*?</embed>@siu',
+            '@<applet[^>]*?.*?</applet>@siu',
+            '@<noframes[^>]*?.*?</noframes>@siu',
+            '@<noscript[^>]*?.*?</noscript>@siu',
+            '@<noembed[^>]*?.*?</noembed>@siu',
+          // Add line breaks before and after blocks
+            '@</?((address)|(blockquote)|(center)|(del))@iu',
+            '@</?((div)|(h[1-9])|(ins)|(isindex)|(p)|(pre))@iu',
+            '@</?((dir)|(dl)|(dt)|(dd)|(li)|(menu)|(ol)|(ul))@iu',
+            '@</?((table)|(th)|(td)|(caption))@iu',
+            '@</?((form)|(button)|(fieldset)|(legend)|(input))@iu',
+            '@</?((label)|(select)|(optgroup)|(option)|(textarea))@iu',
+            '@</?((frameset)|(frame)|(iframe))@iu',
+        ),
+        array(
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            "\n\$0", "\n\$0", "\n\$0", "\n\$0", "\n\$0", "\n\$0",
+            "\n\$0", "\n\$0",
+        ),
+        $text );
+    return strip_tags( $text ,'<p>');
+}
+?>
+
+<?php
+function showHtml($val, $lab='',$style='height:500px;width:600px;overflow:auto;',$decode=true,$hide=false,$title=''){
+  static $divId=0;
+  $divId++;
+  //if ($style==''){
+  //   $style='height:500px;width:80%;overflow:auto;';
+  //}
+  if (!trim($val)) return;
+  if ($decode){
+    $html=html_entity_decode($val,ENT_QUOTES,"utf-8");
+  }else{
+    $html=$val;
+  }
+  if ($lab){
+    if ($hide){
+
+      $lab1="<div id='div-lab-$divId' class='htmlDivs' title='$title' style='font-weight:bold;cursor:pointer;'>$lab:<span id='dots-$divId' >...</span></div>";
+    }else{
+      $lab1="<div id='div-lab-$divId' style='font-weight:bold;'>$lab:</div>";
+    }
+  }
+  if ($hide){
+    $style.="display:none;";
+  }
+  //$div="$lab1<div id='div-html-$divId' style='$style'>".$html."</div><br /><br />"; Comentado por GC 18/07/2010
+  $div="<div id='relatedText' >".$html."</div><br /><br />";  
+
+  return $div;
+}
+
+function showProp($val, $lab='', $decode=false){
+  if ($val){
+    if ($decode){
+      $val=html_entity_decode($val,ENT_QUOTES,'UTF-8');
+    }
+    if ($lab){
+      $lab1=$lab.': ';
+    }
+    return $lab1.$val.'<br /><br />';
+  }
+}

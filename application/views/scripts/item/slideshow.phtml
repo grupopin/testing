@@ -1,0 +1,28 @@
+<td colspan="2" class=""><!--ADVANCED SEARCH FORM-->
+			<div style="background: transparent url(images/items/top_6.jpg) no-repeat scroll left top; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous;" id="inSlideShow">
+				<div id="inSH1"><h1>Here Comes Search String As Title (35)</h1></div>
+				<div id="viewChange"><a class="l4" href="item_view.php">View Normal Mode <img alt="View Normal Mode" src="images/items/hat.gif"/></a></div>
+				<div id="slideshowPic">
+				<?php
+				$pad=true;
+				if ($this->type=='gallery'){
+				  $pad=false;
+				  $imgPath=$this->item[$this->itemView['image_id']];
+				  $imgPath=str_replace('galery/','',$imgPath);
+				}else{
+				  $imgPath=$this->item[$this->itemView['image_id']];
+				}
+				$imgPath=$this->workImage($this->type,'original',$imgPath,'list',true,'asc',1,$pad);//medium is too small!!!
+				if (!$imgPath){
+				  $imgPath="/images/items/example_item.jpg";
+				}
+				?> <a href="<?=$imgPath?>" target="_blank"><img	src="<?=$imgPath?>" alt="click to enlarge"></a>
+				<img alt="" src="images/items/someExamplePic.jpg"/></div>
+				<div id="inSH2">
+					Work No.234  <h2>Here Comes The Picture Title</h2>
+					<!--Work No.234-->
+					<div id="inSH3"><a class="l8" href="#">&lt; Backward</a><a class="l8" href="#">Stop</a><a class="l8" href="#">Forward &gt;</a><span>1 of 35</span></div>
+				</div>
+
+			</div>
+		</td>

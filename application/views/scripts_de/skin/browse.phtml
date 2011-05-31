@@ -1,0 +1,17 @@
+<?php
+$sz=sizeof($this->hlArr);
+$sz1=sizeof($this->wkArr);
+$this->placeholder('work_id')->set($this->work.'_id');
+$this->placeholder('work')->set($this->work);
+$this->placeholder('date_fld')->set($this->date_fld_name);
+if (in_array($this->work,array('audio','video','text'))){
+  $this->placeholder('title_fld')->set($this->titleArr[$this->work]);
+}else{
+  $this->placeholder('title_fld')->set($this->titleArr[$this->work].'_'.$this->lang);
+}
+if ($sz){
+  print $this->partialLoop('skin_ge/_highlightRow.phtml',$this->hlArr);
+}elseif($sz1){
+  print $this->partialLoop('skin_ge/_workRow.phtml',$this->wkArr);	
+}
+?>

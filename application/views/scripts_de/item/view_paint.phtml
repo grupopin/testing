@@ -1,0 +1,113 @@
+<?php
+$title=$this->item['title'];
+if (!$title){
+  $title=$this->item['title'];
+}
+if($workNumStr=$this->item['workNumber']){
+  $workNumStr.="&nbsp;&nbsp;&nbsp;";
+}
+?>
+
+<br/><h2><?=$workNumStr?><?=$title?></h2>
+<?php
+print showTitle($this->item['titleEnglish'],$title);
+print showTitle($this->item['titleGerman'],$title);
+print showTitle($this->item['titleFrench'],$title);
+print showTitle($this->item['titleItalian'],$title);
+print showTitle($this->item['titleSpanish'],$title);
+print showTitle($this->item['titleJapanese'],$title);
+?>
+<br/>
+<div class="itemView2">
+<? echo showProp($this->item['finishedPlace'] .", ". $this->item['year'])?> 
+<? echo showProp($this->item['technique'])?>
+<? echo showProp($this->item['heightMm'] . " x " . $this->item['widthMm'] . " mm")?> 
+<? echo showProp($this->item['date'])?> 
+</div>
+<div class="text1">
+<?php
+	showText($this->item['hundertwasser_comment_'.$this->langArr['lang_alt_short']],
+          	$this->item['hundertwasser_comment_ge'],
+          	$this->langArr['lang_alt_short'],
+          	          'ge',
+          	$this->l('Hundertwasser comment about the work'),'font-size:18px;');
+
+	showText($this->item['information_'.$this->langArr['lang_alt_short']],
+        	$this->item['information_ge'],
+        	$this->langArr['lang_alt_short'],
+        	          'ge',
+        	$this->l(''),'font-size:16px;'); 
+
+?>
+
+  <?php $this->showList($this->item['oneManExhibitions'],$this->l('One man exhibitions'))?>
+
+	<?php $this->showList($this->item['groupExhibitions'],$this->l('Group exhibitions'))?>
+
+	<?php $this->showList($this->item['literatureMonographs'],$this->l('Literature'),$this->l('Monographs'))?>
+
+	<?php $this->showList($this->item['literatureExhibitionCatalogues'],$this->l('Literature'),$this->l('Exhibition catalogues'))?>
+
+  <?php $this->showList($this->item['literatureVarious'],$this->l('Literature'),$this->l('Various'))?>
+
+  <?php $this->showList($this->item['literatureMagazinesPeriodicals'],$this->l('Literature'),$this->l('Magazines/periodicals'))?>
+
+	<?php $this->showList($this->item['reproductionsArtPrints'],$this->l('Reproductions art prints'))?>
+
+
+</div>
+
+<?php
+
+function showProp($val,$lab=''){
+  if ($val){
+    if ($lab){
+      $lab1=$lab.': ';
+    }
+    //return $lab1.$val.'<br>'; Modificado por GC
+    return $lab1.html_entity_decode($val, ENT_QUOTES, "utf-8").'<br>';
+  }
+}
+
+	function showTitle($titleLang,$title){
+	  if ($titleLang && $titleLang!=$title){
+	    echo "<h2>".$titleLang."</h2>";
+	  }
+	}
+
+function showText($textLang, $textDef, $curLang, $defLanguage,$header,$style=''){
+  $res=$textLang;
+	if (!$res && $curLang!=$defLanguage){
+	  $res=$textDef;
+	}
+	if ($res){
+	?>
+	<?php if ($header) {?><br><span class="t1"><?=$header?></span>:<?php }?>
+	<div style='<?=$style?>'><?php echo html_entity_decode($res, ENT_QUOTES, "utf-8") ; ?></div>
+<?php
+	 }
+
+}
+
+
+
+function showList($val,$header1,$header2=''){
+  if (isset($val)){
+    ?>
+<br>
+<span class="t1"><?=$header1?></span>:<? if ($header2) print $header2;?>
+<ul class="ul1">
+<?php
+$arr=explode("<br>",$val);
+foreach($arr as $rn=>$row){
+  ?>
+	<li><?=$row?></li>
+	<?php
+}
+?>
+</ul>
+<?php
+  }
+}
+
+?>

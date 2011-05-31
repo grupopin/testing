@@ -1,0 +1,22 @@
+<?php //echo $this->doctype('XHTML1_STRICT'); ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+<head>
+<?php echo $this->HeadMeta(); ?>
+<?php echo $this->headTitle(); ?>
+<?php echo $this->headLink(); ?>
+<?php print $this->headScript();?>
+<?php print $this->jQuery(); ?>
+</head>
+<body style="margin: 0px;">
+<?php //echo $this->partial("_header.phtml"); ?>
+<?php echo $this->layout()->menu; ?>
+<div id="container">
+<div id="content" class="column">
+<div id="pad"><?php echo $this->layout()->content; ?></div>
+</div>
+</div>
+<?php echo $this->partial("_footer.phtml"); ?>
+</body>
+</html>

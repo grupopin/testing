@@ -1,0 +1,104 @@
+<?php
+$title=$this->textFldValue('title',$this->lang,$this->wkRow);
+if ($title){
+?>
+<style>
+a {
+	color: #959595;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #959595;
+	text-decoration: underline;
+}
+</style>
+<div>
+<table align=left cellpadding=0 cellspacing=0 border=0>
+	<tr>
+	<td width=205 valign=top style="padding-left:30px; padding-right:5px;" align=left><br><br><br>
+	<b><font face="Verdana" size="2" color="#D45232"><?=$title; ?><br>
+	Work no: <?=$this->wkRow['work_id'] ?></font></b>
+	<br><br>
+	<b><font face="Verdana" size="2" color="#ACC790"><?=($this->wkRow['JW'])?('Youth Work'):('')?><br>
+	<?=$this->wkRow['place']?><br>
+	<?=$this->wkRow['technique']?><br>
+	<?=$this->wkRow['sheet_height_mm']/10?> X <?=$this->wkRow['sheet_length_mm']/10?> cm</font></b>
+	</td>
+	<td valign=top align=left width=407>
+	<img width=80% src="<?=$this->img?>">
+	<?
+	//<img src=http://www.hw-archive.com/images/item_normal.jpg width=407 height=302>
+	?>
+	</td>
+	</tr>
+	<tr>
+	<td></td><td align=center>
+	<a target=_blank href="<?=$this->img_big?>"><b>
+	<font face="Verdana" size="2" color="#959595">Click to enlarge</font></b></a>
+	</td>
+	</tr>
+	</table>
+</div>
+
+<br style="line-height:20px;">
+<br clear=all>
+<div style="width:607px; background-color:#000000;">
+<?
+$fields=array(
+'hundertwasser_comment'=>'Hundertwasser Comments',
+'information'=>'Information',
+'one_man_exibition'=>'One Man Exhibitions',
+'group_exibition'=>'Group Exhibition',
+'monographs'=>'Monographs',
+'exibition_catalogs'=>'Exhibition Catalogs',
+'art_prints'=>'Art Prints',
+'reproductions'=>'Reproductions',
+'description'=>'Description',
+
+);
+
+
+
+?>
+
+<br>
+
+<?
+$row=$this->wkRow;
+$disp='';
+foreach($fields as $fldName=>$fldTitle){
+  $out=$this->textDiv($fldName,$fldTitle,$row,$this->lang,$disp);
+  if ($out){
+  $activeFields[$fldName]=true;
+  if (!$disp){
+   $disp='none';
+  }
+  print $out;
+  }
+}
+foreach($fields as $fldName=>$fldTitle){
+  if ($activeFields[$fldName]){
+    print $this->textDivLink($fldName,$fldTitle);
+  }
+}
+$this->textDivScript();
+?>
+
+</div>
+<?
+}
+$sz1=sizeof($this->wkArr);
+$this->placeholder('work_id')->set($this->work.'_id');
+$this->placeholder('work')->set($this->work);
+if (in_array($this->work,array('audio','video','text'))){
+  $this->placeholder('title_fld')->set($this->titleArr[$this->work]);
+}else{
+  $this->placeholder('title_fld')->set($this->titleArr[$this->work].'_'.$this->lang);
+}
+if($sz1){
+  print $this->partialLoop('skin_ge/_workRow.phtml',$this->wkArr); 
+}
+
+
+

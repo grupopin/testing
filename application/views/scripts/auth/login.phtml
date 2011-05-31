@@ -1,0 +1,10 @@
+<center>
+Please login:<br>
+<form name="login_form" method="POST" action="/auth/login">
+
+Pass: <?=$this->formPassword('ps')?>&nbsp;<?=$this->formSubmit('submit',"Login")?>
+<?=$this->formHidden('from',$this->from)?>
+
+</form>
+<?=$this->l("Not correct")?>
+</center>

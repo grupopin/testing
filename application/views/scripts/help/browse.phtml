@@ -1,0 +1,8 @@
+<h1><?php echo $this->escape($this->title);?></h1>
+<?php if(count($this->help)) : ?>
+<table>
+
+<?php echo $this->partialLoop('help/_placeRow.phtml', $this->help) ?>
+
+</table>
+<?php endif; ?>

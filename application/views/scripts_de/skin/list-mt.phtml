@@ -1,0 +1,106 @@
+<td colspan="2">
+<div style="float: right;">
+<div class="" id="rightBlock">
+<div id="RB1"><img alt="<?=$this->l('Related Items')?>"
+	src="/images/items/tit_rel_eng.gif" /></div>
+<div id="RB1Cat">
+<div id="RB2">
+<?php
+$langArr=$this->sess('langArr');
+//print_r($langArr);
+foreach($this->relLink as $id=>$link){
+?>
+<div
+	onmouseover="MM_swapImage('ImageRB<?=$id?>','','/images/icons/tit_<?=$link['name']?>_on_<?=$langArr['lang_alt']?>.gif',1)"
+	onmouseout="MM_swapImgRestore()"><a href="#"> <img alt="<?=$link['title']?>"
+	src="/images/icons/<?=$link['name']?>.gif" /> <img id="ImageRB<?=$id?>" name="ImageRB<?=$id?>"
+	alt="<?=$link['title']?>" src="/images/icons/tit_<?=$link['name']?>_<?=$langArr['lang_alt']?>.gif" /> </a> (<?=$link['cnt']?>)</div>
+<?php
+}
+
+?>
+
+
+<br />
+<br />
+ </div>
+<div title="" id="RB1Cat2"> </div>
+</div>
+<div class="" id="RB1Cat3">
+<div id="RB3"><!--<img src="/images/items/buy_eng.gif" alt="Related Shop Products" />-->
+<div class="newCrazy1">Buy Me!   </div>
+<span class="newCrazy2">Related Shop Products    </span>
+<div id="RB4">
+<div class="ThumbRow">
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Somewhat Long
+Product Title </span></a></div>
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Short Title</span></a></div>
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Another Product
+Title</span></a></div>
+</div>
+<div class="ThumbRow clearRow">
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Somewhat Long
+Product Title </span></a></div>
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Short Title</span></a></div>
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Another Product
+Title</span></a></div>
+</div>
+</div>
+<a id="shopLink" class="l10" href="#">Visit Online Shop</a>
+<div id="RB1Cat4"> </div>
+</div>
+</div>
+</div>
+
+
+</div>
+<div>
+<div id="inCatItems">
+<div class="crazy3">The Fifth Skin: <span>Earth</span></div>
+
+<!--					<img src="/images/skins/tit_earth_eng.gif" alt="Earth" style="position:relative;top:-6px;left:15px;" />
+-->
+<div id="inCI1b"><?php print $this->pageTitle?> <?php print $this->countStr?></div>
+<?php
+
+foreach($this->pager as $item){
+  if ($item['class_id']){
+    $CatItem2_color="CatItem2_color".$item['class_id'];
+    $CatItem3_color="CatItem3_color".$item['class_id'];
+    $CatItem4_color="CatItem4_color".$item['class_id'];
+  }else{
+    $CatItem2_color="";
+    $CatItem3_color="";
+    $CatItem4_color="";
+  }
+  ?>
+<div class="CatItem1">
+<div class="CatItem2 <?=$CatItem2_color?>"></div>
+<div class="CatItem3 CI3noPad CatItem3b <?=$CatItem3_color?>"
+	title="<?php print $item['maintitle_name'];?>">
+<div><a href="/highlights/<?php print $item['mt']?>" class="l12"><span><?php print $item['maintitle_name'];?></span></a>
+<br />
+  <?php print $item['maintitle_name'];?> <br />
+<a href="/highlights/<?php print $item['mt']?>" class="l6b">more Info</a></div>
+</div>
+<div class="CatItem4 <?=$CatItem4_color?>"></div>
+</div>
+  <?php
+}
+?>
+<div id="catPaging"><!--ITEM PAGING--> <?php
+echo $this->paginationControl($this->pager,'Sliding', 'skin/pages.phtml');
+?></div>
+</div>
+</div>
+</td>
+
+
+
+

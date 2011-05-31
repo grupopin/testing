@@ -1,0 +1,76 @@
+<?php
+/**** SHOW DIV FUNCTIONS ****/
+
+$sz1=sizeof($this->wkArr);
+$title=$this->textFldValue('text_title',$this->lang,$this->wkRow);
+if ($title){
+$fields=array(
+'text_summary'=>'Summary',
+'text_occasion'=>'Occasion',
+'text_published'=>'Published',
+'text_author'=>'Author',
+'text_orig_lang'=>'Original language',
+'text_translator'=>'Translator',
+'text_source'=>'Source',
+'text_excerpt'=>'Escerpt',
+'text_origin'=>'Original',
+);
+?>
+<style>
+a {
+	color: #959595;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #959595;
+	text-decoration: underline;
+}
+</style>
+<div><?=iconv('iso-8859-1','utf-8',$title)?></div>
+<br>
+
+<div style='overflow:auto;height:300px;width:600px;'>
+<?php
+print $this->textFldValue('text_contents',$this->lang,$this->wkRow);
+?>
+</div>
+
+<br style="line-height:20px;">
+<br clear=all>
+<div style="width:607px; background-color:#000000;">
+<br>
+<?
+$row=$this->wkRow;
+$disp='';
+foreach($fields as $fldName=>$fldTitle){
+  $out=$this->textDiv($fldName,$fldTitle,$row,$this->lang,$disp);
+  if ($out){
+  $activeFields[$fldName]=true;
+  if (!$disp){
+   $disp='none';
+  }
+  print $out;
+  }
+}
+foreach($fields as $fldName=>$fldTitle){
+	if ($activeFields[$fldName]){
+    print $this->textDivLink($fldName,$fldTitle);
+	}
+}
+?>
+</div>
+<?
+  $this->textDivScript();
+}elseif($sz1){
+
+$this->placeholder('work_id')->set($this->work.'_id');
+$this->placeholder('work')->set($this->work);
+if (in_array($this->work,array('audio','video','text'))){
+  $this->placeholder('title_fld')->set($this->titleArr[$this->work]);
+}else{
+  $this->placeholder('title_fld')->set($this->titleArr[$this->work].'_'.$this->lang);
+}
+  print $this->partialLoop('skin_ge/_workRow.phtml',$this->wkArr); 
+}
+?>

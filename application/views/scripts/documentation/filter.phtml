@@ -1,0 +1,76 @@
+<tr>
+    <!--BREADCRUMB PATH-->
+    <td class="" style="height: 136px; background: url(&quot;/images/advanced_search/top_4.jpg&quot;) no-repeat scroll left top transparent;">
+      <div id="bcPath"> 
+         <a href="/" class="l4 b">Home Page</a> &gt; 
+         <a href="/documentation" class="l4 b">Documentation</a> &gt;
+         <span class="l4on"><?php echo $this->breadcrumb; ?> - Filter</span>
+      </div>
+    </td>
+    <td><div class="bcPath3" title="" style="background: url(&quot;/images/advanced_search/top_5.jpg&quot;) no-repeat scroll left top transparent;">&nbsp;</div></td>
+</tr>
+<tr>
+ 	<td class="" colspan="2"><!--ADVANCED SEARCH FORM-->
+   	<div id="inAdSe" style="background:url(/images/advanced_search/top_6.jpg) left top no-repeat;">
+	<form name="search" action="/documentation/search/"  id="novsearchfilter">
+	
+		<div class="novinput0">
+    		<div class="novinput">    			Title:                  </div>
+    		<div class="novinput2">
+    			<input type="text" name="title" class="novinputa"></input>
+    		</div>
+    		<div class="clearer"></div>
+        </div>
+        <div class="novinput0">
+		<div class="novinput">
+			Year:
+              </div>
+		<div class="novinput3">
+			<input type="text" name="year" class="novinputb"></input>
+		</div>
+		<div class="clearer"></div>
+          </div>
+        <div class="novinput0">
+			<div class="novinput">
+				Keyword:
+              </div>
+			<div class="novinput2">
+				<input type="text" name="keyword" value="" class="novinputc">
+			</div>
+			<div class="clearer"></div>
+        </div>
+        <?php if (($this->type=='text' and  $this->subtype=='nothw') or $this->type=='video') {?>
+         <div class="novinput0">
+			<div class="novinput">
+				Author:
+              </div>
+			<div class="novinput2">
+				<input type="text" name="author" value="" class="novinputc"></input>
+			</div>
+			<div class="clearer"></div>
+        </div>
+        <?php } ?>
+        <?php if ($this->type=='gallery' ) {?>
+         <div class="novinput0">
+			<div class="novinput">
+				Photographer:
+              </div>
+			<div class="novinput2">
+				<input type="text" name="photographer" value="" class="novinputc"></input>
+			</div>
+			<div class="clearer"></div>
+        </div>
+        <?php } ?>
+        <input type="hidden" name="type" value="<?php echo $this->type;?>"></input>
+ 		<input type="hidden" name="subtype" value="<?php echo $this->subtype;?>"></input>
+ 		<input type="hidden" name="key" value="<?php echo $this->key;?>"></input>
+ 				
+        <div id="asBtn" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('submit','','/images/advanced_search/btn_search_over.gif',1)">
+<!--        	<a><img  src="/images/advanced_search/btn_search.gif" alt="" name="Image1s" id="Image1s" /></a>-->
+       	<input type="submit" value="&nbsp;" name='submit' id="submit" style='background-image:url(/images/advanced_search/btn_search.gif);border:0px;padding:0px;background-color:transparent;height:37px;width:153px;'>
+        </div>
+                
+	</form>
+	</div>
+	</td>
+</tr>

@@ -1,0 +1,66 @@
+<?
+$work_id=$this->work.'_id';
+
+if (in_array($this->work,array('audio','video','text'))){
+  $title_fld=$this->titleArr[$this->work];
+}else{
+  $title_fld=$this->titleArr[$this->work].'_'.$this->lang;
+}
+
+?>
+<table width="1008" border=0>
+<tr>
+<td valign=middle valign=top style="padding-left:35px;" width="622">
+<b><font color="#74C828" face="Verdana">Search string as title (<?=$this->total?>)
+    
+
+</font></b>
+    
+
+</td>
+<td width="139" valign=middle><a href="/<?=$this->work?>/item/id/<?=$this->wkArr[0][$work_id]?>">
+<b><font color="#74C828" face="Verdana"><font size="2">View Normal Mode</font>
+</font></b></a>
+</td>
+<td valign=top>
+<img src="http://www.hw-archive.com/images/view_nor.jpg">
+</td>
+</tr>
+
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table align=center border=0>
+<tr>
+<td valign=top background="http://www.hw-archive.com/images/slideshow_item_bg.jpg" width=964 height=593>
+<table  cellpadding=0 cellspacing=0 width="924">
+<tr>
+<td width=80>&nbsp;</td>
+<td align=left valign=top>
+<br><br><br>
+<img src=http://www.hw-archive.com/images/item_big.jpg width="727" height="434">
+</td>
+<td valign=top><br><br>
+  <a href="/searchresults/index/type/<?=$this->work?>" onmouseover="document.close.src='http://www.hw-archive.com/images/btn_close_over.gif'" onmouseout="document.close.src='http://www.hw-archive.com/images/btn_close.gif'">
+
+        <IMG SRC="http://www.hw-archive.com/images/btn_close.gif" NAME="close" BORDER="0" ALT="Close Slide Show"></a>
+
+</td>
+</tr>
+<tr>
+<td colspan=3 height=90 style="padding-left:60px;">
+<b><font face="Verdana" size="2" color="#74C828"><?=$this->wkArr[0][$title_fld] ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </font></b>
+<b><font color="#D45232" face="Verdana" size="2">Work Number: <?=$this->wkArr[0]['work_num'] ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font color="#74C828" face="Verdana" size="1">&lt;</font><font color="#74C828" face="Verdana" size="2"> 
+<a href="<?=$this->prev?>">Backward</a>&nbsp;&nbsp; Stop&nbsp;&nbsp; <a href="<?=$this->next?>">Forward</a> </font>
+
+<font color="#74C828" face="Verdana" size="1">&gt;</font></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+<b><font face="Verdana" size="2" color="#959595"><?=$this->curPage?> of <?=$this->total?>  </font></b>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>

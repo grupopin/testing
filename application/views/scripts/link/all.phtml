@@ -1,0 +1,155 @@
+<?php
+$this->JQuery()->addStylesheet("/js/jquery.plugins/greybox/greybox.css");
+$this->JQuery()->addJavascriptFile("/js/jquery.plugins/greybox/greybox.js");
+?>
+<script type="text/javascript">
+var GB_ANIMATION = true;
+<?php
+$this->subGridFld=Zend_Registry::get('subGridFld');
+$this->jQuery()->onLoadCaptureStart();
+?>
+
+jQuery("input.image-visible-chk").live('click',function(){
+	idStr=jQuery(this).attr("id");
+	alert('chk!');
+	
+});
+
+var imageApplyChanges=function(id){
+ alert(id);
+	
+}
+
+var itemIds={'apa':'APA','hwg':'HWG','arch':'ARCH','tap':'TAP','jw':'JW','paint':'Work Number'};
+//var itemIdKeys=['apa','hwg','arch','tap','jw','paint'];
+var galleryTitles=['keyword','year'];
+jQuery(".item_type_select").change(function(){
+ var Val=jQuery(this).val();
+ 
+ var IdName=itemIds[Val]
+ var idStr=jQuery(this).attr("id");
+ //alert(idStr);
+ var tmpArr=idStr.split('_');
+ var idNum=tmpArr[2];
+ jQuery("#field_name_"+idNum).html("");
+ jQuery("#field_name_"+idNum).append("<option value='id' selected>Id</option>");
+ jQuery("#field_name_"+idNum).append("<option value='title'>Title</option>");
+ jQuery("#field_name_"+idNum).append("<option value='workNumber'>Work Number</option>");
+ if (IdName){
+ 	
+ 	//alert(IdName);
+    jQuery("#field_name_"+idNum+" option[value='id']").text(IdName);
+    $("#list_"+idNum).setLabel("id",IdName); 
+ }else if(Val=='gallery'){
+	jQuery("#field_name_"+idNum+" option[value='id']").text('Id');
+	$("#list_"+idNum).setLabel("id",'Id');
+    jQuery("#field_name_"+idNum).append("<option value='keyword'>Keyword</option>");
+    jQuery("#field_name_"+idNum).append("<option value='year'>Year</option>");
+ }
+ //alert(idNum);
+	
+});
+
+showBox=function(el){
+	 var t = el.title || $(el).text() || $(el).attr('href');
+	 //alert(el.href);
+	 GB_show(t,$(el).attr('href'),600,900); //Modify by GC
+	 return false;
+}
+/*
+$("a.thumb_image").live('click',function(){
+	var t = this.title || $(this).text() || this.href;
+  GB_show(t,this.href,470,600);
+  return false;
+});
+*/
+<?php
+if (is_array($this->subGridFld)){
+	  ?>
+	  var subGridProps=new Array();
+	  <?php
+	foreach($this->subGridFld as $itemType=>$props){
+	  ?>
+	  subGridProps['<?=$itemType?>']={"field":"<?=$props['field']?>", 'type':"<?=$props['type']?>", 'model':<?=$props['model']?>};
+	<?php
+	 }
+	}
+
+	$fields=Zend_Registry::get('fields');
+	?>
+	var fields=new Array();
+	<?php foreach($fields as $fieldName=>$fieldList){?>
+	 fields['<?=$fieldName?>']=new Array();
+	 <?php foreach($fieldList as $itemType=>$kbFldName){?>
+	 fields['<?=$fieldName?>']['<?=$itemType?>']='<?=$kbFldName?>';
+	<?
+	}
+	}
+$this->jQuery()->onLoadCaptureEnd();
+?>
+</script>
+<?php
+$grid1=new Hw_GridConfig();
+$grid1->id=1;
+$grid1->subGrid=true;
+$grid1->child='3,4';
+$grid1->childArr=array(3,4);
+$grid1->gridHeight=455;
+$grid1->gridWidth=400;
+$grid1->itemType='text';
+
+$grid1->gridCaption=$this->l("Parent Object");
+
+$grid3=new Hw_GridConfig();
+$grid3->id=3;
+$grid3->subGrid=true;
+$grid3->child='5,6';
+$grid3->parent=1;
+$grid3->hlEditor=true;
+$grid3->selectedItemsGrid=true;
+$grid3->allItemsGridId=4;
+$grid3->gridCaption=$this->l("Child object, linked to parent");
+
+$grid4=new Hw_GridConfig();
+$grid4->id=4;
+//$grid4->child=5;
+$grid4->subGrid=true;
+$grid4->parent=1;
+$grid4->allItemsGrid=true;
+$grid4->selectedGridId=3;
+$grid4->gridCaption=$this->l("Child Objects, available");
+
+$grid5=new Hw_GridConfig();
+$grid5->id=5;
+$grid5->subGrid=true;
+$grid5->parent=3;
+$grid5->hlEditor=true;
+$grid5->selectedItemsGrid=true;
+$grid5->allItemsGridId=6;
+$grid5->gridCaption=$this->l("Child of child(grand child)");
+
+$grid6=new Hw_GridConfig();
+$grid6->id=6;
+$grid6->parent=3;
+$grid6->allItemsGrid=true;
+$grid6->selectedGridId=5;
+$grid6->gridCaption=$this->l("All available childs of child");
+
+
+?>
+<table>
+	<tr valign="top">
+		<td rowspan="2"><?=$this->gridInstance($grid1)?></td>
+		<td><?=$this->gridInstance($grid3)?></td>
+		<td><?=$this->gridInstance($grid5)?></td>
+	</tr>
+	<tr valign="top">
+		<td><?=$this->gridInstance($grid4)?></td>
+		<td><?=$this->gridInstance($grid6)?></td>
+	</tr>
+</table>
+<script>
+
+
+
+</script>

@@ -1,0 +1,268 @@
+<?php
+    $tt0 = microtime(true);
+    fb("Start","object-list.phtml"); 
+?>
+<tr>
+		<td class="" style="height: 136px; background: url(&quot;/images/advanced_search/top_4.jpg&quot;) no-repeat scroll left top transparent;">
+			<div id="bcPath">
+				<a href="/" class="l4 b">Home Page</a> &gt;
+				<a href="/oeuvre" class="l4">The Oeuvre</a> &gt;
+				<span class="l4on"><?=$this->itemProp[$this->type]['title']?></span>
+			</div>
+
+		</td>
+		<td>
+			<div class="bcPath3" title="" style="background: url(&quot;/images/advanced_search/top_5.jpg&quot;) no-repeat scroll left top transparent;">&nbsp;</div>
+		</td>
+</tr>
+<tr>
+<td colspan="2"><!--RELATED ITEMS DISPLAY-->
+<div class="" style="float: right;">
+<div class="" id="rightBlock">
+
+
+<!--<div id="RB1">Other Items</div>
+<div id="RB1Cat">
+<div id="RB2"><?php
+//print 'type:'.$this->type."<br>";
+$langArr=$this->sess('langArr');
+if ($this->otherItems){
+  $paramVars=array();
+  foreach($this->params as $par=>$val){
+    if ($par=='object_type') continue;
+    if (is_array($val)){
+      foreach($val as $i=>$v){
+        $paramVars[]="{$par}[]=$v";
+      }
+    }else{
+      $paramVars[]="$par=$val";
+    }
+  }
+  if ($paramVars){
+    $paramsStr=implode("&",$paramVars);
+  }
+
+  foreach($this->otherItems as $id=>$link){
+    $href='/item/object-list?object_type='.$link['type'].'&'.$paramsStr;
+    //$hrefArr[]=$href;
+    ?>
+<div style='z-index:100000;'
+	onmouseover="MM_swapImage('ImageRB<?=$id?>','','/images/icons/tit_<?=$link['name']?>_on_<?=$langArr['lang_alt']?>.gif',1)"
+	onmouseout="MM_swapImgRestore()"><a href="<?=$href?>"> <img	alt="<?=$link['title']?>" src="/images/icons/<?=$link['name']?>.gif" />
+<img id="ImageRB<?=$id?>" name="ImageRB<?=$id?>"	alt="<?=$link['title']?>"	src="/images/icons/tit_<?=$link['name']?>_<?=$langArr['lang_alt']?>.gif" /></a> (<?=$link['cnt']?>)</div>
+    <?php
+  }
+}
+//print_r($hrefArr);
+?> <br />
+<br />
+ </div>
+<div title="" id="RB1Cat2"></div>
+</div>
+-->
+
+<div id="RB1"><img alt="Related Items"
+	src="/images/items/tit_rel_eng.gif" /></div>
+<div id="RB1Cat">
+<div id="RB2"><?php
+//print 'type:'.$this->type."<br>";
+$langArr=$this->sess('langArr');
+if ($this->relLink){
+  foreach($this->relLink as $id=>$link){
+    $href='/'.$this->type.'/'.$this->idStr.'_related-'.$link['type'];
+    //$hrefArr[]=$href;
+    ?>
+<div style='z-index:100000;'
+	onmouseover="MM_swapImage('ImageRB<?=$id?>','','/images/icons/tit_<?=$link['name']?>_on_<?=$langArr['lang_alt']?>.gif',1)"
+	onmouseout="MM_swapImgRestore()"><a href="<?=$href?>"> <img	alt="<?=$link['title']?>" src="/images/icons/<?=$link['name']?>.gif" />
+<img id="ImageRB<?=$id?>" name="ImageRB<?=$id?>"	alt="<?=$link['title']?>"	src="/images/icons/tit_<?=$link['name']?>_<?=$langArr['lang_alt']?>.gif" /></a> (<?=$link['cnt']?>)</div>
+    <?php
+  }
+}
+//print_r($hrefArr);
+?> <br />
+<br />
+</div>
+<div title="" id="RB1Cat2"></div>
+</div>
+<div class="" id="RB1Cat3">
+<div id="RB3"><!--<img src="/images/items/buy_eng.gif" alt="Related Shop Products" />-->
+<div class="newCrazy1"><?=$this->l('Buy Me!')?></div>
+<span class="newCrazy2"><?=$this->l('Related Shop Products')?></span>
+<div id="RB4"><?php
+$cnt=sizeof($this->buyItems);
+
+for($i=0;$i<$cnt;$i++){
+
+  $srcEnc=urlencode($this->buyItems[$i]['image_path']);
+  if ($i % 3==0){
+    ?>
+<div class="ThumbRow clearRow"><?php
+  }
+  ?>
+<div><a class="l11" target='_blank'
+	 href="/shop/product.php?productid=<?=$this->buyItems[$i]['id']?>&cat=<?=$this->buyItems[$i]['categoryid']?>&page=1">
+	 <img alt="<?=substr($this->buyItems[$i]['descr'],0,30)?>"
+	 src="/image/thumb/?cat=apparel&from=shop&src=<?=$srcEnc?>">
+	 <span><?=substr($this->buyItems[$i]['descr'],0,30)?></span>
+	 </a>
+</div>
+  <?php
+  if ($i % 3 ==2  OR $i==$num){
+    ?></div>
+    <?php
+  }
+}
+?></div>
+<a id="shopLink" class="l10" href="#"><?=$this->l('Visit Online Shop')?></a>
+<div id="RB1Cat4"></div>
+</div>
+</div>
+</div>
+</div>
+
+<!--MAIN ITEM DISPLAY-->
+<div id="oeuvre2" title="" class="">
+<div id="inCatItems" style="width: 600px">
+<img alt="<?=$this->itemProp[$this->type]['name']?>" src="/images/icons/<?=$this->itemProp[$this->type]['name']?>.gif"/>
+<img alt="<?=$this->itemProp[$this->type]['name']?>" src="/images/icons/tit_<?=$this->itemProp[$this->type]['name']?>_<?=$langArr['lang_alt']?>.gif"/>
+<?php
+switch ($this->type) {
+	case 'hwg': 
+	  $inCI1_padding=80;	break;
+	case 'apa': 
+	  $inCI1_padding=30;	break;
+	case 'arch': 
+	  $inCI1_padding=45;	break;
+	case 'jw': 
+	  $inCI1_padding=30;	break;
+	case 'paint': 
+	  $inCI1_padding=0;	break;	  
+	default:
+		$inCI1_padding=0;
+	break;
+} 
+?>
+
+<div id="inCI1" style="padding-left: <?=$inCI1_padding?>px;">
+<?php if ($this->count){
+
+  ?>
+(<?=$this->fromStr?> - <?=$this->toStr?> of <?=$this->count?>)
+<?php if (in_array($this->type,$this->objectCategory['work'])){
+$fItem=$this->itemArr->getItem(1);
+$idStr=$this->transId($fItem[$this->itemViewConfig['id']]);
+  ?>
+<a class="l4" href="/<?=$this->type?>/slides-<?=$idStr?>">View Slideshow</a>
+<?php }?>
+</div>
+<?php foreach($this->itemArr as $n=>$item){
+    //$n1=$n+1;
+    //$txtIdStr=str_replace(".","_",$txtId);
+    if ($item[$this->itemViewConfig['title']]){
+      //$title=str_replace("\r\n","<br>",$item[$this->itemViewConfig['title']]);
+      $title=html_entity_decode($item[$this->itemViewConfig['title']],ENT_QUOTES,'UTF-8');
+    }else{
+      //$title=str_replace("\r\n","<br>",$item[$this->itemViewConfig['title_default']]);
+      $title=html_entity_decode($item[$this->itemViewConfig['title_default']],ENT_QUOTES,'UTF-8');
+    }
+    //                        $type,     $size='small',$id,$mode='list',$series=false,$sort='asc',$showNum=1
+    $pad=true;
+    if ($this->type=='gallery'){
+      $pad=false;
+    }
+    $notADoc=false;
+    if (!in_array($this->type,array('audio','text','video'))){
+      $notADoc=true;
+
+      //$imgPath=$this->workImage($this->type,'small',$item[$this->itemViewConfig['image_id']],'list',true,'asc',1,$pad);
+      $imgPath=$this->workImage($this->type,'small',$item[$this->itemViewConfig['id']],'list',true,'asc',1,$pad); //changed by gc
+      if (!$imgPath){
+        //$imgPath="/images/items/example_thumbnail.jpg";
+        $imgPath="";
+      }
+    }else{
+      $style='padding-left:40px;';
+    }
+    $year=$item['year'];
+    if (!$year) $year=$item['publishedYear'];
+    
+    $idStr=$this->transId($item[$this->itemViewConfig['id']]);
+
+    ?>
+<div class="newCatItem1">
+<div class="newCatItem2"></div>
+<div class="newCatItem3">
+<?php if ($notADoc){?>
+ <a href="/<?=$this->type?>/view-<?=$idStr?>" class="newCatItem4"><?php if ($imgPath) {?><img src="<?=$imgPath?>" /><?php }?></a>
+<?php }?>
+  <!--<div style='<?=$style?>' title="" class="newCatItem3">-->
+  <div class="newCatItem5">
+  <?php
+    if ($this->type!='paint' && in_array($this->type,$this->objectCategory['work'])){
+      $objIdStr=strtoupper($this->type)." ".$item[$this->type];
+      print $objIdStr . "<br/>";
+    }
+    if ($item[$this->itemViewConfig['work_number']]){
+     print "<span style='color: #595353'>".$item[$this->itemViewConfig['work_number']]."&nbsp;"."</span>";
+    }
+  ?>
+  <span><a style='text-decoration:none;' href="/<?=$this->type?>/view-<?=$idStr?>"><?=$title?></a></span><br/>
+  <?php if ($this->type=='apa' and $item['descriptionCategoryKeyword']) { echo $item['descriptionCategoryKeyword'].", "; } ?> 
+  <?=$year?><br/>
+  <? echo $item['descriptionPortfolio']?>
+  </div>
+  <div class="clearer"></div>
+  
+ 
+<?php
+$id=$item[$this->itemViewConfig['id']];
+$quoted=false;
+if (preg_match("@\D+@",$id)){
+  $id="'".$id."'";
+  $quoted=true;
+}
+
+if ($this->relatedItems[$id]){
+
+  foreach($this->relatedItems[$id] as $type=>$cnt){
+    //print $type.'('.$cnt.'),';
+    $link=$this->itemProp[$type];
+
+    if ($quoted){
+      $id=str_replace("'",'',$id);
+    }
+    $idStr=$this->transId($id);
+    $href='/'.$this->type.'/'.$idStr.'_related-'.$type;
+
+    ?>
+    <a href="<?=$href?>"> <img	alt="<?=$link['title']?>" width='24px' src="/images/icons/<?=$link['name']?>.gif" />
+<img id="ImageRB<?=$id?>" height='15px' name="ImageRB<?=$id?>"	alt="<?=$link['title']?>"	src="/images/icons/tit_<?=$link['name']?>_<?=$langArr['lang_alt']?>.gif" /></a><span style='padding-bottom:3px;font-size:12px;'>(<?=$cnt?>)</span>
+    <?php
+
+  }
+}
+?>
+
+</div>
+<div class="newCatItem6"></div>
+
+</div>
+
+<?php }?>
+
+<?php
+echo $this->paginationControl($this->itemArr,'Sliding', 'item/pages.phtml',$this->params);
+?>
+<?php }else{
+  print $this->l('No items available for this category');
+}?></div>
+</div>
+
+</td>
+</tr>
+<?php 
+    $tt1 = microtime(true);
+    fb("END","object-list.phtml");
+    fb($tt1-$tt0,"object-list.phtml - Elapsed time: ");
+?>

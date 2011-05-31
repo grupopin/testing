@@ -1,0 +1,140 @@
+<?php
+if ($this->title){
+
+?>
+<style>
+a {
+	color: #959595;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #959595;
+	text-decoration: underline;
+}
+</style>
+<div>
+<table align=left cellpadding=0 cellspacing=0 border=0>
+	<tr>
+	<td width=205 valign=top style="padding-left:30px; padding-right:5px;" align=left><br><br><br>
+	<b><font face="Verdana" size="2" color="#D45232"><?=$this->title; ?><br>
+	Work no: <?=$this->wkRow['work_num'] ?></font></b>
+	<br><br>
+	<b><font face="Verdana" size="2" color="#ACC790"><?=($this->wkRow['JW'])?('Youth Work'):('')?><br>
+	<?=$this->wkRow['place']?><br>
+	<?=$this->wkRow['technique']?><br>
+	<?=$this->wkRow['height_mm']/10?> X <?=$this->wkRow['length_mm']/10?> cm</font></b>
+	</td>
+	<td valign=top align=left width=407>
+	<img width=80% src="<?=$this->img?>">
+	<?
+	//<img src=http://www.hw-archive.com/images/item_normal.jpg width=407 height=302>
+	?>
+	</td>
+	</tr>
+	<tr>
+	<td></td><td align=center>
+	<a target=_blank href="<?=$this->img_big?>"><b>
+	<font face="Verdana" size="2" color="#959595">Click to enlarge</font></b></a>
+	</td>
+	</tr>
+	</table>
+</div>
+
+<br style="line-height:20px;">
+<br clear=all>
+<div style="width:607px; background-color:#000000;">
+<?
+$fields=array(
+'title'=>'Title',
+'subtitle'=>'Subtitle',
+'date_of_shot'=>'Date of shot',
+'place'=>'Place',
+'language'=>'Language',
+'note_occasion'=>'Note occasion',
+'broadcasting_title'=>'Broadcasting Title',
+'broadcasting_date'=>'Broadcasting Date',
+'broadcasting_company'=>'Broadcasting Company',
+'broadcasting_place'=>'Broadcasting Place',
+
+);
+
+
+
+?>
+
+<br>
+
+<?
+}
+$sz1=sizeof($this->wkArr);
+$this->placeholder('work_id')->set($this->work.'_id');
+$this->placeholder('work')->set($this->work);
+if (in_array($this->work,array('audio','video','text'))){
+  $this->placeholder('title_fld')->set($this->titleArr[$this->work]);
+}else{
+  $this->placeholder('title_fld')->set($this->titleArr[$this->work].'_'.$this->lang);
+}
+if($sz1){
+  print $this->partialLoop('skin_ge/_workRow.phtml',$this->wkArr); 
+}
+
+
+
+/**** SHOW DIV FUNCTIONS ****/
+function showTextDiv($fldName,$fldTitle,$row,$lang,$display='none'){
+  ?>
+
+<div id='txtdiv_<?=$fldName?>' style="vertical-align:top; overflow:auto; width:450px; height:130px; display:<?=$display?>;">
+
+<? 
+
+$txt=$row[$fldName.'_'.$lang];
+if ($txt){
+  $out= $txt;
+}else{
+  $out= $row[$fldName];
+}
+print nl2br($out);
+?>
+</div>
+<br style="line-height:5px;">
+<?
+}
+
+function showTextLink($fldName,$fldTitle){
+  ?>
+  <a href="javascript:;" onclick="switchDiv('<?=$fldName?>');"><?=$fldTitle?></a><br clear=all/>
+  <?
+}
+
+$row=$this->wkRow;
+$disp='';
+foreach($fields as $fldName=>$fldTitle){
+  showTextDiv($fldName,$fldTitle,$row,$this->lang,$disp);
+  if (!$disp){
+   $disp='none';
+  }
+}
+foreach($fields as $fldName=>$fldTitle){
+  showTextLink($fldName,$fldTitle);
+}
+?>
+<script>
+function switchDiv(divName){
+  var divs=document.getElementsByTagName('DIV');
+  curDiv='txtdiv_'+divName;
+  document.getElementById(curDiv).style.display='';
+  for(i in divs){
+   idVal=divs[i].id;
+   if (idVal.indexOf('txtdiv_')==0 && idVal!=curDiv){
+    divs[i].style.display='none';
+   }
+  }
+  
+  
+}
+</script>
+</div>
+
+

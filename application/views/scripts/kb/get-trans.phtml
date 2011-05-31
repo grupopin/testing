@@ -1,0 +1,20 @@
+<?php
+//print_r($this->heads);
+foreach($this->heads as $row){
+  print ':-dynamic '.$row->term_head.'/'.$row->term_arity.".\n";
+}
+
+print "\n";
+foreach($this->trans as $row){
+  $body=str_replace('\"','"',$row->term_list);//do not replace '\ as term atoms are surrounded by '
+  $termList=$row->term_list;
+  if ($row->term_head=='object' && $row->term_arity==4){
+    print $row->term_head."(".$row->term_arg1.",'".$row->term_arg2."','".$row->term_arg3."',\n$termList\n).\n\n";//  ). - are in db, need to refactor
+  }elseif($row->term_head=='object' && $row->term_arity==2){
+    print $row->term_head."(".$row->term_arg1.",$termList).\n\n";
+  }elseif($row->term_head=='link'){
+    print $row->term_head."(".$row->term_arg1.",'".$row->term_arg2."',".$row->term_arg3.",'".$row->term_arg4."').\n\n";
+  }
+}
+
+?>

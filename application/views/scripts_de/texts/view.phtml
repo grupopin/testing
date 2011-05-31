@@ -1,0 +1,241 @@
+<?php
+$this->JQuery()->addJavascriptFile("/js/jquery.plugins/jquery.scrollto/jquery.scrollTo-min.js");
+$this->JQuery()->addJavascriptFile("/js/jquery.plugins/jquery.siblings/jquery.siblings.js");
+?>
+
+<script type="text/javascript">
+<?php
+
+$this->jQuery()->onLoadCaptureStart();
+?>
+$.highlightFragment=function(hlId,activeId){
+ //var hlId=40;
+ //check if markers exist
+ var hlColor='#ACC798';
+ if (hlId==activeId){
+  hlColor='yellow';
+ }
+ if ($("#hlS-"+hlId).count<=0){
+  alert('start marker '+hlId+' does not exist');
+ }
+ if ($("#hlE-"+hlId).count<=0){
+	  alert('end marker '+hlId+' does not exist');
+}
+//find common parent node
+ $("#hlS-"+hlId).parents().each(function(){
+			$(this).addClass('mark-parent-'+hlId);
+	 });
+ var found=false;
+ $("#hlE-"+hlId).parents().each(function(){
+   if (!found){
+	   if ($(this).hasClass('mark-parent-'+hlId)){
+	    $(this).addClass('common-parent-'+hlId);
+	    found=true;
+	   }else{
+      $(this).addClass('mark-parent-right'+hlId);
+	   }
+   }else{
+     $(this).removeClass('mark-parent-'+hlId);
+   }
+ });
+
+ //$('.mark-parent-'+hlId).css({'border':'solid thin green'});
+ var el=$("#hlS-"+hlId);
+ $(el).rightSiblings(el).each(function(){
+	 if ($(this).attr('id')=="hlE-"+hlId){
+			return false;
+	 }
+	 if (this.nodeType==3){
+  		 $(this).wrap("<span class='marked-kid"+hlId+"'></span>");
+  	 }else{
+  		 $(this).contents().andSelf().addClass('marked-kid'+hlId);
+  	 }
+	});
+
+	$('.mark-parent-'+hlId).each(function(index){
+		if (index>0){
+			$(this).rightSiblings(this).each(function(){
+				$(this).markNodes('marked-kid'+hlId);
+			});
+		}
+	});
+
+	var el2=$("#hlE-"+hlId);
+	var startPos=-1;
+  //find position of start marker, if exist
+  //alert($(el2).attr('id'));
+  $(el2).leftSiblings(el2).each(function(inx){
+	  //alert(this.nodeName+'/'+$(this).attr('id'));
+	  if ($(this).attr('id')=="hlS-"+hlId){
+      startPos=inx;
+      return false;
+	  }
+  });
+  //alert(startPos);
+	$(el2).leftSiblings(el2).each(function(inx){
+		if (startPos==-1 || inx>startPos){
+		if (this.nodeType==3){
+	  		 $(this).wrap("<span class='marked-kid"+hlId+"'></span>");
+	  	 }else{
+	  		 $(this).contents().andSelf().addClass('marked-kid'+hlId);
+	  	 }
+		}
+		});
+
+	$('.mark-parent-right'+hlId).each(function(index){
+		if (index>0){
+			$(this).leftSiblings(this).each(function(){
+				$(this).markNodes('marked-kid'+hlId);
+			});
+		}
+
+	});
+
+  $(".marked-kid"+hlId).css({color:hlColor,'font-weight':'bold'});
+}
+
+
+jQuery('span.hw-highlight').css({visibility:'hidden','font-size':'1px'});
+//find all fragment markers
+var ids=[];
+$('span.hw-highlight').each(function(){
+	var idArr=$(this).attr('id').split('-');
+	ids.push(idArr[1]);
+});
+//show them
+for(i in ids){
+$.highlightFragment(ids[i],<?=$this->hl_id?>);
+}
+
+
+
+
+
+jQuery.scrollTo('#hlS-<?=$this->hl_id?>',800,{offset:-50});
+
+
+
+<?php
+
+$this->jQuery()->onLoadCaptureEnd();
+?>
+</script>
+<?
+$html= html_entity_decode($this->text['text_contents_en'],ENT_QUOTES,"utf-8");//html_entity_decode($cont,ENT_QUOTES, "utf-8");
+
+//$dom = new Zend_Dom_Query($html);
+//$text1=$dom->query("div");
+$divStr='<div style="overflow: auto; height: 170px; white-space: normal;">';
+$html2=preg_replace('@'.$divStr.'@','',$html,-1,$count);
+if ($count){
+for($i=1;$i<=$count;$i++){
+  $pos=mb_strripos($html2,"</div>");
+  $len=strlen("</div>");
+  $html2=substr_replace($html2,'',$pos,$len);
+}
+}else{
+  $html2=$html;
+}
+$html2=str_replace(array("\\n","\\r\\n"),"<br>",$html2);
+$html2=Hw_Tidy::runTidy($html2);
+//print getcwd()."<br>";
+/*
+$fp= fopen("files/text-".$this->id.'.txt','w+');
+fwrite($fp,$html2);
+fclose($fp);
+
+$htmlClean=Hw_Tidy::runTidy($html2);
+$fp= fopen("files/text-clean-".$this->id.'.txt','w+');
+fwrite($fp,$htmlClean);
+fclose($fp);
+*/
+//replace highlight spans with bold tag and place anchor
+/*
+$span='<span id="hlS-8" class="hw-highlight" style="cursor: pointer; color: yellow; font-size: 10px; font-weight: bold;"> 8>>></span>';
+
+$dom=new Zend_Dom_Query($html2);
+$span=$dom->query("span.hw-highlight");
+print_r(count($span));
+foreach($span as $el){
+  print_r($el);
+
+}
+*/
+//print $html2;
+?>
+<td colspan="2"><!--RELATED ITEMS DISPLAY-->
+<div style="float: right;">
+<div class="" id="rightBlock">
+<div id="RB1"><img alt="Related Items"
+	src="/images/items/tit_rel_eng.gif" /></div>
+<div id="RB1Cat">
+<div id="RB2"><?php
+$langArr=$this->sess('langArr');
+//print_r($langArr);
+if ($this->relLink){
+foreach($this->relLink as $id=>$link){
+  ?>
+<div
+	onmouseover="MM_swapImage('ImageRB<?=$id?>','','/images/icons/tit_<?=$link['name']?>_on_<?=$langArr['lang_alt']?>.gif',1)"
+	onmouseout="MM_swapImgRestore()"><a href="#"> <img
+	alt="<?=$link['title']?>" src="/images/icons/<?=$link['name']?>.gif" />
+<img id="ImageRB<?=$id?>" name="ImageRB<?=$id?>"
+	alt="<?=$link['title']?>"
+	src="/images/icons/tit_<?=$link['name']?>_<?=$langArr['lang_alt']?>.gif" />
+</a> (<?=$link['cnt']?>)</div>
+  <?php
+}
+}
+
+?> <br />
+<br />
+ </div>
+<div title="" id="RB1Cat2"> </div>
+</div>
+<div class="" id="RB1Cat3">
+<div id="RB3"><!--<img src="/images/items/buy_eng.gif" alt="Related Shop Products" />-->
+<div class="newCrazy1">Buy Me!   </div>
+<span class="newCrazy2">Related Shop Products    </span>
+<div id="RB4">
+<div class="ThumbRow">
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Somewhat Long
+Product Title </span></a></div>
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Short Title</span></a></div>
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Another Product
+Title</span></a></div>
+</div>
+<div class="ThumbRow clearRow">
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Somewhat Long
+Product Title </span></a></div>
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Short Title</span></a></div>
+<div><a class="l11" href="#"><img alt="Product Title"
+	src="/images/items/example_thumbnail_shop.jpg" /><span>Another Product
+Title</span></a></div>
+</div>
+</div>
+<a id="shopLink" class="l10" href="#">Visit Online Shop</a>
+<div id="RB1Cat4"> </div>
+</div>
+</div>
+</div>
+</div>
+<!--MAIN ITEM DISPLAY-->
+<div>
+<div id="inCatItems"><?php if ($html){?> <img
+	style="position: relative; top: -6px; left: 15px;" alt="Earth"
+	src="/images/skins/tit_earth_eng.gif" />
+<div id="inCI1c"></div>
+
+<?php print $html2;?>
+
+<?php }else{
+  print $this->l('No highlights defined for this maintitle');
+}?>
+</div>
+</div>
+</td>

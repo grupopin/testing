@@ -1,0 +1,208 @@
+<script type="text/javascript">
+<?php
+$this->jQuery()->onLoadCaptureStart();
+?>
+
+jQuery(".htmlDivs").click(function(){
+ var idArr=$(this).attr('id').split('-');
+ var id=idArr[idArr.length-1];
+ //alert(id);
+ $("#dots-"+id).toggle();
+ $("#div-html-"+id).toggle("slow");
+
+});
+
+<?php
+$this->jQuery()->onLoadCaptureEnd();
+?>
+
+</script>
+
+<br>
+<div id="inCI1c"><span style="font-size: 18px"><?php
+$lang=$this->langArr['lang_alt_short'];
+$title=$this->item['text_title_'.$this->langArr['lang_alt_short']];
+if (!$title){
+  $title=$this->item['text_title_ge'];
+}
+
+$title=html_entity_decode($title,ENT_QUOTES,'UTF-8');
+print $title;
+?></span></div>
+<br />
+<?php
+  $textContent=html_entity_decode($this->item['text_contents_'.$lang],ENT_QUOTES,'utf-8');
+  //$textContent=str_replace('<div style="overflow: auto; height: 170px; white-space: normal;">','',$textContent,$count);
+  $textContent=preg_replace('/<div style="overflow: auto; height: 170px; white-space: normal;">/','',$textContent,-1,$count);
+  if ($count>0){
+    for($i=0;$i<2;$i++){
+      if (($pos=strrpos($textContent,"</div>"))!==false){
+        $textContent=substr_replace($textContent,"",$pos,6);
+      }
+    }
+  }
+
+?>
+<?=showHtml($textContent,'','')?>
+
+<div class="itemView2">
+<? //showProp($this->item['text_date'],$this->l('Date'))?>
+<?
+//ticket 58
+//print showHtml($this->item['text_summary_'.$lang],'','width:600px;overflow:auto;')
+?>
+
+<?//=showProp($this->item['text_type'],$this->l('Type'))?>
+<?//=showProp($this->item['text_category'],$this->l('Category'))?>
+
+<?php 
+if (strtolower($this->item['text_author'])!='hundertwasser'){
+  echo "<div id='relatedText'>";
+  print showProp($this->item['text_author']);
+  echo "</div>";
+}
+
+
+if ($this->item['text_occasion_'.$lang]) {
+  echo $this->l('Occasion:');
+  echo showHtml($this->item['text_occasion_'.$lang],'','width:600px;overflow:auto;',true,false,$this->l('Click to open or close'));
+}
+
+?>
+
+<?php if ($this->item['text_summary_'.$lang]) {
+  echo $this->l('Summary:');
+  echo showHtml($this->item['text_summary_'.$lang],$this->l('Summary'),'width:600px;overflow:auto;',true,true,$this->l('Click to open or close'));
+}
+?>
+
+<?php if ($this->item['text_published_'.$lang]) {
+  $dirty_text =  html_entity_decode($this->item['text_published_'.$lang],ENT_QUOTES,'UTF-8');
+  $clean_text = strip_html_tags($dirty_text); 
+  $this->showList($clean_text,$this->l('Published'),$this->l(''), '</p>');
+}
+?>
+
+<?php //echo $this->l('Published:');?>
+<?php //echo showHtml($this->item['text_published_'.$lang],$this->l('Published'),'width:600px;overflow:auto;',true,true,$this->l('Click to open or close'))?>
+<?//=showProp($this->item['text_translator'],$this->l('Translator'))?>
+<?//=showProp($this->item['text_source_'.$lang],$this->l('Source'),true)?>
+<?//=showProp($this->item['text_origin'],$this->l('Origin'))?>
+</div>
+
+<br/><br/>
+<div id="jump"><a href="#top" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('toparrow','','/images/totop1_1.gif',1)"><img src="/images/totop0.gif" alt='Top page' title='Top page' name="toparrow" width="48" height="50" alt="" /></a></div>
+
+
+<?php
+function showHtml($val, $lab='',$style='height:500px;width:600px;overflow:auto;',$decode=true,$hide=false,$title=''){
+  static $divId=0;
+  $divId++;
+  //if ($style==''){
+  //   $style='height:500px;width:80%;overflow:auto;';
+  //}
+  if (!trim($val)) return;
+  if ($decode){
+    $html=html_entity_decode($val,ENT_QUOTES,"utf-8");
+  }else{
+    $html=$val;
+  }
+  if ($lab){
+    if ($hide){
+
+      $lab1="<div id='div-lab-$divId' class='htmlDivs' title='$title' style='font-weight:bold;cursor:pointer;'>$lab:<span id='dots-$divId' >...</span></div>";
+    }else{
+      $lab1="<div id='div-lab-$divId' style='font-weight:bold;'>$lab:</div>";
+    }
+  }
+  if ($hide){
+    $style.="display:none;";
+  }
+  //$div="$lab1<div id='div-html-$divId' style='$style'>".$html."</div><br /><br />"; Comentado por GC 18/07/2010
+  $div="<div id='relatedText' >".$html."</div><br />";  
+
+  return $div;
+}
+
+function showProp($val,$lab='',$decode=false){
+  if ($val){
+    if ($decode){
+      $val=html_entity_decode($val,ENT_QUOTES,'UTF-8');
+    }
+    if ($lab){
+      $lab1=$lab.': ';
+    }
+    return $lab1.$val.'<br /><br />';
+  }
+}
+
+function showText($textLang, $textDef, $curLang, $defLanguage,$header){
+  $res=$textLang;
+	if (!$res && $curLang!=$defLanguage){
+	  $res=$textDef;
+	}
+	if ($res){
+	?>
+	<br><span class="t1"><?=$header?></span>:
+	<br><?=$res?><br /><br />
+<?php
+	 }
+
+}
+
+
+
+function showList($val,$header1,$header2=''){
+  if (isset($val)){
+    ?>
+<br>
+<span class="t1"><?=$header1?></span>:<? if ($header2) print $header2;?>
+<ul class="ul1">
+<?php
+$arr=explode("<br>",$val);
+foreach($arr as $rn=>$row){
+  ?>
+	<li><?=$row?></li>
+	<?php
+}
+?>
+</ul>
+<?php
+  }
+}
+
+?>
+
+<?php
+function strip_html_tags( $text )
+{
+    $text = preg_replace(
+        array(
+          // Remove invisible content
+            '@<head[^>]*?>.*?</head>@siu',
+            '@<style[^>]*?>.*?</style>@siu',
+            '@<script[^>]*?.*?</script>@siu',
+            '@<object[^>]*?.*?</object>@siu',
+            '@<embed[^>]*?.*?</embed>@siu',
+            '@<applet[^>]*?.*?</applet>@siu',
+            '@<noframes[^>]*?.*?</noframes>@siu',
+            '@<noscript[^>]*?.*?</noscript>@siu',
+            '@<noembed[^>]*?.*?</noembed>@siu',
+          // Add line breaks before and after blocks
+            '@</?((address)|(blockquote)|(center)|(del))@iu',
+            '@</?((div)|(h[1-9])|(ins)|(isindex)|(p)|(pre))@iu',
+            '@</?((dir)|(dl)|(dt)|(dd)|(li)|(menu)|(ol)|(ul))@iu',
+            '@</?((table)|(th)|(td)|(caption))@iu',
+            '@</?((form)|(button)|(fieldset)|(legend)|(input))@iu',
+            '@</?((label)|(select)|(optgroup)|(option)|(textarea))@iu',
+            '@</?((frameset)|(frame)|(iframe))@iu',
+        ),
+        array(
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            "\n\$0", "\n\$0", "\n\$0", "\n\$0", "\n\$0", "\n\$0",
+            "\n\$0", "\n\$0",
+        ),
+        $text );
+    return strip_tags( $text ,'<p>');
+}
+?>

@@ -1,0 +1,90 @@
+<?php if ($this->haArr){
+
+    $this->jQuery()->setLocalPath("/js/jquery/jquery-1.3.2.min.js");
+    $this->jQuery()->addJavascriptFile("/js/jquery1.7/js/jquery-ui-1.7.2.custom.light.min.js");
+    //$this->jQuery()->addJavascriptFile("/js/jquery1.7/ui/ui.autocomplete.js");
+    //$this->jQuery()->addStylesheet("/css/jquery/autocomplete.css");
+
+    //autocomplete version 1.1Pre
+    //$this->jQuery()->addJavascriptFile("/js/jquery1.7/ui/jquery.autocomplete.js");
+    //$this->jQuery()->addStylesheet("/css/jquery/jquery.autocomplete.css");
+
+    //autocomplete version 1.1 http://bassistance.de/jquery-plugins/jquery-plugin-autocomplete/
+    $this->jQuery()->addJavascriptFile("/js/jquery.plugins/jquery-autocomplete/jquery.autocomplete.js");
+    $this->jQuery()->addStylesheet("/js/jquery.plugins/jquery-autocomplete/jquery.autocomplete.css");
+	
+	
+?>
+
+<script>
+<?php
+$this->jQuery()->onLoadCaptureStart();
+?>
+$("#text_type").autocomplete("/kb/text-auto?fld=text_type",
+	{
+    autoFill:false,
+	matchContains:"word",
+	minChars:0,
+	max: 200,
+	cacheLength:1
+	});
+
+$("#text_category").autocomplete("/kb/text-auto?fld=text_cat",
+		{
+	    autoFill:false,
+		matchContains:"word",
+		minChars:0,
+		max: 200,
+		cacheLength:1
+		});
+<?
+$this->jQuery()->onLoadCaptureEnd();
+
+$this->headScript()->captureStart();
+?>
+function FCKeditor_OnComplete( editorInstance ){
+	editorInstance.Events.AttachEvent( 'OnBlur'	, FCKeditor_OnBlur ) ;
+	editorInstance.Events.AttachEvent( 'OnFocus', FCKeditor_OnFocus ) ;
+}
+
+function FCKeditor_OnBlur( editorInstance ){
+	editorInstance.ToolbarSet.Collapse() ;
+}
+
+function FCKeditor_OnFocus( editorInstance ){
+	editorInstance.ToolbarSet.Expand() ;
+}
+<?
+$this->headScript()->captureEnd();
+?>
+</script>
+<?php
+$this->headScript()->appendFile('/js/fckeditor/fckeditor.js');
+?>
+<script>
+<?php
+$this->jQuery()->onLoadCaptureStart();
+
+?>
+// Automatically calculates the editor base path based on the _samples directory.
+// This is usefull only for these samples. A real application should use something like this:
+// oFCKeditor.BasePath = '/fckeditor/' ;	// '/fckeditor/' is the default value.
+var sBasePath = '/js/fckeditor/' ;
+
+//var oFCKEditors=new Array();
+<?php
+foreach($this->haArr as $fldName){ ?>
+var oFCKeditor_<?=$fldName?> = new FCKeditor( '<?=$fldName?>' ) ;
+oFCKeditor_<?=$fldName?>.BasePath	= sBasePath ;
+oFCKeditor_<?=$fldName?>.Config['ToolbarStartExpanded'] = false ;
+oFCKeditor_<?=$fldName?>.ToolbarSet	= 'Basic' ;
+oFCKeditor_<?=$fldName?>.ReplaceTextarea() ;
+<?php }?>
+<?php
+$this->jQuery()->onLoadCaptureEnd();
+?>
+</script>
+<?php
+}
+print $this->form;
+?>

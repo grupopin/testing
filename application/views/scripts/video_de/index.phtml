@@ -1,0 +1,18 @@
+<h1><?php echo $this->escape($this->title);?></h1>
+<div class="location">
+<?php echo nl2br($this->escape($this->displayAddress($this->place)));?>
+</div>
+
+<h2>Reviews</h2>
+<?php if(count($this->reviews)) : ?>
+<ul id="reviews">
+<?php foreach($this->reviews as $review) : ?>
+<li>
+    <p class="review-meta">
+        <?php echo $this->displayDate($review->date_updated); ?>
+    </p>
+    <p class="review-body"><?php echo $this->escape($review->body); ?></p>
+</li>
+<?php endforeach; ?>
+</ul>
+<?php endif; ?>

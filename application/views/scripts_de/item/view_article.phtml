@@ -1,0 +1,28 @@
+<br>
+<h2><?php
+$title=$this->item['title_'.$this->langArr['lang']];
+if (!$title){
+  $title=$this->item['title_en'];
+}
+print $title;
+?></h2>
+<div class="itemView2">
+
+<?=showProp($this->item["article_summary_{$this->langArr['lang']}"])?>
+<?=showProp($this->item["date"])?>
+<?=showProp($this->item["author"])?>
+<?=showProp($this->item["medium"])?>
+<?=showProp($this->item["article_keywords_{$this->langArr['lang']}"], "Keywords")?>
+<?=showProp($this->item["language"])?>
+</div>
+
+<?php
+function showProp($val,$lab=''){
+  if ($val){
+    if ($lab){
+      $lab1=$lab.': ';
+    }
+    return $lab1.html_entity_decode($val).'<br>';
+  }
+}
+?>

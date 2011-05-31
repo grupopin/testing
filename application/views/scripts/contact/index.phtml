@@ -1,0 +1,172 @@
+<?php
+     $this->jQuery()->setLocalPath("/js/jquery/jquery-1.3.2.min.js");
+    $this->jQuery()->addJavascriptFile("/js/jquery1.7/js/jquery-ui-1.7.2.custom.light.min.js");
+    //$this->jQuery()->addJavascriptFile("/js/jquery1.7/ui/ui.autocomplete.js");
+    //$this->jQuery()->addStylesheet("/css/jquery/autocomplete.css");
+
+    //autocomplete version 1.1Pre
+    //$this->jQuery()->addJavascriptFile("/js/jquery1.7/ui/jquery.autocomplete.js");
+    //$this->jQuery()->addStylesheet("/css/jquery/jquery.autocomplete.css");
+
+    //autocomplete version 1.1 http://bassistance.de/jquery-plugins/jquery-plugin-autocomplete/
+    $this->jQuery()->addJavascriptFile("/js/jquery.plugins/jquery-autocomplete/jquery.autocomplete.js");
+    $this->jQuery()->addStylesheet("/js/jquery.plugins/jquery-autocomplete/jquery.autocomplete.css");
+    //$this->jQuery()->addJavascriptFile("/js/jquery.plugins/jquery-autocomplete/demo/localdata.js");
+
+
+?>
+<script>
+<?php 
+$this->jQuery()->onLoadCaptureStart();
+?>
+var country=[ "Afghanistan","Albania","Algeria","American Samoa","Andorra", "Angola", "Anguilla", "Antarctica", "Antigua And Barbuda",           
+"Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium",                       
+"Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia And Herzegowina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory",
+"Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic",      
+"Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Cook Islands", "Costa Rica", "Cote D'Ivoire",                 
+"Croatia (Local Name: Hrvatska)", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor",                    
+"Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands",                 
+"Fiji", "Finland", "France", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana",                         
+"Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard And Mc Donald Islands",   
+"Holy See (Vatican City State)", "Honduras", "Hong Kong", "Hungary", "Icel And", "India", "Indonesia", "Iran (Islamic Republic Of)", "Iraq", "Ireland", "Israel",                        
+"Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea", "Korea", "Kuwait", "Kyrgyzstan", "Lao People'S Dem Republic", "Latvia",                        
+"Lebanon", "Lesotho", "Liberia", "Libyan Arab Jamahiriya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi",                        
+"Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia",                    
+"Moldova", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Ant Illes",         
+"New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway",                        
+"Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico",                   
+"Qatar", "Reunion", "Romania", "Russian Federation", "Rwanda", "Saint K Itts And Nevis", "Saint Lucia", "Saint Vincent", "Samoa",                         
+"San Marino", "Sao Tome And Principe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovakia (Slovak Republic)", "Slovenia",                      
+"Solomon Islands", "Somalia", "South Africa", "South Georgia", "Spain", "Sri Lanka", "St. Helena", "St. Pierre And Miquelon", "Sudan",                         
+"Suriname", "Svalbard", "Sw Aziland", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo",                          
+"Tokelau", "Tonga", "Trinidad And Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks And Caicos Islands", "Tuvalu", "Uganda", "Ukraine",                       
+"United Arab Emirates",   "United Kingdom", "United States", "United States Minor Is.", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Viet Nam",                      
+"Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis And Futuna Islands", "Western Sahara", "Yemen", "Yugoslavia", "Zaire", "Zambia", "Zimbabwe"
+];
+
+$('#contactInput3').autocomplete(country,{
+	minChars: 0,
+	width: 310,
+	matchContains: "word",
+	scrollHeight:300,
+	max: 200,
+	autoFill: false
+
+});
+<?php 
+$this->jQuery()->onLoadCaptureEnd();
+?>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+function validate_userForm(frm) {
+  var value = '';
+  var errFlag = new Array();
+  var _qfGroups = {};
+  _qfMsg = '';
+
+  value = frm.elements['name'].value;
+  if (value == '' && !errFlag['name']) {
+    errFlag['name'] = true;
+    _qfMsg = _qfMsg + '<?=$this->l('Please enter the name')?>\n';
+  }
+
+  value = frm.elements['surname'].value;
+  if (value == '' && !errFlag['surname']) {
+    errFlag['surname'] = true;
+    _qfMsg = _qfMsg + '<?=$this->l('Please enter the surname')?>\n';
+  }
+ 
+
+  value = frm.elements['email'].value;
+  var regex = /^((\"[^\"\f\n\r\t\v\b]+\")|([\w\!\#\$\%\&'\*\+\-\~\/\^\`\|\{\}]+(\.[\w\!\#\$\%\&'\*\+\-\~\/\^\`\|\{\}]+)*))@((\[(((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9])))\])|(((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9])))|((([A-Za-z0-9\-])+\.)+[A-Za-z\-]+))$/;
+  if (value != '' && !regex.test(value) && !errFlag['email']) {
+    errFlag['email'] = true;
+    _qfMsg = _qfMsg + '<?=$this->l('Please enter a correct email')?>\n';
+  }
+
+  value = frm.elements['email'].value;
+  if (value == '' && !errFlag['email']) {
+    errFlag['email'] = true;
+    _qfMsg = _qfMsg + '<?=$this->l('Please enter an email address')?>\n';
+  }
+
+  value = frm.elements['message'].value;
+  if (value == '' && !errFlag['message']) {
+    errFlag['message'] = true;
+    _qfMsg = _qfMsg + '<?=$this->l('Please enter a message')?>';
+  }
+
+
+  if (_qfMsg != '') {
+    _qfMsg = 'Please correct the form:\n\n' + _qfMsg;
+    alert(_qfMsg);
+    return false;
+  }
+  return true;
+}
+//]]>
+</script>
+<tr><!--BREADCRUMB PATH-->
+		<td class="" style="height: 136px; background: url(&quot;/images/advanced_search/top_4.jpg&quot;) no-repeat scroll left top transparent;">
+			<div id="bcPath">
+				<a href="/" class="l4 b">Home Page</a> &gt;
+				<span class="l4on">Contact Us</span>
+			</div>
+		</td>
+		<td>
+
+			<div class="bcPath3" title="" style="background: url(&quot;/images/advanced_search/top_5.jpg&quot;) no-repeat scroll left top transparent;">&nbsp;</div>
+		</td>
+</tr>
+<tr>
+<td class="" colspan="2"><!--CONTACT FORM-->
+			<div id="inContact" title="" style="background:url(/images/advanced_search/top_6.jpg) left top no-repeat;">
+				<form action="" name="contactForm" method="post" id="contactForm" title="" onsubmit="try { var myValidator = validate_userForm; } catch(e) { return true; } return myValidator(this);">
+					<table class="contactTab" title="">
+						<tr>
+							<td class="ct1"><?=$this->l('Name')?>:</td>
+							<td>
+								<?=$this->formText('name',null,array("id"=>"contactInput1",'class'=>'input2','title'=>'') )?>
+							</td>
+							<td class="ct3" title=""><?=$this->l('Surname')?>:</td>
+							<td class="ct2">
+								<?=$this->formText('surname',null,array("id"=>"contactInput2",'class'=>'input2','title'=>'') )?>
+							</td>
+						</tr>
+						<tr>
+							<td class="ct1"><?=$this->l('Country')?>:</td>
+							<td class="ct2">
+								<?=$this->formText('country',null,array("id"=>"contactInput3",'class'=>'input2','title'=>'') )?>
+							</td>
+
+							<td class="ct3" title=""><?=$this->l('Email')?>:</td>
+							<td class="ct2">
+								<?=$this->formText('email',null,array('id'=>'contactInput4','class'=>'input2','title'=>''))?>
+							</td>
+						</tr>
+						<tr>
+							<td class="ct1"><?=$this->l('Message')?>:</td>
+							<td colspan="3">
+								<?=$this->formTextarea("message",null,array('class'=>'input3'))?>
+								<div id="conSubmit"><?=$this->formSubmit('submit',$this->l('Submit'),array('class'=>'l6','style'=>'background-color:transparent;border:0px;'))?></div>
+							</td>
+						</tr>
+					</table>
+
+				</form>
+			</div>
+			<div id="inContact2" title="">
+				<br/><span class="b">THE HUNDERTWASSER <br/>NON PROFIT FOUNDATION</span>
+				<br/><br/>Address:
+				<br/>P.O. Box 28
+				<br/>1182 Vienna 
+				<br/>Austria / Europe
+				<br/><br/>Contact: 
+				<br/>T +43 (0)1 470 12 12
+				<br/>F +43 (0)1 470 90 90
+				<br/>E <script>document.write('<a href="mailto:o'+'ffi'+'ce@ha'+'rel.a'+'t"'+ 'class="l6">office [at] harel.at</a>');</script>
+
+			</div>
+		</td>
+</tr>

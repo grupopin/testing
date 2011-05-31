@@ -1,0 +1,137 @@
+<!--Hundertwasser-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<?php echo $this->HeadMeta(); ?>
+<?php echo $this->headTitle(); ?>
+<?php echo $this->headLink(); ?>
+<?php print $this->headScript();?>
+<?php print $this->headStyle();?>
+<?php print $this->jQuery(); ?>
+<meta name="description" content="Hudertwasser skins paintings architecture video applied art graphics" />
+<link rel="shortcut icon" href="/images/favicon.ico" />
+</head>
+<body>
+<!--<div style="width: 800px">
+    		Recent pages: 
+    		<?php 
+        		$sess = Zend_Registry::get ( 'nsHw' );
+        		$history = $sess->last_urls;
+        		foreach ($history as $url) {?>
+        		  &gt;  <a href="<?php echo $url  ?>"><?php echo convert_url($url) ?></a>
+        		<?php } ?>
+</div>
+--><table class="tab1">
+
+	<tr><!--MENU-->
+		<td class="inT1"><a href="/">
+
+<img src="/images/advanced_search/top_1.jpg" alt="Go To Hundertwasser Home Page" /></a></td>
+<td class="inT2" style="background:url(/images/advanced_search/top_3.jpg) left 2px no-repeat;" >
+
+<div id="nmn">
+
+<a href="/" style=""><img src="/images/advanced_search/top_2.gif" alt="Go To Hundertwasser Home Page" id="logo2" title=""  /></a>
+<div class="" title=""  id="btn1" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image1','','/images/advanced_search/btn_1_on.gif',1)">
+<a href="/"><img  src="/images/advanced_search/btn_1_out.gif" alt="Home Page" name="Image1" id="Image1" /></a></div>
+
+<div class="" title=""  id="btn2" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image2','','/images/advanced_search/btn_2_on.png',1)">
+<a href="/oeuvre"><img  src="/images/advanced_search/btn_2_out.png" alt="Skins" name="Image2" id="Image2" /></a></div>
+
+<div class="" title=""  id="btn3" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image3','','/images/advanced_search/btn_3_on.png',1)">
+<a href="/skin"><img  src="/images/advanced_search/btn_3_out.png" alt="Shop" name="Image3" id="Image3" /></a></div>
+
+<div class="" title=""  id="btn4" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image4','','/images/advanced_search/btn_4_on.png',1)">
+<a href="/documentation"><img  src="/images/advanced_search/btn_4_out.png" alt="Contact" name="Image4" id="Image4" /></a></div>
+
+<div class="" title=""  id="btn5" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image5','','/images/advanced_search/btn_5_on.png',1)">
+<a href="#"><img  src="/images/advanced_search/btn_5_out.png" alt="Advanced Search" name="Image5" id="Image5" /></a></div>
+
+<div class="" title=""  id="btn6" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image6','','/images/advanced_search/btn_6_on.png',1)">
+<a href="/contact"><img  src="/images/advanced_search/btn_6_out.png" alt="Advanced Search" name="Image6" id="Image6" /></a></div>
+
+<div class="" title=""  id="btn7" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image7','','/images/advanced_search/btn_7_on.png',1)">
+<a href="/search"><img  src="/images/advanced_search/btn_7_out.png" alt="Advanced Search" name="Image7" id="Image7" /></a></div>
+
+</div>
+
+
+<!--<a href="/"><img src="/images/advanced_search/top_2.gif" alt="Go To Hundertwasser Home Page" id="logo2" title=''  /></a>-->
+<!--<div class="" id="btn1" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image1','','/images/advanced_search/btn_1_on.gif',1)"><a href="/">-->
+<!--<img  src="/images/advanced_search/btn_1_out.gif" alt="Home Page" name="Image1" id="Image1" /></a></div>-->
+<!--<div class="" id="btn2" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image2','','/images/advanced_search/btn_2_on.png',1)">-->
+<!--<a href="/skin"><img  src="/images/advanced_search/btn_2_out.gif" alt="Skins" name="Image2" id="Image2" /></a></div>-->
+<!--<div class="" id="btn3" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image3','','/images/advanced_search/btn_3_on.png',1)">-->
+<!--<a href="#.php"><img  src="/images/advanced_search/btn_3_out.gif" alt="Shop" name="Image3" id="Image3" /></a></div>-->
+<!--<div class="" id="btn4" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image4','','/images/advanced_search/btn_4_on.png',1)">-->
+<!--<a href="/contact"><img  src="/images/advanced_search/btn_4_out.gif" alt="Contact" name="Image4" id="Image4" /></a></div>-->
+<!--<div class="" id="btn5" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image5','','/images/advanced_search/btn_5_on.png',1)">-->
+<!--<a href="/search"><img  src="/images/advanced_search/btn_5_out.gif" alt="Advanced Search" name="Image5" id="Image5" /></a></div>-->
+
+</td>
+</tr>
+
+	<!--
+	<tr>BREADCRUMB PATH
+		<td class="" style="height:136px;background:url(/images/advanced_search/top_4.jpg) left top no-repeat;" >
+			<div id="bcPath">
+			<?php print $this->path($this->pathArr); ?> 
+			</div>
+		</td>
+		<td style="background:url(/images/advanced_search/top_5.jpg) left top no-repeat; " >
+		  <?php print $this->layout()->right_column; ?>
+
+		</td>
+	</tr>-->
+	
+
+     <?php print $this->layout()->content; ?>
+	
+	<tr>
+
+		<td colspan="2" class="footer"><!--   FOOTER   -->
+			<?php print $this->partial('_fe_footer.phtml'); ?>	</td>
+	</tr>
+
+</table>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20323156-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+<?php function convert_url($url) {
+  
+  if ($url=='/') return "Home page";
+  if ($url=='/oeuvre') return "The Oeuvre";
+  if ($url=='/documentation') return "Documentation";
+  if ($url=='/skin') return "The 5 Skins";
+  if ($url=='/item/object-list/?type[]=jw') return "Early works";
+  if ($url=='/item/object-list/?type[]=paint') return "Paintings";
+  if ($url=='/item/object-list/?type[]=hwg') return "Original Graphic";
+  if ($url=='/item/object-list/?type[]=apa') return "Applied Art";
+  if (strpos($url, 'documentation/filter')) return "Documentation Search";
+  if (strpos($url, 'documentation/search')) return "Documentation Resultset";
+  
+  
+  
+  
+  
+  
+  return $url;
+}
+
+?>

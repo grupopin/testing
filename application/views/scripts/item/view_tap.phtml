@@ -1,0 +1,126 @@
+<?php
+$title=$this->item['title'.$this->langArr['lang_word']];
+if (!$title){
+  $title=$this->item['title'];
+}
+if($workNumStr=$this->item['workNumber']){
+  $workNumStr.="&nbsp;&nbsp;&nbsp;";
+}
+?>
+
+<!--<table>
+<tr>
+<td>Tap No</td>
+<td><?=$this->item['tap']?></td>
+</tr>
+<tr>
+<td><h2><?=$workNumStr?></h2></td>
+<td><h2><?=$title?></h2></td>
+</tr>
+</table>
+<br/>-->
+
+
+TAP <?=$this->item['tap']?>
+<br/><h2><?=$workNumStr.html_entity_decode($title, ENT_QUOTES, "utf-8")?></h2>
+<?php
+print showTitle($this->item['titleEnglish'],$title);
+print showTitle($this->item['titleGerman'],$title);
+print showTitle($this->item['titleFrench'],$title);
+print showTitle($this->item['titleItalian'],$title);
+print showTitle($this->item['titleSpanish'],$title);
+print showTitle($this->item['titleJapanese'],$title);
+?>
+<br/>
+<div class="itemView2">
+<?=showProp($this->item['date'])?>
+<? //=$this->item['finishedPlace'].'&nbsp;'.$this->item['year']?>
+<?=showProp($this->item['wovenBy'],$this->l('Woven by'))?>
+
+<? if ($this->item['heightMm']) { echo $this->item['heightMm']. ' mm  x '. $this->item['widthMm']. ' mm';}?> </div>
+
+<div class="text1">
+	<?php
+	showText($this->item['hundertwasser_comment_'.$this->langArr['lang_alt_short']],
+          	$this->item['hundertwasser_comment_ge'],
+          	$this->langArr['lang_alt_short'],
+          	          'ge',
+          	$this->l('Hundertwasser comment about the work'),'font-size:16px;');
+
+	showText($this->item['information_'.$this->langArr['lang_alt_short']],
+        	$this->item['information_ge'],
+        	$this->langArr['lang_alt_short'],
+        	          'ge',
+        	$this->l(''),'font-size:16px;');
+
+?>
+  <?php $this->showList($this->item['oneManExhibitions'],$this->l('One-man exhibitions'))?>
+
+	<?php $this->showList($this->item['groupExhibitions'],$this->l('Group Exhibitions'))?>
+
+	<?php $this->showList($this->item['literatureMonographs'],$this->l('Literature'),$this->l('Monographs'))?>
+
+	<?php $this->showList($this->item['literatureExhibitionCatalogues'],$this->l('Literature'),$this->l('Exhibition Catalogues'))?>
+
+	<?php $this->showList($this->item['reproductionsArtPrints'],$this->l('Reproductions Art prints'))?>
+
+  <?php $this->showList($this->item['literatureVarious'],$this->l('Literature'),$this->l('Various'))?>
+
+  <?php $this->showList($this->item['literatureMagazinesPeriodicals'],$this->l('Literature'),$this->l('Magazines/Periodicals'))?>
+</div>
+
+<?php
+
+	function showTitle($titleLang,$title){
+	  if ($titleLang && $titleLang!=$title){
+	   ?>
+	  <h2><?=html_entity_decode($titleLang, ENT_QUOTES, "utf-8")?></h2>
+	   <?php
+	  }
+	}
+function showProp($val,$lab=''){
+  if ($val){
+    if ($lab){
+      $lab1=$lab.': ';
+    }
+    //return $lab1.$val.'<br>';
+    return $lab1.html_entity_decode($val, ENT_QUOTES, "utf-8").'<br>';
+  }
+}
+
+function showText($textLang, $textDef, $curLang, $defLanguage,$header){
+  $res=$textLang;
+	if (!$res && $curLang!=$defLanguage){
+	  $res=$textDef;
+	}
+	if ($res){
+	?>
+	<?php if ($header) {?><br><span class="t1"><?=$header?></span>:<?php }?>
+	<br><?php echo html_entity_decode($res, ENT_QUOTES, "utf-8") ; ?><br/>
+<?php
+	 }
+
+}
+
+
+
+function showList($val,$header1,$header2=''){
+  if (isset($val)){
+    ?>
+<br>
+<span class="t1"><?=$header1?></span>:<? if ($header2) print $header2;?>
+<ul class="ul1">
+<?php
+$arr=explode("<br>",$val);
+foreach($arr as $rn=>$row){
+  ?>
+	<li><?=$row?></li>
+	<?php
+}
+?>
+</ul>
+<?php
+  }
+}
+
+?>

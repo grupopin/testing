@@ -1,0 +1,22 @@
+<?php
+if ($this->class_id){
+  $CatItem2_color="CatItem2_color".$this->class_id;
+  $CatItem3_color="CatItem3_color".$this->class_id;
+  $CatItem4_color="CatItem4_color".$this->class_id;
+}else{
+  $CatItem2_color="";
+  $CatItem3_color="";
+  $CatItem4_color="";
+}
+
+?>
+
+<div class="CatItem1">
+<div class="CatItem2 <?=$CatItem2_color?>"></div>
+<div class="CatItem3 CI3noPad CatItem3b <?=$CatItem3_color?>" title="<?php print $this->maintitle_name;?>">
+<div><a href="/highlights/<?php print $this->mt?>" class="l12"><span><?php print $this->maintitle_name;?></span></a> <br />
+<?php print $this->maintitle_name;?> <br />
+<a href="/highlights/<?php print $this->mt?>" class="l6b">more Info</a></div>
+</div>
+<div class="CatItem4 <?=$CatItem4_color?>"></div>
+</div>

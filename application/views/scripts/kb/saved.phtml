@@ -1,0 +1,18 @@
+<script>
+<?php
+$this->jQuery()->onLoadCaptureStart();
+?>
+jQuery("button#close-over").click(parent.GB_hide);
+jQuery("button#close-edit").click(function(){
+	location.href="/kb/edit?type=<?=$this->type?>&id=<?=$this->id?>";
+});
+<?php
+$this->jQuery()->onLoadCaptureEnd();
+?>
+</script>
+<div align="center" style="margin-top:20px;text-align:center;">
+<?php print $this->l('Object data updated successfully')?><br>
+<button id='close-over'><?=$this->l('Close')?></button>
+<button id='close-edit'><?=$this->l('Edit')?></button>
+</div>
+<?php

@@ -1,0 +1,663 @@
+<script type="text/javascript">
+<?php
+$this->jQuery()->onLoadCaptureStart();
+?>
+//var gridHidden=true;
+
+var selectedRow='';
+
+var curSelectedItem=0;
+
+var actionsArr={
+       2:{'action':'itemview','title' : '<?=$this->l('View Item')?>',modal:true},
+  };
+
+jQuery("#list1").jqGrid({
+
+  //hide grid by default
+   // hiddengrid:true,
+    // the url parameter tells from where to get the data from server
+    // adding ?nd='+new Date().getTime() prevent IE caching
+    url:"/link/jq-list/type/skin?&nd="+new Date().getTime(),
+    // datatype parameter defines the format of data returned from the server
+    // in this case we use a JSON data
+    datatype: "json",
+    multiselect: false,
+    // colNames parameter is a array in which we describe the names
+    // in the columns. This is the text that apper in the head of the grid.
+    colNames:['<?=$this->l('id')?>','<?=$this->l('Name/Title')?>',''],
+    // colModel array describes the model of the column.
+    // name is the name of the column,
+    // index is the name passed to the server to sort data
+    // note that we can pass here nubers too.
+    // width is the width of the column
+    // align is the align of the column (default is left)
+    // sortable defines if this column can be sorted (default true)
+    colModel:[
+        {name:'id',index:'id', width:50,sortable:false},
+        {name:'name',index:'name', align: '<?=$this->sess('langObj')->align_left?>', width:250,editable:false},
+        {name:'view',align: '<?=$this->sess('langObj')->align_left?>',width:50},
+    ],
+    // pager parameter define that we want to use a pager bar
+    // in this case this must be a valid html element.
+    // note that the pager can have a position where you want
+    pager: jQuery('#pager'),
+    // rowNum parameter describes how many records we want to
+    // view in the grid. We use this in example.php to return
+    // the needed data.
+    rowNum:50,
+    // rowList parameter construct a select box element in the pager
+    //in wich we can change the number of the visible rows
+    rowList:[10,20,30,40,50,100],
+    // path to mage location needed for the grid
+    imgpath: '/js/jqgrid/themes/sand/images',
+    // sortname sets the initial sorting column. Can be a name or number.
+    // this parameter is added to the url
+    sortname: 'id',
+    //viewrecords defines the view the total records from the query in the pager
+    //bar. The related tag is: records in xml or json definitions.
+    viewrecords: true,
+    //sets the sorting order. Default is asc. This parameter is added to the url
+    sortorder: "desc",
+    caption: "<?=$this->l('List of Items')?>",
+    //height:'100%',
+    height:550,
+    width:350,
+    shrinkToFit:true,
+    subGrid : true,
+    subGridUrl: '/link/jq-item/type/skin/',
+      subGridModel: [{ name  : ['Content'],
+                      width : [280] }
+      ],
+
+
+    onCellSelect: function(rowid, iCol, cellcontent){
+     //alert(rowid+iCol);
+     // val1=jQuery('#list_hist').getGridParam['selrow'];
+     if (rowid){
+      jQuery("#sel_item").text(rowid);
+      curSelectedItem=rowid;
+      jQuery('#list2').trigger('reloadGrid');
+      jQuery('#list3').trigger('reloadGrid');
+     }
+     if (actionsArr[iCol] && cellcontent.length>1){
+     var actVal=actionsArr[iCol]['action'];
+     var titleVal=actionsArr[iCol]['title'];
+     if (actVal){
+       var href="/link/"+actVal+"/?width=608&height=80%&jqmRefresh=0&id="+rowid;
+       if (actionsArr[iCol]['modal']){
+         var linkId="#grid_link";
+       }else{
+         var linkId="#regular_link";
+
+       }
+       $(linkId).html("").attr('href',href);
+       $(linkId).html("").attr('title',titleVal);
+       //alert($(linkId).html("").attr('href'));
+       $(linkId).trigger('click');
+     }
+     }
+    },
+//    subGridRowExpanded: function(id,rowid){
+//        //id in format list1_23
+//        //rowid is just int - 23
+//
+//    	  //alert(id+'-'+rowid);
+//    	  //alert(jQuery("#textarea_"+rowid).html("").attr("id"));
+//     	  var sBasePath = "/js/fckeditor/" ;
+//        var oFCKeditor = new FCKeditor( 'textarea_'+rowid ) ;
+//        oFCKeditor.BasePath = sBasePath ;
+//        oFCKeditor.ToolbarSet = "Basic";
+//        oFCKeditor.ReplaceTextarea() ;
+
+//    },
+    beforeRequest: function(){
+        var filterValue=jQuery("#filter").val();
+        var typeValue=jQuery("#item_type").val();
+        //if (filterValue.length>1 || catIdValue>0){
+        //alert(1);
+         jQuery('#list1').setGridParam({
+             url:"/link/jq-list/type/"+typeValue+"/?quest_filter="+filterValue+"&nd="+new Date().getTime(),
+        	   subGridUrl: '/link/jq-item/type/'+typeValue+'/?nd='+new Date().getTime()}
+         );
+        //}
+        //alert(jQuery('#list1').getGridParam('url'));
+      }
+
+
+}).navGrid('#pager',{add:false,edit:false,del:true,search:false},{},{},{url:"/test/histdel/",modal:true});
+
+jQuery("#submit_filter").click(
+		 function(){
+
+	   //alert(catIdValue);
+	   //if (filterValue.length>1 || catIdValue>0){
+		  jQuery('#list1').trigger('reloadGrid');
+		  //}else{
+		  // alert('<?//=$this->l('Select category or enter keywords')?>');
+		  //}
+		   return false;
+		 }
+		);
+
+var data = "Hundertwasser Works Graphics Audio Video Text".split(" ");
+$("#filter").autocomplete(data);
+jQuery("#item_type").change(function(){
+	curSelectedItem=0;
+	jQuery("#sel_item").text(0);
+ //alert(jQuery(this).val());
+}
+);
+
+
+jQuery("#list2").jqGrid({
+
+	  //hide grid by default
+	   // hiddengrid:true,
+	    // the url parameter tells from where to get the data from server
+	    // adding ?nd='+new Date().getTime() prevent IE caching
+	    url:"/link/jq-list/type/skin?&nd="+new Date().getTime(),
+	    // datatype parameter defines the format of data returned from the server
+	    // in this case we use a JSON data
+	    datatype: "json",
+	    multiselect: false,
+	    // colNames parameter is a array in which we describe the names
+	    // in the columns. This is the text that apper in the head of the grid.
+	    colNames:['<?=$this->l('id')?>','<?=$this->l('Name/Title')?>',''],
+	    // colModel array describes the model of the column.
+	    // name is the name of the column,
+	    // index is the name passed to the server to sort data
+	    // note that we can pass here nubers too.
+	    // width is the width of the column
+	    // align is the align of the column (default is left)
+	    // sortable defines if this column can be sorted (default true)
+	    colModel:[
+	        {name:'id',index:'id', width:50,sortable:false},
+	        {name:'name',index:'name', align: '<?=$this->sess('langObj')->align_left?>', width:250,editable:false},
+	        {name:'view',align: '<?=$this->sess('langObj')->align_left?>',width:50},
+	    ],
+	    // pager parameter define that we want to use a pager bar
+	    // in this case this must be a valid html element.
+	    // note that the pager can have a position where you want
+	    pager: jQuery('#pager2'),
+	    // rowNum parameter describes how many records we want to
+	    // view in the grid. We use this in example.php to return
+	    // the needed data.
+	    rowNum:10,
+	    // rowList parameter construct a select box element in the pager
+	    //in wich we can change the number of the visible rows
+	    rowList:[10,20,30,40,50,100],
+	    // path to mage location needed for the grid
+	    imgpath: '/js/jqgrid/themes/sand/images',
+	    // sortname sets the initial sorting column. Can be a name or number.
+	    // this parameter is added to the url
+	    sortname: 'id',
+	    //viewrecords defines the view the total records from the query in the pager
+	    //bar. The related tag is: records in xml or json definitions.
+	    viewrecords: true,
+	    //sets the sorting order. Default is asc. This parameter is added to the url
+	    sortorder: "desc",
+	    caption: "<?=$this->l('List of Items')?>",
+	    //height:'100%',
+	    height:200,
+	    width:350,
+	    shrinkToFit:true,
+
+	    onCellSelect: function(rowid, iCol, cellcontent){
+	     //alert(rowid+iCol);
+	     // val1=jQuery('#list_hist').getGridParam['selrow'];
+	     if (actionsArr[iCol] && cellcontent.length>1){
+	     var actVal=actionsArr[iCol]['action'];
+	     var titleVal=actionsArr[iCol]['title'];
+	     if (actVal){
+	       var href="/link/"+actVal+"/?width=608&height=80%&jqmRefresh=0&id="+rowid;
+	       if (actionsArr[iCol]['modal']){
+	         var linkId="#grid_link";
+	       }else{
+	         var linkId="#regular_link";
+
+	       }
+	       $(linkId).html("").attr('href',href);
+	       $(linkId).html("").attr('title',titleVal);
+	       //alert($(linkId).html("").attr('href'));
+	       $(linkId).trigger('click');
+	     }
+	     }
+	    },
+
+	    beforeRequest: function(){
+	        var filterValue=jQuery("#filter2").val();
+	        var typeValue2=jQuery("#item_type2").val();
+	        var typeValue=jQuery("#item_type").val();
+	        //if (filterValue.length>1 || catIdValue>0){
+	         jQuery('#list2').setGridParam({url:"/link/jq-list/type/"+typeValue2+"/?show_selected=0&link_item="+typeValue+"&link_item_id="+curSelectedItem+"&quest_filter="+filterValue+"&nd="+new Date().getTime()});
+	        //}
+	        //alert(jQuery('#list2').getGridParam('url'));
+	      }
+
+
+	}).navGrid('#pager2',{add:false,edit:false,del:true,search:false},
+			  {},
+			  {},
+			  {url:"/link/jq-del/",
+				  modal:true,mtype:"GET",
+				  onclickSubmit: function(params){
+				   var row = jQuery("#list1").getGridParam('selrow');
+				   return {
+					   link_item_id: row,
+					   link_item: jQuery("#item_type").val(),
+					   type: jQuery("#item_type2").val()
+
+					   }
+				  }
+				  //delData:{link_item:jQuery("#item_type").val(),link_item_id: jQuery("#sel_item3").val(), type:jQuery("#item_type2").val()}
+			  }
+			  );
+
+	jQuery("#submit_filter2").click(
+	     function(){
+
+	     //alert(catIdValue);
+	     //if (filterValue.length>1 || catIdValue>0){
+	      jQuery('#list2').trigger('reloadGrid');
+	      //}else{
+	      // alert('<?//=$this->l('Select category or enter keywords')?>');
+	      //}
+	       return false;
+	     }
+	    );
+
+	jQuery("#list3").jqGrid({
+
+	    //hide grid by default
+	     // hiddengrid:true,
+	      // the url parameter tells from where to get the data from server
+	      // adding ?nd='+new Date().getTime() prevent IE caching
+	      url:"/link/jq-list/type/skin?&nd="+new Date().getTime(),
+	      // datatype parameter defines the format of data returned from the server
+	      // in this case we use a JSON data
+	      datatype: "json",
+	      multiselect: false,
+	      // colNames parameter is a array in which we describe the names
+	      // in the columns. This is the text that apper in the head of the grid.
+	      colNames:['<?=$this->l('id')?>','<?=$this->l('Name/Title')?>',''],
+	      // colModel array describes the model of the column.
+	      // name is the name of the column,
+	      // index is the name passed to the server to sort data
+	      // note that we can pass here nubers too.
+	      // width is the width of the column
+	      // align is the align of the column (default is left)
+	      // sortable defines if this column can be sorted (default true)
+	      colModel:[
+	          {name:'id',index:'id', width:50,sortable:false},
+	          {name:'name',index:'name', align: '<?=$this->sess('langObj')->align_left?>', width:250,editable:false},
+	          {name:'view',align: '<?=$this->sess('langObj')->align_left?>',width:50},
+	      ],
+	      // pager parameter define that we want to use a pager bar
+	      // in this case this must be a valid html element.
+	      // note that the pager can have a position where you want
+	      pager: jQuery('#pager3'),
+	      // rowNum parameter describes how many records we want to
+	      // view in the grid. We use this in example.php to return
+	      // the needed data.
+	      rowNum:10,
+	      // rowList parameter construct a select box element in the pager
+	      //in wich we can change the number of the visible rows
+	      rowList:[10,20,30,40,50,100],
+	      // path to mage location needed for the grid
+	      imgpath: '/js/jqgrid/themes/sand/images',
+	      // sortname sets the initial sorting column. Can be a name or number.
+	      // this parameter is added to the url
+	      sortname: 'id',
+	      //viewrecords defines the view the total records from the query in the pager
+	      //bar. The related tag is: records in xml or json definitions.
+	      viewrecords: true,
+	      //sets the sorting order. Default is asc. This parameter is added to the url
+	      sortorder: "desc",
+	      caption: "<?=$this->l('List of Items')?>",
+	      //height:'100%',
+	      height:230,
+	      width:350,
+	      shrinkToFit:true,
+
+	      ondblClickRow: function(rowid,stats){
+	    	  //alert(rowid+','+stats);
+	    	  if (curSelectedItem>0){
+	        var typeValue1=jQuery("#item_type3").val();
+	        var linkItem1=jQuery("#item_type").val();
+	        url="/link/jq-assert?id="+rowid+"&type="+linkItem1+"&link_item="+typeValue1+"&link_item_id="+curSelectedItem;
+	    	  jQuery.get(url, function (data){
+		    	  //alert("asserted: "+data);
+		    	  jQuery('#list2').trigger('reloadGrid');
+		    	  jQuery('#list3').trigger('reloadGrid');
+
+		    	  });
+	    	  }
+        },
+
+
+	      onCellSelect: function(rowid, iCol, cellcontent){
+	       //alert(rowid+iCol);
+	       // val1=jQuery('#list_hist').getGridParam['selrow'];
+	       if (actionsArr[iCol] && cellcontent.length>1){
+	       var actVal=actionsArr[iCol]['action'];
+	       var titleVal=actionsArr[iCol]['title'];
+	       if (actVal){
+	         var href="/link/"+actVal+"/?width=608&height=80%&jqmRefresh=0&id="+rowid;
+	         if (actionsArr[iCol]['modal']){
+	           var linkId="#grid_link";
+	         }else{
+	           var linkId="#regular_link";
+
+	         }
+	         $(linkId).html("").attr('href',href);
+	         $(linkId).html("").attr('title',titleVal);
+	         //alert($(linkId).html("").attr('href'));
+	         $(linkId).trigger('click');
+	       }
+	       }
+	      },
+
+	      beforeRequest: function(){
+	          var filterValue3=jQuery("#filter3").val();
+	          var typeValue3=jQuery("#item_type3").val();
+	          var typeValue=jQuery("#item_type").val();
+	          //if (filterValue.length>1 || catIdValue>0){
+	           //jQuery('#list3').setGridParam({url:"/link/jq-list/type/"+typeValue3+"?show_selected=1&quest_filter="+filterValue3});
+
+	           jQuery('#list3').setGridParam({url:"/link/jq-list/type/"+typeValue3+"?show_selected=1&link_item="+typeValue+"&link_item_id="+curSelectedItem+"&quest_filter="+filterValue3+"&nd="+new Date().getTime()});
+
+	          //}
+	          //alert(jQuery('#list3').getGridParam('url'));
+	        }
+
+
+	  }).navGrid('#pager3',{add:false,edit:false,del:true,search:false},{},{},{url:"/link/jq-del/",modal:true});
+
+	  jQuery("#submit_filter3").click(
+	       function(){
+
+	       //alert(catIdValue);
+	       //if (filterValue.length>1 || catIdValue>0){
+	        jQuery('#list3').trigger('reloadGrid');
+	        //}else{
+	        // alert('<?//=$this->l('Select category or enter keywords')?>');
+	        //}
+	         return false;
+	       }
+	      );
+
+
+	  jQuery("#list_hl").jqGrid({
+
+	      //hide grid by default
+	       // hiddengrid:true,
+	        // the url parameter tells from where to get the data from server
+	        // adding ?nd='+new Date().getTime() prevent IE caching
+	        url:"/link/jq-list-hl/type/skin?&nd="+new Date().getTime(),
+	        // datatype parameter defines the format of data returned from the server
+	        // in this case we use a JSON data
+	        datatype: "json",
+	        multiselect: false,
+	        // colNames parameter is a array in which we describe the names
+	        // in the columns. This is the text that apper in the head of the grid.
+	        colNames:['<?=$this->l('id')?>','<?=$this->l('Name/Title')?>',''],
+	        // colModel array describes the model of the column.
+	        // name is the name of the column,
+	        // index is the name passed to the server to sort data
+	        // note that we can pass here nubers too.
+	        // width is the width of the column
+	        // align is the align of the column (default is left)
+	        // sortable defines if this column can be sorted (default true)
+	        colModel:[
+	            {name:'id',index:'id', width:50,sortable:false},
+	            {name:'name',index:'name', align: '<?=$this->sess('langObj')->align_left?>', width:250,editable:false},
+	            {name:'view',align: '<?=$this->sess('langObj')->align_left?>',width:50},
+	        ],
+	        // pager parameter define that we want to use a pager bar
+	        // in this case this must be a valid html element.
+	        // note that the pager can have a position where you want
+	        pager: jQuery('#pager_hl'),
+	        // rowNum parameter describes how many records we want to
+	        // view in the grid. We use this in example.php to return
+	        // the needed data.
+	        rowNum:10,
+	        // rowList parameter construct a select box element in the pager
+	        //in wich we can change the number of the visible rows
+	        rowList:[10,20,30,40,50,100],
+	        // path to mage location needed for the grid
+	        imgpath: '/js/jqgrid/themes/sand/images',
+	        // sortname sets the initial sorting column. Can be a name or number.
+	        // this parameter is added to the url
+	        sortname: 'id',
+	        //viewrecords defines the view the total records from the query in the pager
+	        //bar. The related tag is: records in xml or json definitions.
+	        viewrecords: true,
+	        //sets the sorting order. Default is asc. This parameter is added to the url
+	        sortorder: "desc",
+	        caption: "<?=$this->l('List of Items')?>",
+	        //height:'100%',
+	        height:230,
+	        width:350,
+	        shrinkToFit:true,
+
+	        ondblClickRow: function(rowid,stats){
+	          //alert(rowid+','+stats);
+	          if (curSelectedItem>0){
+	          var typeValue1=jQuery("#item_type3").val();
+	          var linkItem1=jQuery("#item_type").val();
+	          url="/link/jq-assert?id="+rowid+"&type="+linkItem1+"&link_item="+typeValue1+"&link_item_id="+curSelectedItem;
+	          jQuery.get(url, function (data){
+	            //alert("asserted: "+data);
+	            jQuery('#list2').trigger('reloadGrid');
+	            jQuery('#list3').trigger('reloadGrid');
+
+	            });
+	          }
+	        },
+
+
+	        onCellSelect: function(rowid, iCol, cellcontent){
+	         //alert(rowid+iCol);
+	         // val1=jQuery('#list_hist').getGridParam['selrow'];
+	         if (actionsArr[iCol] && cellcontent.length>1){
+	         var actVal=actionsArr[iCol]['action'];
+	         var titleVal=actionsArr[iCol]['title'];
+	         if (actVal){
+	           var href="/link/"+actVal+"/?width=608&height=80%&jqmRefresh=0&id="+rowid;
+	           if (actionsArr[iCol]['modal']){
+	             var linkId="#grid_link";
+	           }else{
+	             var linkId="#regular_link";
+
+	           }
+	           $(linkId).html("").attr('href',href);
+	           $(linkId).html("").attr('title',titleVal);
+	           //alert($(linkId).html("").attr('href'));
+	           $(linkId).trigger('click');
+	         }
+	         }
+	        },
+
+	        beforeRequest: function(){
+	            var filterValue3=jQuery("#filter3").val();
+	            var typeValue3=jQuery("#item_type3").val();
+	            var typeValue=jQuery("#item_type").val();
+	            //if (filterValue.length>1 || catIdValue>0){
+	             //jQuery('#list3').setGridParam({url:"/link/jq-list/type/"+typeValue3+"?show_selected=1&quest_filter="+filterValue3});
+
+	             jQuery('#list_hl').setGridParam({url:"/link/jq-list-hl/type/"+typeValue3+"?show_selected=1&link_item="+typeValue+"&link_item_id="+curSelectedItem+"&quest_filter="+filterValue3+"&nd="+new Date().getTime()});
+
+	            //}
+	            //alert(jQuery('#list3').getGridParam('url'));
+	          }
+
+
+	    }).navGrid('#pager_hl',{add:false,edit:false,del:true,search:false},{},{},{url:"/link/hl-del/",modal:true});
+
+	    jQuery("#submit_filter_hl").click(
+	         function(){
+
+	         //alert(catIdValue);
+	         //if (filterValue.length>1 || catIdValue>0){
+	          jQuery('#list3').trigger('reloadGrid');
+	          //}else{
+	          // alert('<?//=$this->l('Select category or enter keywords')?>');
+	          //}
+	           return false;
+	         }
+	        );
+
+//	    tinyMCE.init({
+//	        mode : 'textareas',
+//	        theme : 'simple'
+//	      });
+
+
+
+    jQuery("#show_editor").click(function(){
+    	   jQuery(".text-editors").fck({ toolbar:'HL', height:200 });
+        }
+    );
+
+    jQuery("#show_hl").click(
+    		  function(){
+//        		eds=$.fck.editors;
+//        		for(i in eds){
+//            		alert(i+':'+eds[i].instanceName.EditorDocument.body.innerHTML);
+//        		}
+
+//        		var e = FCKeditorAPI.GetInstance('textarea_13') ;
+//        		if( !e.EditorDocument ) {
+//        		    alert('This function can only be used in WYSIWYG mode');
+//        		    return false;
+//        		} else {
+//        		    alert(e.EditorDocument.body.innerHTML);
+//        		    return true;
+//        		}
+        		var htmlStr = $.fck.content("textarea_13");
+        		$("span",htmlStr).each(function(){alert($(this).html())});
+
+        		//instanceName.EditorDocument.body.innerHTML;
+        	}
+    	   );
+    //jQuery("#tatata").fck();
+
+
+
+
+<?
+$this->JQuery()->onLoadCaptureEnd();
+?>
+
+</script>
+
+<button id='show_editor'>Show Editor</button><button id="show_hl">HL</button>
+<table border="1" align="center" style="background-color: c0c0c0;">
+	<tr valign="top">
+		<td rowspan="2">
+		<h4>Item: <i>Selected:<span id='sel_item'></span></i></h4>
+		<select name="item_type" id="item_type">
+			<option value='skin'><?=$this->l('Skin')?></option>
+			<option value='maintitle'><?=$this->l('Maintitle')?></option>
+			<option value='highlight'><?=$this->l('Highlight')?></option>
+			<optgroup label="Works">
+			<?=$this->l('Works')?>
+				<option value='apa'><?=$this->l('Apa')?></option>
+				<option value='arch'><?=$this->l('Architecture')?></option>
+				<option value='graph'><?=$this->l('Graphics')?></option>
+				<option value='paint'><?=$this->l('Paintings')?></option>
+				<option value='tap'><?=$this->l('Tapestry')?></option>
+			</optgroup>
+			<optgroup label="Documents">
+			<?=$this->l('Documents')?>
+				<option value='audio'><?=$this->l('Audio')?></option>
+				<option value='gallery'><?=$this->l('Gallery')?></option>
+				<option value='video'><?=$this->l('Video')?></option>
+				<option value='text'><?=$this->l('Text')?></option>
+			</optgroup>
+		</select> Filter: <input id="filter" /> <input type="submit"
+			name="submit_filter" id="submit_filter" value="ok"><br />
+		<table id="list1" class="scroll" dir="<?=$langObj->dir?>"
+			cellpadding="0" cellspacing="0"></table>
+		<div id="pager" class="scroll" style="text-align: center;"
+			dir="<?=$langObj->dir?>"></div>
+		</td>
+		<td rowspan="2"><img src="/images/icons_big/arrow_right_48.png"></td>
+		<td rowspan="2">
+		<h4>Linked to Highlights:</h4>
+		<table id="list_hl" class="scroll" dir="<?=$langObj->dir?>"
+			cellpadding="0" cellspacing="0"></table>
+		<div id="pager_hl" class="scroll" style="text-align: center;"
+			dir="<?=$langObj->dir?>"></div>
+		</td>
+    <td rowspan="2"><img src="/images/icons_big/arrow_right_48.png"></td>
+		<td>
+		<h4>Linked to:</h4>
+		<select name="item_type2" id="item_type2">
+			<option value='skin'><?=$this->l('Skin')?></option>
+			<option value='maintitle'><?=$this->l('Maintitle')?></option>
+			<option value='highlight'><?=$this->l('Highlight')?></option>
+			<optgroup label="Works">
+			<?=$this->l('Works')?>
+				<option value='apa'><?=$this->l('Apa')?></option>
+				<option value='arch'><?=$this->l('Architecture')?></option>
+				<option value='graph'><?=$this->l('Graphics')?></option>
+				<option value='paint'><?=$this->l('Paintings')?></option>
+				<option value='tap'><?=$this->l('Tapestry')?></option>
+			</optgroup>
+			<optgroup label="Documents">
+			<?=$this->l('Documents')?>
+				<option value='audio'><?=$this->l('Audio')?></option>
+				<option value='gallery'><?=$this->l('Gallery')?></option>
+				<option value='video'><?=$this->l('Video')?></option>
+				<option value='text'><?=$this->l('Text')?></option>
+			</optgroup>
+		</select> Filter: <input id="filter2" /> <input type="submit"
+			name="submit_filter2" id="submit_filter2" value="ok"><br />
+		<table id="list2" class="scroll" dir="<?=$langObj->dir?>"
+			cellpadding="0" cellspacing="0"></table>
+		<div id="pager2" class="scroll" style="text-align: center;"
+			dir="<?=$langObj->dir?>"></div>
+
+
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+		<h4>Available Items:</h4>
+		<select name="item_type3" id="item_type3">
+			<option value='skin'><?=$this->l('Skin')?></option>
+			<option value='maintitle'><?=$this->l('Maintitle')?></option>
+			<option value='highlight'><?=$this->l('Highlight')?></option>
+			<optgroup label="Works">
+			<?=$this->l('Works')?>
+				<option value='apa'><?=$this->l('Apa')?></option>
+				<option value='arch'><?=$this->l('Architecture')?></option>
+				<option value='graph'><?=$this->l('Graphics')?></option>
+				<option value='paint'><?=$this->l('Paintings')?></option>
+				<option value='tap'><?=$this->l('Tapestry')?></option>
+			</optgroup>
+			<optgroup label="Documents">
+			<?=$this->l('Documents')?>
+				<option value='audio'><?=$this->l('Audio')?></option>
+				<option value='gallery'><?=$this->l('Gallery')?></option>
+				<option value='video'><?=$this->l('Video')?></option>
+				<option value='text'><?=$this->l('Text')?></option>
+			</optgroup>
+		</select> Filter: <input id="filter3" /> <input type="submit"
+			name="submit_filter3" id="submit_filter3" value="ok"><br />
+		<table id="list3" class="scroll" dir="<?=$langObj->dir?>"
+			cellpadding="0" cellspacing="0"></table>
+		<div id="pager3" class="scroll" style="text-align: center;"
+			dir="<?=$langObj->dir?>"></div>
+
+
+		</td>
+
+
+	</tr>
+</table>
+
+
+

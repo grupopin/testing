@@ -1,0 +1,304 @@
+<table border=0 cellpadding=0 cellspacing=0 align=left width=100%>
+
+  <tr><td>
+  <!-- Start Top Menu -->
+  <table cellpadding=0 cellspacing=0   align=left>
+  <tr>
+  <td colspan=2 height=87></td>
+  </tr>
+  <tr>
+  <td style="width:218px;">
+  </td>
+
+  <td>
+  <table width=450><tr><td valign=top width="45"><br style="line-height:7px;">
+          <a href="/" onmouseover="document.home.src='http://www.hw-archive.com/images/btn_home_over.jpg'" onmouseout="document.home.src='http://www.hw-archive.com/images/btn_home.jpg'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_home.jpg" NAME="home" BORDER="0" ALT="Home"></a>
+        </td>
+        <td valign=top width="74"><br style="line-height:3px;">
+            <a href="/skin" onmouseover="document.skins.src='http://www.hw-archive.com/images/btn_skins_over2.gif'" onmouseout="document.skins.src='http://www.hw-archive.com/images/btn_skins2.gif'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_skins2.gif" NAME="skins" BORDER="0" ALT="Skins"></a></td>
+        <td width="84">
+
+          <a href="/shop.php" onmouseover="document.shop.src='http://www.hw-archive.com/images/btn_shop_over2.gif'" onmouseout="document.shop.src='http://www.hw-archive.com/images/btn_shop2.gif'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_shop2.gif" NAME="shop" BORDER="0" ALT="Shop"></a>
+        </td>
+        <td valign=top width="85"><br style="line-height:6px;">
+          <a href="/contact.php" onmouseover="document.contact.src='http://www.hw-archive.com/images/btn_contact_over.gif'" onmouseout="document.contact.src='http://www.hw-archive.com/images/btn_contact.gif'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_contact.gif" NAME="contact" BORDER="0" ALT="Contact"></a>
+        </td>
+        <td valign=top>
+          <a href="/search" onmouseover="document.adsearch.src='http://www.hw-archive.com/images/btn_ad_search_over.jpg'" onmouseout="document.adsearch.src='http://www.hw-archive.com/images/btn_ad_search.jpg'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_ad_search.jpg" NAME="adsearch" BORDER="0" ALT="Advanced Search"></a>
+        </td>
+        </tr></table>
+        <!-- End Top Menu -->
+  </td></tr>
+  </table>
+
+  </td></tr>
+  <tr>
+  <td height=78 valign=bottom style="padding-left:35px;">
+  <a href="/">
+  <font color="#878d8a" face="Verdana" size="2"><b><u>
+  Home</u></b></font></a> 
+  <font color="#d45232"> <font size="1" face=verdana>&gt;</font>
+  <a href="/search"><font color="#878d8a" face="Verdana" size="2"><b><u>Advanced Search</u></b></font></a><font size="1" face=verdana> &gt;</font>
+  <font face="Verdana" size="2">Search item results</font></font></td>
+  </tr>
+  <tr>
+<td>
+<table border=0>
+<tr>
+<td width=703 valign=top><br><br><br>
+  <table cellpadding=0 cellspacing=0>
+  <tr>
+  <td style="padding-left:40px;" valign=middle>
+<?php
+switch($this->work){
+	
+	case 'apa':
+		$titleImg="btn_more_apa.jpg";
+		break;
+	case 'arch':	
+		$titleImg="btn_more_archi.jpg";
+		break;
+	case 'graph':
+		$titleImg="btn_more_orig.jpg";
+		break;
+	case 'paint':
+		$titleImg="btn_more_painting.jpg";
+		break;
+		
+	case 'tap':
+		$titleImg="btn_more_tapestry.jpg";
+		break;
+		
+	case 'audio':
+		$titleImg="btn_more_audio.jpg";
+		break;
+		
+	case 'video':
+		$titleImg="btn_more_video.jpg";
+		break;
+		
+	case 'text':
+		$titleImg="btn_more_text.jpg";
+		break;
+	default:
+	
+}
+
+?>
+  <img src='http://www.hw-archive.com/images/<?=$titleImg?>'>
+  </td>
+  <td valign=middle>
+  <b><font face="Verdana" size="2" color="#7AC633">(<?=$this->from?>-<?=$this->to?>) of <?=$this->total?>
+  </font></b>
+  </td>
+  <td valign=middle style="padding-left:20px;">
+  <?if (!in_array($this->work,array('text','video','audio'))){ ?>
+  <a href="http://hw-archive.com/slideshow/index/type/<?php print $this->work;?>"><b><font face="Verdana" size="2" color="#7AC633">View SlideShow
+  <?} ?>
+  </font></b></a>
+  </td>
+
+  </tr>
+  </table>
+  <br>
+  <?php
+$this->placeholder('work_id')->set($this->work.'_id');
+$this->placeholder('work')->set($this->work);
+if (in_array($this->work,array('audio','video','text'))){
+  $this->placeholder('title_fld')->set($this->titleArr[$this->work]);
+  
+}else{
+  $this->placeholder('title_fld')->set($this->titleArr[$this->work].'_'.$this->lang);
+}
+$this->placeholder('date_fld')->set($this->date_fld_name);
+print $this->partialLoop('searchresults/_workRow.phtml',$this->wkArr);
+?>
+ 
+  
+
+</td>
+<td width=295 valign=top>
+  <table align=center width=250>
+  <tr>
+  <td class="related_items"><img src=http://www.hw-archive.com/images/pic1.jpg>
+
+  <div><br style="line-height:10px;">
+  <a href="item.html" class="related_items">Thumbnail Title</a></div>
+  </td>
+  <td width=10></td>
+  <td class="related_items"><img src=http://www.hw-archive.com/images/pic2.jpg>
+  <div><br style="line-height:10px;">
+  <a href="item.html" class="related_items">Thumbnail Title</a></div>
+  </td>
+
+  </tr>
+  <tr>
+  <td colspan=3 height=20></td>
+  </tr>
+  <tr>
+  <td class="related_items"><img src=http://www.hw-archive.com/images/pic3.jpg>
+  <div><br style="line-height:10px;">
+  <a href="item.html" class="related_items">Thumbnail Title</a></div>
+
+  </td>
+  <td width=10></td>
+  <td class="related_items"><img src=http://www.hw-archive.com/images/pic1.jpg>
+  <div><br style="line-height:10px;">
+  <a href="item.html" class="related_items">Thumbnail Title</a></div>
+  </td>
+  </tr>
+  <tr>
+
+  <td colspan=3 height=20></td>
+  </tr>
+  <tr>
+  <td class="related_items"><img src=http://www.hw-archive.com/images/pic3.jpg>
+  <div><br style="line-height:10px;">
+  <a href="item.html" class="related_items">Thumbnail Title</a></div>
+  </td>
+  <td width=10></td>
+
+  <td class="related_items"><img src=http://www.hw-archive.com/images/pic3.jpg>
+  <div><br style="line-height:10px;">
+  <a href="item.html" class="related_items">Thumbnail Title</a></div>
+  </td>
+  </tr>
+
+
+  </table>
+</td>
+</tr>
+
+</table>
+</td>
+</tr>
+<tr>
+<td style="padding-left:80px;">
+<?php
+print $this->links;
+?>
+</td>
+</tr>
+<tr>
+<td style="padding-left:80px;">
+
+<br><br>
+<b><font face="Verdana" color="#7AC633">
+Found more items from different categories:</font>
+<br><br>
+<?php
+$itemStr='';
+if ($this->itemId){
+	$itemStr='/item_'.$this->itemType.'/'.$this->itemId;
+	
+}
+foreach($this->tables as $tab){
+	if ($this->skinCnt[$tab]){
+		$searchLink[$tab]="href=\"/searchresults/index/type/$tab$itemStr\" ";
+	}else{
+		$searchLink[$tab]="href='javascript:;'";
+	}
+	
+}
+
+?>
+<table cellpadding=0 cellspacing=0>
+<tr>
+<td valign=bottom>
+  <a <?=$searchLink['paint']?> onmouseover="document.painting.src='http://www.hw-archive.com/images/btn_more_painting_over.jpg'" onmouseout="document.painting.src='http://www.hw-archive.com/images/btn_more_painting.jpg'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_painting.jpg" NAME="painting" BORDER="0" ALT="Painting"></a>
+
+</td><td valign=top><br style="line-height:10px;"><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['paint']?>)</font></b></td>
+<td width=40></td><td valign=bottom>
+  <a <?=$searchLink['apa']?> onmouseover="document.apa.src='http://www.hw-archive.com/images/btn_more_apa_over.jpg'" onmouseout="document.apa.src='http://www.hw-archive.com/images/btn_more_apa.jpg'">
+
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_apa.jpg" NAME="apa" BORDER="0" ALT="Applied Art"></a>
+
+</td><td style="padding-left:5px;" valign=top><br style="line-height:10px;"><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['apa']?>)</font></b></td>
+<td width=40></td>
+<td valign=bottom>
+  <a <?=$searchLink['video']?> onmouseover="document.video.src='http://www.hw-archive.com/images/btn_more_video_over.jpg'" onmouseout="document.video.src='http://www.hw-archive.com/images/btn_more_video.jpg'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_video.jpg" NAME="video" BORDER="0" ALT="Video"></a>
+
+</td><td style="padding-left:5px;" valign=top><br style="line-height:10px;"><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['video']?>)</font></b></td>
+
+</tr>
+<tr>
+
+<td valign=bottom>
+  <a <?=$searchLink['tap']?> onmouseover="document.tapestry.src='http://www.hw-archive.com/images/btn_more_tapestry_over.jpg'" onmouseout="document.tapestry.src='http://www.hw-archive.com/images/btn_more_tapestry.jpg'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_tapestry.jpg" NAME="tapestry" BORDER="0" ALT="Tapestry"></a>
+
+</td><td valign=middle><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['tap']?>)</font></b></td>
+<td width=40></td><td valign=bottom>
+  <a <?=$searchLink['arch']?> onmouseover="document.archi.src='http://www.hw-archive.com/images/btn_more_archi_over.jpg'" onmouseout="document.archi.src='http://www.hw-archive.com/images/btn_more_archi.jpg'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_archi.jpg" NAME="archi" BORDER="0" ALT="Architecture"></a>
+
+</td><td style="padding-left:5px;" valign=middle><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['arch']?>)</font></b></td>
+<td width=40></td>
+
+<td valign=bottom>
+  <a <?=$searchLink['audio']?> onmouseover="document.audio.src='http://www.hw-archive.com/images/btn_more_audio_over.jpg'" onmouseout="document.audio.src='http://www.hw-archive.com/images/btn_more_audio.jpg'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_audio.jpg" NAME="audio" BORDER="0" ALT="Audio"></a>
+
+</td><td style="padding-left:5px;" valign=middle><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['audio']?>)</font></b></td>
+
+</tr>
+<tr>
+<td valign=bottom>
+  <a <?=$searchLink['graph']?> onmouseover="document.orig.src='http://www.hw-archive.com/images/btn_more_orig_over.jpg'" onmouseout="document.orig.src='http://www.hw-archive.com/images/btn_more_orig.jpg'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_orig.jpg" NAME="orig" BORDER="0" ALT="Original Graphics"></a>
+
+</td><td style="padding-left:5px;" valign=middle><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['graph']?>)</font></b></td>
+<td width=40></td><td valign=bottom>
+  <a <?=$searchLink['text']?> onmouseover="document.text.src='http://www.hw-archive.com/images/btn_more_text_over.jpg'" onmouseout="document.text.src='http://www.hw-archive.com/images/btn_more_text.jpg'">
+        <IMG SRC="http://www.hw-archive.com/images/btn_more_text.jpg" NAME="text" BORDER="0" ALT="Text"></a>
+
+</td><td style="padding-left:5px;" valign=top><br style="line-height:10px;"><b><font face="Verdana" size="3" color="#959595">(<?=$this->skinCnt['text']?>)</font></b></td>
+<td width=40></td>
+<td valign=bottom>
+</td><td style="padding-left:5px;" valign=top></td>
+
+</tr>
+
+</table>
+
+</td>
+</tr>
+<tr>
+<td>
+<br><br style="line-height:10px;">
+<table>
+<tr >
+<td width=35 ></td>
+<td class=bottom>
+<font color=577A34>All contents   &copy; 2007</font>
+</td>
+<td width=50 ></td>
+<td class=bottom><font color=908F8F>
+Design: <a target=_blank class=sitemap_links href="http://www.galordesign.com">galordesign</a> || Powered By : 
+
+<a target=_blank class=sitemap_links href="http://www.mad-logic.com">MadLogic</a></font>
+</td>
+<td width=50 ></td>
+<td class=bottom ><font color=908F8F>
+<a class=sitemap_links href="sitemap.html">Site Map</a>  </font><font color=#D8DA83>
+||</font><font color=908F8F>
+<a  class=sitemap_links href="terms.html">Terms Of Use</a>  </font><font color=#D8DA83>
+||</font><font color=908F8F>
+<a class=sitemap_links href="support.html">Support</a></font>  <font color=#D8DA83>
+
+||</font><font color=908F8F>
+<a class=sitemap_links href="links.html">Links</a></font>  <font color=#D8DA83>||</font><font color=908F8F>
+<a class=sitemap_links href="contact.php">Contact Us</a>  </font></td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>

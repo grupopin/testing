@@ -1,0 +1,417 @@
+<script type="text/javascript">
+<?php
+$this->jQuery()->onLoadCaptureStart();
+?>
+
+var openLists=new Array();
+
+jQuery(".list-headers").click(function(){
+ var idArr=$(this).attr('id').split('-');
+ var id=idArr[idArr.length-1];
+// alert(id);
+
+if (openLists[id]){
+ //$("#list-body-"+id).animate({"height":"0px"}); Comentado por GC
+ //$("#list-body-"+id).attr("style","height:0; line-height:0; overflow: auto; width:600px;"); 
+ $("#list-body-"+id).attr("style","display: none;");
+ openLists[id]=false;
+ $("#list-sign-"+id).html('+');
+}else{
+	openLists[id]=true;
+	var height=$("#list-size-"+id).text()*30;
+	if (height>400){
+   		//height=400; Comentado por GC
+	}
+	//$("#list-body-"+id).animate({"height":height+"px"}); Comentado por GC
+	$("#list-body-"+id).attr("style","overflow: auto; width:600px; display:block");
+	$("#list-sign-"+id).html('-&nbsp');
+}
+
+
+});
+
+var curImg=0;
+jQuery("span.nav").click(function(){
+
+	exists=false;
+  if ($(this).attr('id')=='next'){
+	  temp=curImg+1;
+
+	  var newSrc=jQuery("#im-"+temp).attr('src');
+	  var newPhoto = jQuery("#im-"+temp).attr('alt');
+	  if (newSrc){
+         curImg++;
+         exists=true;
+	  } else {
+		 curImg=0;
+		 exists=true;
+		 newSrc = jQuery("#im-0").attr('src');
+		 newPhoto = jQuery("#im-0").attr('alt');
+	  }
+
+  }else{
+	  temp=curImg-1;
+
+	  var newSrc = jQuery("#im-"+temp).attr('src');
+	  var newPhoto = jQuery("#im-"+temp).attr('alt');
+
+	  if (newSrc){
+        curImg--;
+        exists=true;
+	  }
+  }
+
+
+  if (exists){
+  height=jQuery("#im-"+curImg).attr('height');
+  width=jQuery("#im-"+curImg).attr('width');
+
+  //alert(curImg+','+height+','+width);
+
+ jQuery("#work-img").fadeOut('slow',function(){
+    jQuery("#work-img").attr('src',newSrc);
+    jQuery("#a-work-img").attr('href',newSrc);
+    jQuery("#work-img-photo").text(newPhoto);
+    
+    if (height>width){
+      if (height>450){
+    	  jQuery("#work-img").attr('height',450);
+    	  jQuery("#work-img").removeAttr('width');
+      } else {
+    	  jQuery("#work-img").attr('height',height);
+      	  jQuery("#work-img").attr('width',width);
+      }
+    }else{
+      if (width>450){
+    	  jQuery("#work-img").attr('width',450);
+    	  jQuery("#work-img").removeAttr('height');
+      } else {
+    	  jQuery("#work-img").attr('width',width);
+      	  jQuery("#work-img").attr('height',height);
+      }
+    }
+    jQuery("#work-img").fadeIn('slow');
+	 });
+  }
+
+}
+);
+
+<?php
+$this->jQuery()->onLoadCaptureEnd();
+?>
+</script>
+<style>
+<?php
+$this->headStyle()->captureStart();
+?>
+span#prev,
+span#next{
+ cursor:pointer;
+}
+<?php
+$this->headStyle()->captureEnd();
+?>
+</style>
+<div id="top"><a href="#" name="top"></a></div>
+<tr>
+		<td class="" style="height: 136px; background: url(&quot;/images/advanced_search/top_4.jpg&quot;) no-repeat scroll left top transparent;">
+			<div id="bcPath">
+				<a href="/" class="l4 b">Home Page</a> &gt;
+				<?php if (in_array($this->type, $this->objectCategory['work'])) {?>
+				<a href="/oeuvre" class="l4">The Oeuvre</a> &gt;
+				<a href="/item/object-list/?type[]=<?=$this->type?>" class="l4"><?=$this->title?></a> &gt;
+				<?php } elseif (in_array($this->type, $this->objectCategory['docs'])) {?>
+				<?php if ($this->type=='audio') {?>
+				    <a href="/documentation" class="l4">Documentation</a> &gt;
+					<a href="/documentation/filter?type=audio&key=audio" class="l4"><?=$this->title?></a> &gt;
+				<?php } elseif ($this->type=='video') {?>
+				    <a href="/documentation" class="l4">Documentation</a> &gt;
+					<a href="/documentation/filter?type=video&key=video" class="l4"><?=$this->title?></a> &gt;
+				<?php } elseif ($this->type=='gallery') {?>
+				    <a href="/documentation" class="l4">Documentation</a> &gt;
+					<a href="/documentation/filter?type=gallery&key=gallery" class="l4"><?=$this->title?></a> &gt;
+				<?php } elseif ($this->type=='text') {?>
+					<?php if ($this->subtype=='hw') {?>
+					<a href="/documentation" class="l4">Documentation</a> &gt;
+					<a href="/documentation/filter?type=text&key=txt&subtype=hw" class="l4">Hundertwasser texts and manifestos</a> &gt;
+					<?php } elseif ($this->subtype=='nothw') {?>
+					<a href="/documentation" class="l4">Documentation</a> &gt;
+					<a href="/documentation/filter?type=text&key=txt&subtype=nothw" class="l4">Texts on Hundertwasser</a> &gt;
+					<?php } else {?>
+						<a href="/skin" class="l4">The 5 Skins</a> &gt;				    	
+					<?php }?>
+					<?php }?>
+				<?php } else {?>
+				<a href="/skin" class="l4">The 5 Skins</a> &gt;
+				<!--<a href="/item/object-list/?type[]=<?=$this->type?>" class="l4"><?=$this->title?></a> &gt;
+				--><?php } ?>
+				<span class="l4on">Item View</span>
+			</div>
+		</td>
+		<td>
+			<div class="bcPath3" title="" style="background: url(&quot;/images/advanced_search/top_5.jpg&quot;) no-repeat scroll left top transparent;">&nbsp;</div>
+		</td>
+</tr>
+<tr>
+<td colspan="2"><!--RELATED ITEMS DISPLAY-->
+			<!--RELATED ITEMS DISPLAY-->
+<div style="float: right;">
+<div class="" id="rightBlock">
+<div id="RB1"><img alt="Related Items"
+	src="/images/items/tit_rel_eng.gif" /></div>
+<div id="RB1Cat">
+<div id="RB2"><?php
+//print 'type:'.$this->type."<br>";
+$langArr=$this->sess('langArr');
+if ($this->relLink){
+  foreach($this->relLink as $id=>$link){
+    if ($link['cnt']){
+      $idStr=$this->transId($this->id);
+    ?>
+<div style='z-index:100000;'
+	onmouseover="MM_swapImage('ImageRB<?=$id?>','','/images/icons/tit_<?=$link['name']?>_on_<?=$langArr['lang_alt']?>.gif',1)"
+	onmouseout="MM_swapImgRestore()"><a href="/<?=$this->type?>/<?=$idStr?>_related-<?=$link['type']?>"> <img
+	alt="<?=$link['title']?>" src="/images/icons/<?=$link['name']?>.gif" />
+<img id="ImageRB<?=$id?>" name="ImageRB<?=$id?>"
+	alt="<?=$link['title']?>"
+	src="/images/icons/tit_<?=$link['name']?>_<?=$langArr['lang_alt']?>.gif" />
+</a> (<?=$link['cnt']?>)</div>
+    <?php
+    }
+  }
+}
+
+?> <br />
+<br />
+</div>
+<div title="" id="RB1Cat2"></div>
+</div>
+<div class="" id="RB1Cat3">
+<div id="RB3"><!--<img src="/images/items/buy_eng.gif" alt="Related Shop Products" />-->
+<div class="newCrazy1"><?=$this->l('Buy Me!')?></div>
+<span class="newCrazy2"><?=$this->l('Related Shop Products')?></span>
+<div id="RB4"><?php
+$cnt=sizeof($this->buyItems);
+
+for($i=0;$i<$cnt;$i++){
+
+  $srcEnc=urlencode($this->buyItems[$i]['image_path']);
+  if ($i % 3==0){
+    ?>
+<div class="ThumbRow clearRow"><?php
+  }
+  ?>
+<div><!--<a class="l11" target='_blank'
+	href="http://hw-archive.com/shop/product.php?productid=<?=$this->buyItems[$i]['id']?>&cat=<?=$this->buyItems[$i]['categoryid']?>&page=1"><img
+	alt="<?=$this->buyItems[$i]['descr']?>"
+	src="/image/thumb/?cat=apparel&from=shop&src=<?=$srcEnc?>"><span><?=substr($this->buyItems[$i]['descr'],0,30)?></span></a>
+	--></div>
+  <?php
+  if ($i % 3 ==2  OR $i==$num){
+    ?></div>
+    <?php
+  }
+}
+?></div>
+<a id="shopLink" class="l10" href="#"><?=$this->l('Visit Online Shop')?></a>
+<div id="RB1Cat4"></div>
+</div>
+</div>
+</div>
+</div>
+			<!--MAIN ITEM DISPLAY-->
+			<div>
+					<div id="inCatItems">
+					<img src="/images/icons/<?=$this->name?>.gif" alt="<?=$this->title?>">
+					<img src="/images/icons/tit_<?=$this->name?>_<?=$langArr['lang_alt']?>.gif" alt="<?=$this->title?>">
+
+
+					<div id="itemView"><?php
+
+
+					if (in_array($this->type,array('audio','video'))){
+					  $imagepath=html_entity_decode($this->item[$this->itemView['filepath']],ENT_QUOTES,'UTF-8');
+					  $filepath="/hwdb/thumbs/".$this->type.'/'.$imagepath;
+					  if ($imagepath) {
+					    ?> <!-- begin embedded WindowsMedia file... -->
+<table
+	border='0' cellpadding='0' align="right">
+	<tr>
+		<td><OBJECT id='mediaPlayer' width="320" height="285"
+			classid='CLSID:22d6f312-b0f6-11d0-94ab-0080c74c7e95'
+			codebase='http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701'
+			standby='Loading Microsoft Windows Media Player components...'
+			type='application/x-oleobject'>
+			<param name='fileName' value="<?=$filepath?>">
+			<param name='animationatStart' value='true'>
+			<param name='transparentatStart' value='true'>
+			<param name='autoStart' value="true">
+			<param name='showControls' value="true">
+			<param name='loop' value="false">
+			<EMBED type='application/x-mplayer2'
+				pluginspage='http://microsoft.com/windows/mediaplayer/en/download/'
+				id='mediaPlayer' name='mediaPlayer' displaysize='4' autosize='-1'
+				bgcolor='darkblue' showcontrols="true" showtracker='-1'
+				showdisplay='0' showstatusbar='-1' videoborder3d='-1' width="320"
+				height="285" src="<?=$filepath?>" autostart="true"
+				designtimesp='5311' loop="false">
+			</EMBED> </OBJECT></td>
+	</tr>
+	<!-- ...end embedded WindowsMedia file -->
+	<!-- begin link to launch external media player... -->
+	<tr>
+		<td align='center'>
+<!--			<a href="<?=$filepath?>" style='font-size: 85%;' target='_blank'>Launch in external player</a> -->
+			<!-- ...end link to launch external media player... -->
+		</td>
+	</tr>
+</table>
+
+					    <?php
+					  } else {
+					    echo "Media file unavailable.";
+					  }
+
+					}elseif($this->type=='text'){
+
+					  $this->headStyle()->appendStyle(".hw-highlight{display:none;}");
+
+					}else{ //Muestra imagen o pdf
+
+
+					  $pad=true;
+					  if ($this->type=='gallery' or $this->type=='picture'){
+					    $pad=false;
+					    $imgPath = html_entity_decode($this->item[$this->itemView['filepath']],ENT_QUOTES,'UTF-8');
+					    //$imgPath=str_replace('galery/','',$imgPath);
+					    $images[] = array ('file'=>'/hwdb/thumbs/'.$imgPath);
+					  } elseif ($this->type=='article' ) {
+					    $pad=false;
+					    $imgPath=$this->item[$this->itemView['filepath']];
+					    $images[] = array ('file'=>'/hwdb/thumbs/article/'.$imgPath);
+                      } elseif ($this->type=='document' ) {
+					    $pad=false;
+					    $imgPath=$this->item[$this->itemView['filepath']];
+					    $images[] = array ('file'=>'/hwdb/thumbs/document/'.$imgPath);					    
+					  } else {
+					    //$imgPath=$this->item[$this->itemView['image_id']];
+					    $imgPath=$this->item[$this->itemView['id']]; //changed by gc
+					    $images=$this->workImage($this->type,'original',$imgPath,'extended',true,'asc',0,$pad,array('check_visibility'=>0));//medium is too small!!!
+					    $photographer = $images[0]['photographer'];
+					  }
+					  //fb($imgPath,'imgPath');
+
+					  if (sizeof($images)>1){
+
+					      $slides = true;
+
+    					  foreach($images as $iNum => $im){    
+    					  ?>
+    					   <img id="im-<?php print $iNum;?>" src='<?=$im['file']?>' alt='<? if ($im['photographer']) echo 'Photo: '. utf8_encode($im['photographer']); ?>' style='display:none;'/>
+    					  <?php
+    
+    					  }
+
+					  }
+					   $imgPath=$images[0]['file'];
+					   
+    				   if ($imgPath) {
+    					   $imgProps=getimagesize(DOCROOT.'/'.$imgPath);
+    					   $imW=$imgProps[0];
+    					   $imH=$imgProps[1];
+    					   //print "$imW,$imH<br>";
+    					   if ($imW>$imH){
+    					    if ($imW>450){
+    					      $imW=450;
+    					    }
+    					    $attr="width='$imW'";
+    					   }else{
+    					    if ($imH>450){
+    					      $imH=450;
+    					    }
+    					    $attr="height='$imH'";
+    					   }
+					   }
+					   if (!$imgPath){
+					    //$imgPath="/images/items/example_item.jpg";
+					    $imgPath = "";
+					   }
+					  ?>
+					  <div style='width:460px; float:right;text-align:center;'>
+					  <table align='center' width='460'>
+					  
+				    <?php if ($slides){?>
+				    <tr><td align='center'><span id='prev' class='nav'>&lt;&nbsp;<?php print $this->l('prev')?></span>&nbsp;&nbsp;<span id='next' class='nav'><?=$this->l('next')?>&nbsp;&gt;</span></td></tr>
+
+				    <?php }?>
+
+<!--					  <tr><td align='center'><a id='a-work-img'  href="<?=$imgPath?>" target="_blank"><img id='work-img' src="<?=$imgPath?>" <?=$attr?>  alt="click to enlarge"></a></td></tr>-->
+					  <tr>
+                         <td align='center'>
+                         <?php
+                         $pos = strpos($imgPath, ".pdf"); 
+                         if ($pos === false) { ?>
+                           <a id='a-work-img'  href="<?=$imgPath?>" target="_blank"><?php if ($imgPath) {?><img id='work-img'	src="<?=$imgPath?>"  <?=$attr?>  alt="click to enlarge"><?php }?></a>
+                         <?php } else { ?>
+                         	<embed src="<?=$imgPath?>" width="450" height="700">
+                         <?php }?>
+                         </td>
+					  </tr>
+					  <tr>
+					  	<td align="right">
+<!--							<div id="aworkcr1">Photo: ian macnewton</div>-->
+							<div id="work-img-photo"><?php if ($photographer) echo "Photo: " . utf8_encode($photographer) ;?></div>
+  						 </td>
+					  </tr>
+					  </table>
+					  </div>
+
+					   <?php
+
+
+
+					}
+
+					print $this->render("item/view_{$this->type}.phtml")?>
+
+
+					</div>
+
+<?php if ($this->showItems and !in_array($this->type,$this->objectCategory['docs'])){?>
+<div id="catPaging">
+<!-- Numbered page links -->
+<?php
+$path=parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
+if ($prev=$this->prev[$this->idField]){
+?>
+<a class="l9"  href="/<?=$this->type?>/view-<?=$prev?>"><?=$this->l('Previous')?></a>&lt;
+<?php
+}
+$primero=true;
+foreach ($this->showItems as $n => $l_item){
+  
+  $inx=$n+1;
+  if (!$primero) { print ",";}
+  $primero=false;
+$href='/'.$this->type.'/view-'.$l_item[$this->idField];
+if (stristr($path,$href)){
+ print "<span>{$inx}</span>"; 
+}else{
+?>
+<a class="l9" href="/<?=$this->type?>/view-<?=$l_item[$this->idField]?>"><?=$inx?></a>
+<?php
+   }
+}
+if ($next=$this->next[$this->idField]){
+?>
+&gt;<a class="l9"  href="/<?=$this->type?>/view-<?=$next?>"><?=$this->l('Next')?></a>
+<?php
+}
+?>
+</div>
+<?php } ?>
+</div>
+</div>
+</td>
+</tr>
