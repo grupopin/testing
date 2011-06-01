@@ -43,6 +43,8 @@
 :- load_files('kbase/sql_text_type.pl').
 :- load_files('kbase/sql_text_cat.pl').
 */
+
+
 %:- load_files('kbase/trans.pl').
 
 load_http_file(Url,Opts):-
@@ -52,8 +54,10 @@ load_http_file(Url,Opts):-
   close(In).
 
 % loading instead of kbase/trans.pl
-:- load_http_file('http://hw-archive.com/kb/get-trans/?ps=an1234',[authorization(basic('srv','pl745Ghj'))]).
-%:- load_files('kbase/trans.pl').
+
+:- load_http_file('http://hwarch/kb/get-trans/?ps=an1234',[authorization(basic('srv','pl745Ghj'))]).
+
+%:- load_files('../kbase/trans.pl').
 
 
 :-index(object(1,1,1,1)).
