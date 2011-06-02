@@ -3,4 +3,4 @@ cache/*
 translate/*
 public_html/hwdb2
 application/config.ini
-pl/onto/srv.pl
+pl
